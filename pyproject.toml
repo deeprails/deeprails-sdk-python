@@ -1,11 +1,11 @@
 [project]
 name = "deeprails"
-version = "1.1.0"
+version = "1.2.0"
 description = "The official Python library for the deeprails API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Deeprails", email = "support@deeprails.ai" },
+{ name = "DeepRails", email = "support@deeprails.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
@@ -35,7 +35,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/deeprails/deeprails-sdk-python"
+Homepage = "https://docs.deeprails.com/"
 Repository = "https://github.com/deeprails/deeprails-sdk-python"
 
 [project.optional-dependencies]
