@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Mapping, cast
-from typing_extensions import Self, Literal, override
+from typing import Any, Mapping
+from typing_extensions import Self, override
 
 import httpx
 
@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import monitor, evaluate
+from .resources import defend, monitor, evaluate
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, DeeprailsError
 from ._base_client import (
@@ -29,10 +29,8 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.defend import defend
 
 __all__ = [
-    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
@@ -42,11 +40,6 @@ __all__ = [
     "Client",
     "AsyncClient",
 ]
-
-ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api.deeprails.com",
-    "environment_1": "https://dev-api.deeprails",
-}
 
 
 class Deeprails(SyncAPIClient):
@@ -59,14 +52,11 @@ class Deeprails(SyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "environment_1"] | NotGiven
-
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | NotGiven = not_given,
-        base_url: str | httpx.URL | None | NotGiven = not_given,
+        base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -97,31 +87,10 @@ class Deeprails(SyncAPIClient):
             )
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("DEEPRAILS_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `DEEPRAILS_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "production"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("DEEPRAILS_BASE_URL")
+        if base_url is None:
+            base_url = f"https://api.deeprails.com"
 
         super().__init__(
             version=__version__,
@@ -164,7 +133,6 @@ class Deeprails(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -200,7 +168,6 @@ class Deeprails(SyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -257,14 +224,11 @@ class AsyncDeeprails(AsyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "environment_1"] | NotGiven
-
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | NotGiven = not_given,
-        base_url: str | httpx.URL | None | NotGiven = not_given,
+        base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -295,31 +259,10 @@ class AsyncDeeprails(AsyncAPIClient):
             )
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("DEEPRAILS_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `DEEPRAILS_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "production"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("DEEPRAILS_BASE_URL")
+        if base_url is None:
+            base_url = f"https://api.deeprails.com"
 
         super().__init__(
             version=__version__,
@@ -362,7 +305,6 @@ class AsyncDeeprails(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -398,7 +340,6 @@ class AsyncDeeprails(AsyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
