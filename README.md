@@ -38,7 +38,7 @@ defend_response = client.defend.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 print(defend_response.workflow_id)
@@ -70,7 +70,7 @@ async def main() -> None:
             "completeness": 0.85,
             "instruction_adherence": 0.75,
         },
-        name="Push Alerts System",
+        name="Push Alert System",
         type="custom",
     )
     print(defend_response.workflow_id)
@@ -111,7 +111,7 @@ async def main() -> None:
                 "completeness": 0.85,
                 "instruction_adherence": 0.75,
             },
-            name="Push Alerts System",
+            name="Push Alert System",
             type="custom",
         )
         print(defend_response.workflow_id)
@@ -171,7 +171,7 @@ try:
             "completeness": 0.85,
             "instruction_adherence": 0.75,
         },
-        name="Push Alerts System",
+        name="Push Alert System",
         type="custom",
     )
 except deeprails.APIConnectionError as e:
@@ -222,7 +222,7 @@ client.with_options(max_retries=5).defend.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 ```
@@ -253,7 +253,7 @@ client.with_options(timeout=5.0).defend.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 ```
@@ -302,7 +302,7 @@ response = client.defend.with_raw_response.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 print(response.headers.get('X-My-Header'))
@@ -328,7 +328,7 @@ with client.defend.with_streaming_response.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 ) as response:
     print(response.headers.get("X-My-Header"))
