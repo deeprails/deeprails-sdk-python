@@ -31,7 +31,7 @@ class EvaluateResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/deeprails-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#accessing-raw-response-data-eg-headers
         """
         return EvaluateResourceWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class EvaluateResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/deeprails-python#with_streaming_response
+        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#with_streaming_response
         """
         return EvaluateResourceWithStreamingResponse(self)
 
@@ -162,7 +162,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/deeprails-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncEvaluateResourceWithRawResponse(self)
 
@@ -171,7 +171,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/deeprails-python#with_streaming_response
+        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#with_streaming_response
         """
         return AsyncEvaluateResourceWithStreamingResponse(self)
 
