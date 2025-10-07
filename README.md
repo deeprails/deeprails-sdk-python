@@ -16,12 +16,9 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/deeprails-python.git
+# install from PyPI
+pip install deeprails
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install deeprails`
 
 ## Usage
 
@@ -41,7 +38,7 @@ defend_response = client.defend.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 print(defend_response.workflow_id)
@@ -73,7 +70,7 @@ async def main() -> None:
             "completeness": 0.85,
             "instruction_adherence": 0.75,
         },
-        name="Push Alerts System",
+        name="Push Alert System",
         type="custom",
     )
     print(defend_response.workflow_id)
@@ -91,8 +88,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from this staging repo
-pip install 'deeprails[aiohttp] @ git+ssh://git@github.com/stainless-sdks/deeprails-python.git'
+# install from PyPI
+pip install deeprails[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -114,7 +111,7 @@ async def main() -> None:
                 "completeness": 0.85,
                 "instruction_adherence": 0.75,
             },
-            name="Push Alerts System",
+            name="Push Alert System",
             type="custom",
         )
         print(defend_response.workflow_id)
@@ -174,7 +171,7 @@ try:
             "completeness": 0.85,
             "instruction_adherence": 0.75,
         },
-        name="Push Alerts System",
+        name="Push Alert System",
         type="custom",
     )
 except deeprails.APIConnectionError as e:
@@ -225,7 +222,7 @@ client.with_options(max_retries=5).defend.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 ```
@@ -256,7 +253,7 @@ client.with_options(timeout=5.0).defend.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 ```
@@ -305,7 +302,7 @@ response = client.defend.with_raw_response.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 )
 print(response.headers.get('X-My-Header'))
@@ -314,9 +311,9 @@ defend = response.parse()  # get the object that `defend.create_workflow()` woul
 print(defend.workflow_id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/deeprails-python/tree/main/src/deeprails/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/deeprails/deeprails-sdk-python/tree/main/src/deeprails/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/deeprails-python/tree/main/src/deeprails/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/deeprails/deeprails-sdk-python/tree/main/src/deeprails/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -331,7 +328,7 @@ with client.defend.with_streaming_response.create_workflow(
         "completeness": 0.85,
         "instruction_adherence": 0.75,
     },
-    name="Push Alerts System",
+    name="Push Alert System",
     type="custom",
 ) as response:
     print(response.headers.get("X-My-Header"))
@@ -428,7 +425,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/deeprails-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/deeprails/deeprails-sdk-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
