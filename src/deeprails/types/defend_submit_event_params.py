@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict, Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["EventSubmitEventParams", "ModelInput"]
+__all__ = ["DefendSubmitEventParams", "ModelInput"]
 
 
-class EventSubmitEventParams(TypedDict, total=False):
+class DefendSubmitEventParams(TypedDict, total=False):
     model_input: Required[ModelInput]
     """A dictionary of inputs sent to the LLM to generate output.
 

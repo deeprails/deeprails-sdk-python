@@ -7,43 +7,32 @@ from typing_extensions import Literal
 
 import httpx
 
-from .events import (
-    EventsResource,
-    AsyncEventsResource,
-    EventsResourceWithRawResponse,
-    AsyncEventsResourceWithRawResponse,
-    EventsResourceWithStreamingResponse,
-    AsyncEventsResourceWithStreamingResponse,
-)
-from ...types import defend_create_workflow_params, defend_update_workflow_params
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ..types import defend_submit_event_params, defend_create_workflow_params, defend_update_workflow_params
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from ...types.defend_response import DefendResponse
+from .._base_client import make_request_options
+from ..types.defend_response import DefendResponse
+from ..types.workflow_event_response import WorkflowEventResponse
 
 __all__ = ["DefendResource", "AsyncDefendResource"]
 
 
 class DefendResource(SyncAPIResource):
     @cached_property
-    def events(self) -> EventsResource:
-        return EventsResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> DefendResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/deeprails-python#accessing-raw-response-data-eg-headers
         """
         return DefendResourceWithRawResponse(self)
 
@@ -52,7 +41,7 @@ class DefendResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/deeprails-python#with_streaming_response
         """
         return DefendResourceWithStreamingResponse(self)
 
@@ -134,6 +123,42 @@ class DefendResource(SyncAPIResource):
             cast_to=DefendResponse,
         )
 
+    def retrieve_event(
+        self,
+        event_id: str,
+        *,
+        workflow_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowEventResponse:
+        """
+        Retrieve a specific event of a guardrail workflow.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        if not event_id:
+            raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
+        return self._get(
+            f"/defend/{workflow_id}/events/{event_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkflowEventResponse,
+        )
+
     def retrieve_workflow(
         self,
         workflow_id: str,
@@ -165,6 +190,69 @@ class DefendResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DefendResponse,
+        )
+
+    def submit_event(
+        self,
+        workflow_id: str,
+        *,
+        model_input: defend_submit_event_params.ModelInput,
+        model_output: str,
+        model_used: str,
+        nametag: str,
+        run_mode: Literal["precision_plus", "precision", "smart", "economy"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowEventResponse:
+        """
+        Submit a model input and output pair to a workflow for evaluation.
+
+        Args:
+          model_input: A dictionary of inputs sent to the LLM to generate output. This must contain a
+              `user_prompt` field and an optional `context` field. Additional properties are
+              allowed.
+
+          model_output: Output generated by the LLM to be evaluated.
+
+          model_used: Model ID used to generate the output, like `gpt-4o` or `o3`.
+
+          nametag: An optional, user-defined tag for the event.
+
+          run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
+              speed, accuracy, and cost by determining which models are used to evaluate the
+              event. Available run modes include `precision_plus`, `precision`, `smart`, and
+              `economy`. Defaults to `smart`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        return self._post(
+            f"/defend/{workflow_id}/events",
+            body=maybe_transform(
+                {
+                    "model_input": model_input,
+                    "model_output": model_output,
+                    "model_used": model_used,
+                    "nametag": nametag,
+                    "run_mode": run_mode,
+                },
+                defend_submit_event_params.DefendSubmitEventParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkflowEventResponse,
         )
 
     def update_workflow(
@@ -220,16 +308,12 @@ class DefendResource(SyncAPIResource):
 
 class AsyncDefendResource(AsyncAPIResource):
     @cached_property
-    def events(self) -> AsyncEventsResource:
-        return AsyncEventsResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> AsyncDefendResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/deeprails-python#accessing-raw-response-data-eg-headers
         """
         return AsyncDefendResourceWithRawResponse(self)
 
@@ -238,7 +322,7 @@ class AsyncDefendResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/deeprails/deeprails-python-sdk#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/deeprails-python#with_streaming_response
         """
         return AsyncDefendResourceWithStreamingResponse(self)
 
@@ -320,6 +404,42 @@ class AsyncDefendResource(AsyncAPIResource):
             cast_to=DefendResponse,
         )
 
+    async def retrieve_event(
+        self,
+        event_id: str,
+        *,
+        workflow_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowEventResponse:
+        """
+        Retrieve a specific event of a guardrail workflow.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        if not event_id:
+            raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
+        return await self._get(
+            f"/defend/{workflow_id}/events/{event_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkflowEventResponse,
+        )
+
     async def retrieve_workflow(
         self,
         workflow_id: str,
@@ -351,6 +471,69 @@ class AsyncDefendResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DefendResponse,
+        )
+
+    async def submit_event(
+        self,
+        workflow_id: str,
+        *,
+        model_input: defend_submit_event_params.ModelInput,
+        model_output: str,
+        model_used: str,
+        nametag: str,
+        run_mode: Literal["precision_plus", "precision", "smart", "economy"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowEventResponse:
+        """
+        Submit a model input and output pair to a workflow for evaluation.
+
+        Args:
+          model_input: A dictionary of inputs sent to the LLM to generate output. This must contain a
+              `user_prompt` field and an optional `context` field. Additional properties are
+              allowed.
+
+          model_output: Output generated by the LLM to be evaluated.
+
+          model_used: Model ID used to generate the output, like `gpt-4o` or `o3`.
+
+          nametag: An optional, user-defined tag for the event.
+
+          run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
+              speed, accuracy, and cost by determining which models are used to evaluate the
+              event. Available run modes include `precision_plus`, `precision`, `smart`, and
+              `economy`. Defaults to `smart`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        return await self._post(
+            f"/defend/{workflow_id}/events",
+            body=await async_maybe_transform(
+                {
+                    "model_input": model_input,
+                    "model_output": model_output,
+                    "model_used": model_used,
+                    "nametag": nametag,
+                    "run_mode": run_mode,
+                },
+                defend_submit_event_params.DefendSubmitEventParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkflowEventResponse,
         )
 
     async def update_workflow(
@@ -411,16 +594,18 @@ class DefendResourceWithRawResponse:
         self.create_workflow = to_raw_response_wrapper(
             defend.create_workflow,
         )
+        self.retrieve_event = to_raw_response_wrapper(
+            defend.retrieve_event,
+        )
         self.retrieve_workflow = to_raw_response_wrapper(
             defend.retrieve_workflow,
+        )
+        self.submit_event = to_raw_response_wrapper(
+            defend.submit_event,
         )
         self.update_workflow = to_raw_response_wrapper(
             defend.update_workflow,
         )
-
-    @cached_property
-    def events(self) -> EventsResourceWithRawResponse:
-        return EventsResourceWithRawResponse(self._defend.events)
 
 
 class AsyncDefendResourceWithRawResponse:
@@ -430,16 +615,18 @@ class AsyncDefendResourceWithRawResponse:
         self.create_workflow = async_to_raw_response_wrapper(
             defend.create_workflow,
         )
+        self.retrieve_event = async_to_raw_response_wrapper(
+            defend.retrieve_event,
+        )
         self.retrieve_workflow = async_to_raw_response_wrapper(
             defend.retrieve_workflow,
+        )
+        self.submit_event = async_to_raw_response_wrapper(
+            defend.submit_event,
         )
         self.update_workflow = async_to_raw_response_wrapper(
             defend.update_workflow,
         )
-
-    @cached_property
-    def events(self) -> AsyncEventsResourceWithRawResponse:
-        return AsyncEventsResourceWithRawResponse(self._defend.events)
 
 
 class DefendResourceWithStreamingResponse:
@@ -449,16 +636,18 @@ class DefendResourceWithStreamingResponse:
         self.create_workflow = to_streamed_response_wrapper(
             defend.create_workflow,
         )
+        self.retrieve_event = to_streamed_response_wrapper(
+            defend.retrieve_event,
+        )
         self.retrieve_workflow = to_streamed_response_wrapper(
             defend.retrieve_workflow,
+        )
+        self.submit_event = to_streamed_response_wrapper(
+            defend.submit_event,
         )
         self.update_workflow = to_streamed_response_wrapper(
             defend.update_workflow,
         )
-
-    @cached_property
-    def events(self) -> EventsResourceWithStreamingResponse:
-        return EventsResourceWithStreamingResponse(self._defend.events)
 
 
 class AsyncDefendResourceWithStreamingResponse:
@@ -468,13 +657,15 @@ class AsyncDefendResourceWithStreamingResponse:
         self.create_workflow = async_to_streamed_response_wrapper(
             defend.create_workflow,
         )
+        self.retrieve_event = async_to_streamed_response_wrapper(
+            defend.retrieve_event,
+        )
         self.retrieve_workflow = async_to_streamed_response_wrapper(
             defend.retrieve_workflow,
+        )
+        self.submit_event = async_to_streamed_response_wrapper(
+            defend.submit_event,
         )
         self.update_workflow = async_to_streamed_response_wrapper(
             defend.update_workflow,
         )
-
-    @cached_property
-    def events(self) -> AsyncEventsResourceWithStreamingResponse:
-        return AsyncEventsResourceWithStreamingResponse(self._defend.events)

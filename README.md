@@ -16,9 +16,12 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from PyPI
-pip install deeprails
+# install from this staging repo
+pip install git+ssh://git@github.com/stainless-sdks/deeprails-python.git
 ```
+
+> [!NOTE]
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install deeprails`
 
 ## Usage
 
@@ -30,26 +33,16 @@ from deeprails import Deeprails
 
 client = Deeprails(
     api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="environment_1",
 )
 
 defend_response = client.defend.create_workflow(
-    improvement_action="regenerate",
+    improvement_action="fixit",
     metrics={
-        "0": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
+        "completeness": 0.85,
+        "instruction_adherence": 0.75,
     },
-    name="REPLACE_ME",
-    type="automatic",
+    name="Push Alerts System",
+    type="custom",
 )
 print(defend_response.workflow_id)
 ```
@@ -70,28 +63,18 @@ from deeprails import AsyncDeeprails
 
 client = AsyncDeeprails(
     api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="environment_1",
 )
 
 
 async def main() -> None:
     defend_response = await client.defend.create_workflow(
-        improvement_action="regenerate",
+        improvement_action="fixit",
         metrics={
-            "0": 0,
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": 0,
+            "completeness": 0.85,
+            "instruction_adherence": 0.75,
         },
-        name="REPLACE_ME",
-        type="automatic",
+        name="Push Alerts System",
+        type="custom",
     )
     print(defend_response.workflow_id)
 
@@ -108,8 +91,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from PyPI
-pip install deeprails[aiohttp]
+# install from this staging repo
+pip install 'deeprails[aiohttp] @ git+ssh://git@github.com/stainless-sdks/deeprails-python.git'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -126,21 +109,13 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         defend_response = await client.defend.create_workflow(
-            improvement_action="regenerate",
+            improvement_action="fixit",
             metrics={
-                "0": 0,
-                "1": 0,
-                "2": 0,
-                "3": 0,
-                "4": 0,
-                "5": 0,
-                "6": 0,
-                "7": 0,
-                "8": 0,
-                "9": 0,
+                "completeness": 0.85,
+                "instruction_adherence": 0.75,
             },
-            name="REPLACE_ME",
-            type="automatic",
+            name="Push Alerts System",
+            type="custom",
         )
         print(defend_response.workflow_id)
 
@@ -166,7 +141,7 @@ from deeprails import Deeprails
 
 client = Deeprails()
 
-workflow_event_response = client.defend.events.submit_event(
+workflow_event_response = client.defend.submit_event(
     workflow_id="workflow_id",
     model_input={"user_prompt": "user_prompt"},
     model_output="model_output",
@@ -194,21 +169,13 @@ client = Deeprails()
 
 try:
     client.defend.create_workflow(
-        improvement_action="regenerate",
+        improvement_action="fixit",
         metrics={
-            "0": 0,
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": 0,
+            "completeness": 0.85,
+            "instruction_adherence": 0.75,
         },
-        name="REPLACE_ME",
-        type="automatic",
+        name="Push Alerts System",
+        type="custom",
     )
 except deeprails.APIConnectionError as e:
     print("The server could not be reached")
@@ -253,21 +220,13 @@ client = Deeprails(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).defend.create_workflow(
-    improvement_action="regenerate",
+    improvement_action="fixit",
     metrics={
-        "0": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
+        "completeness": 0.85,
+        "instruction_adherence": 0.75,
     },
-    name="REPLACE_ME",
-    type="automatic",
+    name="Push Alerts System",
+    type="custom",
 )
 ```
 
@@ -292,21 +251,13 @@ client = Deeprails(
 
 # Override per-request:
 client.with_options(timeout=5.0).defend.create_workflow(
-    improvement_action="regenerate",
+    improvement_action="fixit",
     metrics={
-        "0": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
+        "completeness": 0.85,
+        "instruction_adherence": 0.75,
     },
-    name="REPLACE_ME",
-    type="automatic",
+    name="Push Alerts System",
+    type="custom",
 )
 ```
 
@@ -349,21 +300,13 @@ from deeprails import Deeprails
 
 client = Deeprails()
 response = client.defend.with_raw_response.create_workflow(
-    improvement_action="regenerate",
+    improvement_action="fixit",
     metrics={
-        "0": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
+        "completeness": 0.85,
+        "instruction_adherence": 0.75,
     },
-    name="REPLACE_ME",
-    type="automatic",
+    name="Push Alerts System",
+    type="custom",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -371,9 +314,9 @@ defend = response.parse()  # get the object that `defend.create_workflow()` woul
 print(defend.workflow_id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/deeprails/deeprails-python-sdk/tree/main/src/deeprails/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/deeprails-python/tree/main/src/deeprails/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/deeprails/deeprails-python-sdk/tree/main/src/deeprails/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/deeprails-python/tree/main/src/deeprails/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -383,21 +326,13 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.defend.with_streaming_response.create_workflow(
-    improvement_action="regenerate",
+    improvement_action="fixit",
     metrics={
-        "0": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
+        "completeness": 0.85,
+        "instruction_adherence": 0.75,
     },
-    name="REPLACE_ME",
-    type="automatic",
+    name="Push Alerts System",
+    type="custom",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -493,7 +428,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/deeprails/deeprails-python-sdk/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/deeprails-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
