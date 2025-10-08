@@ -59,7 +59,8 @@ class MonitorResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIResponse:
         """
-        Create a new monitor to evaluate model inputs and outputs using guardrails.
+        Use this endpoint to create a new monitor to evaluate model inputs and outputs
+        using guardrails
 
         Args:
           name: Name of the new monitor.
@@ -102,7 +103,8 @@ class MonitorResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MonitorRetrieveResponse:
         """
-        Retrieve the details and evaluations associated with a specific monitor.
+        Use this endpoint to retrieve the details and evaluations associated with a
+        specific monitor
 
         Args:
           limit: Limit the returned events associated with this monitor. Defaults to 10.
@@ -144,7 +146,8 @@ class MonitorResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIResponse:
         """
-        Update the name, description, or status of an existing monitor.
+        Use this endpoint to update the name, description, or status of an existing
+        monitor
 
         Args:
           description: Description of the monitor.
@@ -207,7 +210,8 @@ class MonitorResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MonitorSubmitEventResponse:
         """
-        Submit a model input and output pair to a monitor for evaluation.
+        Use this endpoint to submit a model input and output pair to a monitor for
+        evaluation
 
         Args:
           guardrail_metrics: An array of guardrail metrics that the model input and output pair will be
@@ -293,7 +297,8 @@ class AsyncMonitorResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIResponse:
         """
-        Create a new monitor to evaluate model inputs and outputs using guardrails.
+        Use this endpoint to create a new monitor to evaluate model inputs and outputs
+        using guardrails
 
         Args:
           name: Name of the new monitor.
@@ -336,7 +341,8 @@ class AsyncMonitorResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MonitorRetrieveResponse:
         """
-        Retrieve the details and evaluations associated with a specific monitor.
+        Use this endpoint to retrieve the details and evaluations associated with a
+        specific monitor
 
         Args:
           limit: Limit the returned events associated with this monitor. Defaults to 10.
@@ -378,7 +384,8 @@ class AsyncMonitorResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIResponse:
         """
-        Update the name, description, or status of an existing monitor.
+        Use this endpoint to update the name, description, or status of an existing
+        monitor
 
         Args:
           description: Description of the monitor.
@@ -441,7 +448,8 @@ class AsyncMonitorResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MonitorSubmitEventResponse:
         """
-        Submit a model input and output pair to a monitor for evaluation.
+        Use this endpoint to submit a model input and output pair to a monitor for
+        evaluation
 
         Args:
           guardrail_metrics: An array of guardrail metrics that the model input and output pair will be

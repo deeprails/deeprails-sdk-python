@@ -41,7 +41,6 @@ class APIResponse(BaseModel):
     """Represents whether the request was completed successfully."""
 
     data: Optional[Data] = None
-    """Response payload for creating or updating a monitor."""
 
     message: Optional[str] = None
     """The accompanying message for the request.

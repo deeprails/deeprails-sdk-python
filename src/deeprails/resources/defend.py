@@ -63,13 +63,13 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendResponse:
         """
-        Create a new guardrail workflow with optional guardrail thresholds and
-        improvement actions.
+        Use this endpoint to create a new guardrail workflow with optional guardrail
+        thresholds and improvement actions
 
         Args:
           improvement_action: The action used to improve outputs that fail one or guardrail metrics for the
               workflow events. May be `regenerate`, `fixit`, or null which represents “do
-              nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+              nothing”. Regenerate runs the user's input prompt with minor induced variance.
               Fixit attempts to directly address the shortcomings of the output using the
               guardrail failure rationale. Do nothing does not attempt any improvement.
 
@@ -136,7 +136,7 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowEventResponse:
         """
-        Retrieve a specific event of a guardrail workflow.
+        Use this endpoint to retrieve a specific event of a guardrail workflow
 
         Args:
           extra_headers: Send extra headers
@@ -171,7 +171,7 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendResponse:
         """
-        Retrieve the details for a specific guardrail workflow.
+        Use this endpoint to retrieve the details for a specific defend workflow
 
         Args:
           extra_headers: Send extra headers
@@ -209,7 +209,8 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowEventResponse:
         """
-        Submit a model input and output pair to a workflow for evaluation.
+        Use this endpoint to submit a model input and output pair to a workflow for
+        evaluation
 
         Args:
           model_input: A dictionary of inputs sent to the LLM to generate output. This must contain a
@@ -261,7 +262,6 @@ class DefendResource(SyncAPIResource):
         *,
         description: str | Omit = omit,
         name: str | Omit = omit,
-        type: Literal["automatic", "custom"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -270,14 +270,12 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendResponse:
         """
-        Update an existing guardrail workflow.
+        Use this endpoint to update an existing guardrail workflow
 
         Args:
           description: Description for the workflow.
 
           name: Name of the workflow.
-
-          type: Type of thresholds to use for the workflow, either `automatic` or `custom`.
 
           extra_headers: Send extra headers
 
@@ -295,7 +293,6 @@ class DefendResource(SyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "type": type,
                 },
                 defend_update_workflow_params.DefendUpdateWorkflowParams,
             ),
@@ -344,13 +341,13 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendResponse:
         """
-        Create a new guardrail workflow with optional guardrail thresholds and
-        improvement actions.
+        Use this endpoint to create a new guardrail workflow with optional guardrail
+        thresholds and improvement actions
 
         Args:
           improvement_action: The action used to improve outputs that fail one or guardrail metrics for the
               workflow events. May be `regenerate`, `fixit`, or null which represents “do
-              nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+              nothing”. Regenerate runs the user's input prompt with minor induced variance.
               Fixit attempts to directly address the shortcomings of the output using the
               guardrail failure rationale. Do nothing does not attempt any improvement.
 
@@ -417,7 +414,7 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowEventResponse:
         """
-        Retrieve a specific event of a guardrail workflow.
+        Use this endpoint to retrieve a specific event of a guardrail workflow
 
         Args:
           extra_headers: Send extra headers
@@ -452,7 +449,7 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendResponse:
         """
-        Retrieve the details for a specific guardrail workflow.
+        Use this endpoint to retrieve the details for a specific defend workflow
 
         Args:
           extra_headers: Send extra headers
@@ -490,7 +487,8 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowEventResponse:
         """
-        Submit a model input and output pair to a workflow for evaluation.
+        Use this endpoint to submit a model input and output pair to a workflow for
+        evaluation
 
         Args:
           model_input: A dictionary of inputs sent to the LLM to generate output. This must contain a
@@ -542,7 +540,6 @@ class AsyncDefendResource(AsyncAPIResource):
         *,
         description: str | Omit = omit,
         name: str | Omit = omit,
-        type: Literal["automatic", "custom"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -551,14 +548,12 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendResponse:
         """
-        Update an existing guardrail workflow.
+        Use this endpoint to update an existing guardrail workflow
 
         Args:
           description: Description for the workflow.
 
           name: Name of the workflow.
-
-          type: Type of thresholds to use for the workflow, either `automatic` or `custom`.
 
           extra_headers: Send extra headers
 
@@ -576,7 +571,6 @@ class AsyncDefendResource(AsyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "type": type,
                 },
                 defend_update_workflow_params.DefendUpdateWorkflowParams,
             ),
