@@ -133,7 +133,7 @@ class EvaluateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Evaluation:
         """
-        Retrieve the evaluation record for a given evaluation ID.
+        Use this endpoint to retrieve the evaluation record for a given evaluation ID
 
         Args:
           extra_headers: Send extra headers
@@ -264,7 +264,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Evaluation:
         """
-        Retrieve the evaluation record for a given evaluation ID.
+        Use this endpoint to retrieve the evaluation record for a given evaluation ID
 
         Args:
           extra_headers: Send extra headers

@@ -264,7 +264,6 @@ class TestDefend:
             workflow_id="workflow_id",
             description="description",
             name="name",
-            type="automatic",
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -552,7 +551,6 @@ class TestAsyncDefend:
             workflow_id="workflow_id",
             description="description",
             name="name",
-            type="automatic",
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
