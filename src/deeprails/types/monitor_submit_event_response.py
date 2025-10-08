@@ -27,7 +27,6 @@ class MonitorSubmitEventResponse(BaseModel):
     """Represents whether the request was completed successfully."""
 
     data: Optional[Data] = None
-    """Response payload for monitor event operations."""
 
     message: Optional[str] = None
     """The accompanying message for the request.

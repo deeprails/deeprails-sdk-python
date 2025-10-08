@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["DefendUpdateWorkflowParams"]
 
@@ -13,6 +13,3 @@ class DefendUpdateWorkflowParams(TypedDict, total=False):
 
     name: str
     """Name of the workflow."""
-
-    type: Literal["automatic", "custom"]
-    """Type of thresholds to use for the workflow, either `automatic` or `custom`."""

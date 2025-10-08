@@ -72,7 +72,6 @@ class MonitorRetrieveResponse(BaseModel):
     """Represents whether the request was completed successfully."""
 
     data: Optional[Data] = None
-    """Detailed response payload for retrieving a monitor and its evaluations."""
 
     message: Optional[str] = None
     """The accompanying message for the request.
