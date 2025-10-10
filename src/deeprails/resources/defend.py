@@ -199,8 +199,8 @@ class DefendResource(SyncAPIResource):
         model_input: defend_submit_event_params.ModelInput,
         model_output: str,
         model_used: str,
-        nametag: str,
         run_mode: Literal["precision_plus", "precision", "smart", "economy"],
+        nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -221,12 +221,12 @@ class DefendResource(SyncAPIResource):
 
           model_used: Model ID used to generate the output, like `gpt-4o` or `o3`.
 
-          nametag: An optional, user-defined tag for the event.
-
           run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
               event. Available run modes include `precision_plus`, `precision`, `smart`, and
               `economy`. Defaults to `smart`.
+
+          nametag: An optional, user-defined tag for the event.
 
           extra_headers: Send extra headers
 
@@ -245,8 +245,8 @@ class DefendResource(SyncAPIResource):
                     "model_input": model_input,
                     "model_output": model_output,
                     "model_used": model_used,
-                    "nametag": nametag,
                     "run_mode": run_mode,
+                    "nametag": nametag,
                 },
                 defend_submit_event_params.DefendSubmitEventParams,
             ),
@@ -477,8 +477,8 @@ class AsyncDefendResource(AsyncAPIResource):
         model_input: defend_submit_event_params.ModelInput,
         model_output: str,
         model_used: str,
-        nametag: str,
         run_mode: Literal["precision_plus", "precision", "smart", "economy"],
+        nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -499,12 +499,12 @@ class AsyncDefendResource(AsyncAPIResource):
 
           model_used: Model ID used to generate the output, like `gpt-4o` or `o3`.
 
-          nametag: An optional, user-defined tag for the event.
-
           run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
               event. Available run modes include `precision_plus`, `precision`, `smart`, and
               `economy`. Defaults to `smart`.
+
+          nametag: An optional, user-defined tag for the event.
 
           extra_headers: Send extra headers
 
@@ -523,8 +523,8 @@ class AsyncDefendResource(AsyncAPIResource):
                     "model_input": model_input,
                     "model_output": model_output,
                     "model_used": model_used,
-                    "nametag": nametag,
                     "run_mode": run_mode,
+                    "nametag": nametag,
                 },
                 defend_submit_event_params.DefendSubmitEventParams,
             ),
