@@ -22,9 +22,6 @@ class DefendSubmitEventParams(TypedDict, total=False):
     model_used: Required[str]
     """Model ID used to generate the output, like `gpt-4o` or `o3`."""
 
-    nametag: Required[str]
-    """An optional, user-defined tag for the event."""
-
     run_mode: Required[Literal["precision_plus", "precision", "smart", "economy"]]
     """Run mode for the workflow event.
 
@@ -33,6 +30,9 @@ class DefendSubmitEventParams(TypedDict, total=False):
     include `precision_plus`, `precision`, `smart`, and `economy`. Defaults to
     `smart`.
     """
+
+    nametag: str
+    """An optional, user-defined tag for the event."""
 
 
 class ModelInputTyped(TypedDict, total=False):

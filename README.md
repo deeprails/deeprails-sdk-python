@@ -141,7 +141,6 @@ workflow_event_response = client.defend.submit_event(
     model_input={"user_prompt": "user_prompt"},
     model_output="model_output",
     model_used="model_used",
-    nametag="nametag",
     run_mode="precision_plus",
 )
 print(workflow_event_response.model_input)

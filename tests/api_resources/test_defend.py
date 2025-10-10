@@ -179,7 +179,6 @@ class TestDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
@@ -195,8 +194,8 @@ class TestDefend:
             },
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
+            nametag="nametag",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
 
@@ -208,7 +207,6 @@ class TestDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
         )
 
@@ -225,7 +223,6 @@ class TestDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
         ) as response:
             assert not response.is_closed
@@ -245,7 +242,6 @@ class TestDefend:
                 model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
                 model_used="model_used",
-                nametag="nametag",
                 run_mode="precision_plus",
             )
 
@@ -466,7 +462,6 @@ class TestAsyncDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
@@ -482,8 +477,8 @@ class TestAsyncDefend:
             },
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
+            nametag="nametag",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
 
@@ -495,7 +490,6 @@ class TestAsyncDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
         )
 
@@ -512,7 +506,6 @@ class TestAsyncDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            nametag="nametag",
             run_mode="precision_plus",
         ) as response:
             assert not response.is_closed
@@ -532,7 +525,6 @@ class TestAsyncDefend:
                 model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
                 model_used="model_used",
-                nametag="nametag",
                 run_mode="precision_plus",
             )
 
