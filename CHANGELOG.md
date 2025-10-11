@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.1 (2025-10-11)
+
+Full Changelog: [v1.4.0...v1.4.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.4.0...v1.4.1)
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([c0b084c](https://github.com/deeprails/deeprails-sdk-python/commit/c0b084c0f0e71a600274186c30902246aa3816d1))
+
 ## 1.4.0 (2025-10-10)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.3.0...v1.4.0)
