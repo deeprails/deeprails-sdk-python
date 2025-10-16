@@ -138,7 +138,7 @@ client = Deeprails()
 
 workflow_event_response = client.defend.submit_event(
     workflow_id="workflow_id",
-    model_input={},
+    model_input={"user_prompt": "user_prompt"},
     model_output="model_output",
     model_used="model_used",
     run_mode="precision_plus",
