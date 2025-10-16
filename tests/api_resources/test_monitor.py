@@ -174,7 +174,7 @@ class TestMonitor:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
         )
         assert_matches_type(MonitorSubmitEventResponse, monitor, path=["response"])
@@ -186,8 +186,9 @@ class TestMonitor:
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
             model_input={
+                "ground_truth": "ground_truth",
+                "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
-                "context": "context",
             },
             model_output="model_output",
             model_used="model_used",
@@ -202,7 +203,7 @@ class TestMonitor:
         response = client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
         )
 
@@ -217,7 +218,7 @@ class TestMonitor:
         with client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
         ) as response:
             assert not response.is_closed
@@ -235,7 +236,7 @@ class TestMonitor:
             client.monitor.with_raw_response.submit_event(
                 monitor_id="",
                 guardrail_metrics=["correctness"],
-                model_input={"user_prompt": "user_prompt"},
+                model_input={},
                 model_output="model_output",
             )
 
@@ -398,7 +399,7 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
         )
         assert_matches_type(MonitorSubmitEventResponse, monitor, path=["response"])
@@ -410,8 +411,9 @@ class TestAsyncMonitor:
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
             model_input={
+                "ground_truth": "ground_truth",
+                "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
-                "context": "context",
             },
             model_output="model_output",
             model_used="model_used",
@@ -426,7 +428,7 @@ class TestAsyncMonitor:
         response = await async_client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
         )
 
@@ -441,7 +443,7 @@ class TestAsyncMonitor:
         async with async_client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
             guardrail_metrics=["correctness"],
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
         ) as response:
             assert not response.is_closed
@@ -459,6 +461,6 @@ class TestAsyncMonitor:
             await async_client.monitor.with_raw_response.submit_event(
                 monitor_id="",
                 guardrail_metrics=["correctness"],
-                model_input={"user_prompt": "user_prompt"},
+                model_input={},
                 model_output="model_output",
             )
