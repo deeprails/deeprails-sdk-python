@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 (2025-10-16)
+
+Full Changelog: [v1.4.1...v1.5.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.4.1...v1.5.0)
+
+### Features
+
+* **api:** adding support for system_prompt and ground_truth ([be4cd74](https://github.com/deeprails/deeprails-sdk-python/commit/be4cd74a118dc1e4b1ef90f25f311a0862807176))
+
 ## 1.4.1 (2025-10-11)
 
 Full Changelog: [v1.4.0...v1.4.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.4.0...v1.4.1)
