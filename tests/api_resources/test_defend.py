@@ -176,7 +176,7 @@ class TestDefend:
     def test_method_submit_event(self, client: Deeprails) -> None:
         defend = client.defend.submit_event(
             workflow_id="workflow_id",
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             model_used="model_used",
             run_mode="precision_plus",
@@ -189,8 +189,9 @@ class TestDefend:
         defend = client.defend.submit_event(
             workflow_id="workflow_id",
             model_input={
+                "ground_truth": "ground_truth",
+                "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
-                "context": "context",
             },
             model_output="model_output",
             model_used="model_used",
@@ -204,7 +205,7 @@ class TestDefend:
     def test_raw_response_submit_event(self, client: Deeprails) -> None:
         response = client.defend.with_raw_response.submit_event(
             workflow_id="workflow_id",
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             model_used="model_used",
             run_mode="precision_plus",
@@ -220,7 +221,7 @@ class TestDefend:
     def test_streaming_response_submit_event(self, client: Deeprails) -> None:
         with client.defend.with_streaming_response.submit_event(
             workflow_id="workflow_id",
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             model_used="model_used",
             run_mode="precision_plus",
@@ -239,7 +240,7 @@ class TestDefend:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             client.defend.with_raw_response.submit_event(
                 workflow_id="",
-                model_input={"user_prompt": "user_prompt"},
+                model_input={},
                 model_output="model_output",
                 model_used="model_used",
                 run_mode="precision_plus",
@@ -459,7 +460,7 @@ class TestAsyncDefend:
     async def test_method_submit_event(self, async_client: AsyncDeeprails) -> None:
         defend = await async_client.defend.submit_event(
             workflow_id="workflow_id",
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             model_used="model_used",
             run_mode="precision_plus",
@@ -472,8 +473,9 @@ class TestAsyncDefend:
         defend = await async_client.defend.submit_event(
             workflow_id="workflow_id",
             model_input={
+                "ground_truth": "ground_truth",
+                "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
-                "context": "context",
             },
             model_output="model_output",
             model_used="model_used",
@@ -487,7 +489,7 @@ class TestAsyncDefend:
     async def test_raw_response_submit_event(self, async_client: AsyncDeeprails) -> None:
         response = await async_client.defend.with_raw_response.submit_event(
             workflow_id="workflow_id",
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             model_used="model_used",
             run_mode="precision_plus",
@@ -503,7 +505,7 @@ class TestAsyncDefend:
     async def test_streaming_response_submit_event(self, async_client: AsyncDeeprails) -> None:
         async with async_client.defend.with_streaming_response.submit_event(
             workflow_id="workflow_id",
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             model_used="model_used",
             run_mode="precision_plus",
@@ -522,7 +524,7 @@ class TestAsyncDefend:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             await async_client.defend.with_raw_response.submit_event(
                 workflow_id="",
-                model_input={"user_prompt": "user_prompt"},
+                model_input={},
                 model_output="model_output",
                 model_used="model_used",
                 run_mode="precision_plus",

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -12,23 +12,14 @@ __all__ = ["Evaluation", "ModelInput"]
 
 
 class ModelInput(BaseModel):
-    user_prompt: str
+    ground_truth: Optional[str] = None
+    """The ground truth for evaluating Ground Truth Adherence guardrail."""
+
+    system_prompt: Optional[str] = None
+    """The system prompt used to generate the output."""
+
+    user_prompt: Optional[str] = None
     """The user prompt used to generate the output."""
-
-    context: Optional[str] = None
-    """Optional context supplied to the LLM when generating the output."""
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
-    else:
-        __pydantic_extra__: Dict[str, object]
 
 
 class Evaluation(BaseModel):
@@ -41,8 +32,8 @@ class Evaluation(BaseModel):
     api_model_input: ModelInput = FieldInfo(alias="model_input")
     """A dictionary of inputs sent to the LLM to generate output.
 
-    The dictionary must contain a `user_prompt` field and an optional `context`
-    field. Additional properties are allowed.
+    The dictionary must contain at least one of `user_prompt` or `system_prompt`.
+    For ground_truth_aherence guadrail metric, `ground_truth` should be provided.
     """
 
     api_model_output: str = FieldInfo(alias="model_output")

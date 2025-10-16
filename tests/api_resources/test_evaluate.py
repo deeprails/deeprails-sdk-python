@@ -21,7 +21,7 @@ class TestEvaluate:
     @parametrize
     def test_method_create(self, client: Deeprails) -> None:
         evaluate = client.evaluate.create(
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             run_mode="precision_plus",
         )
@@ -32,8 +32,9 @@ class TestEvaluate:
     def test_method_create_with_all_params(self, client: Deeprails) -> None:
         evaluate = client.evaluate.create(
             model_input={
+                "ground_truth": "ground_truth",
+                "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
-                "context": "context",
             },
             model_output="model_output",
             run_mode="precision_plus",
@@ -47,7 +48,7 @@ class TestEvaluate:
     @parametrize
     def test_raw_response_create(self, client: Deeprails) -> None:
         response = client.evaluate.with_raw_response.create(
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             run_mode="precision_plus",
         )
@@ -61,7 +62,7 @@ class TestEvaluate:
     @parametrize
     def test_streaming_response_create(self, client: Deeprails) -> None:
         with client.evaluate.with_streaming_response.create(
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             run_mode="precision_plus",
         ) as response:
@@ -125,7 +126,7 @@ class TestAsyncEvaluate:
     @parametrize
     async def test_method_create(self, async_client: AsyncDeeprails) -> None:
         evaluate = await async_client.evaluate.create(
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             run_mode="precision_plus",
         )
@@ -136,8 +137,9 @@ class TestAsyncEvaluate:
     async def test_method_create_with_all_params(self, async_client: AsyncDeeprails) -> None:
         evaluate = await async_client.evaluate.create(
             model_input={
+                "ground_truth": "ground_truth",
+                "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
-                "context": "context",
             },
             model_output="model_output",
             run_mode="precision_plus",
@@ -151,7 +153,7 @@ class TestAsyncEvaluate:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDeeprails) -> None:
         response = await async_client.evaluate.with_raw_response.create(
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             run_mode="precision_plus",
         )
@@ -165,7 +167,7 @@ class TestAsyncEvaluate:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDeeprails) -> None:
         async with async_client.evaluate.with_streaming_response.create(
-            model_input={"user_prompt": "user_prompt"},
+            model_input={},
             model_output="model_output",
             run_mode="precision_plus",
         ) as response:

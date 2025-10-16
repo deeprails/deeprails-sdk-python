@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["DefendSubmitEventParams", "ModelInput"]
 
@@ -12,8 +11,8 @@ class DefendSubmitEventParams(TypedDict, total=False):
     model_input: Required[ModelInput]
     """A dictionary of inputs sent to the LLM to generate output.
 
-    This must contain a `user_prompt` field and an optional `context` field.
-    Additional properties are allowed.
+    The dictionary must contain at least one of `user_prompt` or `system_prompt`.
+    For ground_truth_aherence guadrail metric, `ground_truth` should be provided.
     """
 
     model_output: Required[str]
@@ -35,10 +34,12 @@ class DefendSubmitEventParams(TypedDict, total=False):
     """An optional, user-defined tag for the event."""
 
 
-class ModelInputTyped(TypedDict, total=False):
-    user_prompt: Required[str]
+class ModelInput(TypedDict, total=False):
+    ground_truth: str
+    """The ground truth for evaluating Ground Truth Adherence guardrail."""
 
-    context: str
+    system_prompt: str
+    """The system prompt used to generate the output."""
 
-
-ModelInput: TypeAlias = Union[ModelInputTyped, Dict[str, object]]
+    user_prompt: str
+    """The user prompt used to generate the output."""
