@@ -35,7 +35,7 @@ client = Deeprails(
 defend_response = client.defend.create_workflow(
     improvement_action="fixit",
     metrics={
-        "completeness": 0.8,
+        "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
     name="Push Alert Workflow",
@@ -67,7 +67,7 @@ async def main() -> None:
     defend_response = await client.defend.create_workflow(
         improvement_action="fixit",
         metrics={
-            "completeness": 0.8,
+            "completeness": 0.7,
             "instruction_adherence": 0.75,
         },
         name="Push Alert Workflow",
@@ -108,7 +108,7 @@ async def main() -> None:
         defend_response = await client.defend.create_workflow(
             improvement_action="fixit",
             metrics={
-                "completeness": 0.8,
+                "completeness": 0.7,
                 "instruction_adherence": 0.75,
             },
             name="Push Alert Workflow",
@@ -167,7 +167,7 @@ try:
     client.defend.create_workflow(
         improvement_action="fixit",
         metrics={
-            "completeness": 0.8,
+            "completeness": 0.7,
             "instruction_adherence": 0.75,
         },
         name="Push Alert Workflow",
@@ -218,7 +218,7 @@ client = Deeprails(
 client.with_options(max_retries=5).defend.create_workflow(
     improvement_action="fixit",
     metrics={
-        "completeness": 0.8,
+        "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
     name="Push Alert Workflow",
@@ -249,7 +249,7 @@ client = Deeprails(
 client.with_options(timeout=5.0).defend.create_workflow(
     improvement_action="fixit",
     metrics={
-        "completeness": 0.8,
+        "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
     name="Push Alert Workflow",
@@ -298,7 +298,7 @@ client = Deeprails()
 response = client.defend.with_raw_response.create_workflow(
     improvement_action="fixit",
     metrics={
-        "completeness": 0.8,
+        "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
     name="Push Alert Workflow",
@@ -324,7 +324,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.defend.with_streaming_response.create_workflow(
     improvement_action="fixit",
     metrics={
-        "completeness": 0.8,
+        "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
     name="Push Alert Workflow",
