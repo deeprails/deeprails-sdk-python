@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.1 (2025-10-22)
+
+Full Changelog: [v1.6.0...v1.6.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.6.0...v1.6.1)
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([fde0f65](https://github.com/deeprails/deeprails-sdk-python/commit/fde0f65f5947336baeee5ae71d7ad49fa8aefc98))
+
 ## 1.6.0 (2025-10-20)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.5.0...v1.6.0)
