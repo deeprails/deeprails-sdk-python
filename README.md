@@ -36,6 +36,10 @@ defend_response = client.defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
     type="custom",
+    custom_hallucination_threshold_values={
+        "completeness": 0.7,
+        "instruction_adherence": 0.75,
+    },
 )
 print(defend_response.workflow_id)
 ```
@@ -64,6 +68,10 @@ async def main() -> None:
         improvement_action="fixit",
         name="Push Alert Workflow",
         type="custom",
+        custom_hallucination_threshold_values={
+            "completeness": 0.7,
+            "instruction_adherence": 0.75,
+        },
     )
     print(defend_response.workflow_id)
 
@@ -101,6 +109,10 @@ async def main() -> None:
             improvement_action="fixit",
             name="Push Alert Workflow",
             type="custom",
+            custom_hallucination_threshold_values={
+                "completeness": 0.7,
+                "instruction_adherence": 0.75,
+            },
         )
         print(defend_response.workflow_id)
 
@@ -156,6 +168,10 @@ try:
         improvement_action="fixit",
         name="Push Alert Workflow",
         type="custom",
+        custom_hallucination_threshold_values={
+            "completeness": 0.7,
+            "instruction_adherence": 0.75,
+        },
     )
 except deeprails.APIConnectionError as e:
     print("The server could not be reached")
@@ -203,6 +219,10 @@ client.with_options(max_retries=5).defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
     type="custom",
+    custom_hallucination_threshold_values={
+        "completeness": 0.7,
+        "instruction_adherence": 0.75,
+    },
 )
 ```
 
@@ -230,6 +250,10 @@ client.with_options(timeout=5.0).defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
     type="custom",
+    custom_hallucination_threshold_values={
+        "completeness": 0.7,
+        "instruction_adherence": 0.75,
+    },
 )
 ```
 
@@ -275,6 +299,10 @@ response = client.defend.with_raw_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
     type="custom",
+    custom_hallucination_threshold_values={
+        "completeness": 0.7,
+        "instruction_adherence": 0.75,
+    },
 )
 print(response.headers.get('X-My-Header'))
 
@@ -297,6 +325,10 @@ with client.defend.with_streaming_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
     type="custom",
+    custom_hallucination_threshold_values={
+        "completeness": 0.7,
+        "instruction_adherence": 0.75,
+    },
 ) as response:
     print(response.headers.get("X-My-Header"))
 
