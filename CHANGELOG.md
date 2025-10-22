@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 (2025-10-22)
+
+Full Changelog: [v1.6.1...v1.7.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.6.1...v1.7.0)
+
+### Features
+
+* **api:** update defend naming and data structures ([ba934de](https://github.com/deeprails/deeprails-sdk-python/commit/ba934de8812d71da159a00fa8283876e682aeb7b))
+
 ## 1.6.1 (2025-10-22)
 
 Full Changelog: [v1.6.0...v1.6.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.6.0...v1.6.1)
