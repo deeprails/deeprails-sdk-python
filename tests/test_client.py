@@ -718,7 +718,7 @@ class TestDeeprails:
 
         with pytest.raises(APITimeoutError):
             client.defend.with_streaming_response.create_workflow(
-                improvement_action="regenerate", metrics={"foo": 0}, name="name", type="automatic"
+                improvement_action="regen", name="name", type="automatic"
             ).__enter__()
 
         assert _get_open_connections(self.client) == 0
@@ -730,7 +730,7 @@ class TestDeeprails:
 
         with pytest.raises(APIStatusError):
             client.defend.with_streaming_response.create_workflow(
-                improvement_action="regenerate", metrics={"foo": 0}, name="name", type="automatic"
+                improvement_action="regen", name="name", type="automatic"
             ).__enter__()
         assert _get_open_connections(self.client) == 0
 
@@ -761,7 +761,7 @@ class TestDeeprails:
         respx_mock.post("/defend").mock(side_effect=retry_handler)
 
         response = client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate", metrics={"foo": 0}, name="name", type="automatic"
+            improvement_action="regen", name="name", type="automatic"
         )
 
         assert response.retries_taken == failures_before_success
@@ -787,11 +787,7 @@ class TestDeeprails:
         respx_mock.post("/defend").mock(side_effect=retry_handler)
 
         response = client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
-            name="name",
-            type="automatic",
-            extra_headers={"x-stainless-retry-count": Omit()},
+            improvement_action="regen", name="name", type="automatic", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -816,11 +812,7 @@ class TestDeeprails:
         respx_mock.post("/defend").mock(side_effect=retry_handler)
 
         response = client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
-            name="name",
-            type="automatic",
-            extra_headers={"x-stainless-retry-count": "42"},
+            improvement_action="regen", name="name", type="automatic", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1553,7 +1545,7 @@ class TestAsyncDeeprails:
 
         with pytest.raises(APITimeoutError):
             await async_client.defend.with_streaming_response.create_workflow(
-                improvement_action="regenerate", metrics={"foo": 0}, name="name", type="automatic"
+                improvement_action="regen", name="name", type="automatic"
             ).__aenter__()
 
         assert _get_open_connections(self.client) == 0
@@ -1567,7 +1559,7 @@ class TestAsyncDeeprails:
 
         with pytest.raises(APIStatusError):
             await async_client.defend.with_streaming_response.create_workflow(
-                improvement_action="regenerate", metrics={"foo": 0}, name="name", type="automatic"
+                improvement_action="regen", name="name", type="automatic"
             ).__aenter__()
         assert _get_open_connections(self.client) == 0
 
@@ -1599,7 +1591,7 @@ class TestAsyncDeeprails:
         respx_mock.post("/defend").mock(side_effect=retry_handler)
 
         response = await client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate", metrics={"foo": 0}, name="name", type="automatic"
+            improvement_action="regen", name="name", type="automatic"
         )
 
         assert response.retries_taken == failures_before_success
@@ -1626,11 +1618,7 @@ class TestAsyncDeeprails:
         respx_mock.post("/defend").mock(side_effect=retry_handler)
 
         response = await client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
-            name="name",
-            type="automatic",
-            extra_headers={"x-stainless-retry-count": Omit()},
+            improvement_action="regen", name="name", type="automatic", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1656,11 +1644,7 @@ class TestAsyncDeeprails:
         respx_mock.post("/defend").mock(side_effect=retry_handler)
 
         response = await client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
-            name="name",
-            type="automatic",
-            extra_headers={"x-stainless-retry-count": "42"},
+            improvement_action="regen", name="name", type="automatic", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
