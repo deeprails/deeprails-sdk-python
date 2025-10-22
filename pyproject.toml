@@ -1,6 +1,6 @@
 [project]
 name = "deeprails"
-version = "1.6.0"
+version = "1.6.1"
 description = "The official Python library for the deeprails API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -39,7 +39,7 @@ Homepage = "https://docs.deeprails.com/"
 Repository = "https://github.com/deeprails/deeprails-sdk-python"
 
 [project.optional-dependencies]
-aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 
 [tool.rye]
 managed = true
