@@ -2,29 +2,20 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["DefendCreateWorkflowParams"]
 
 
 class DefendCreateWorkflowParams(TypedDict, total=False):
-    improvement_action: Required[Optional[Literal["regenerate", "fixit"]]]
+    improvement_action: Required[Literal["regen", "fixit", "do_nothing"]]
     """
     The action used to improve outputs that fail one or guardrail metrics for the
-    workflow events. May be `regenerate`, `fixit`, or null which represents “do
-    nothing”. Regenerate runs the user's input prompt with minor induced variance.
-    Fixit attempts to directly address the shortcomings of the output using the
-    guardrail failure rationale. Do nothing does not attempt any improvement.
-    """
-
-    metrics: Required[Dict[str, float]]
-    """Mapping of guardrail metrics to floating point threshold values.
-
-    If the workflow type is automatic, only the metric names are used
-    (`automatic_tolerance` determines thresholds). Possible metrics are
-    `correctness`, `completeness`, `instruction_adherence`, `context_adherence`,
-    `ground_truth_adherence`, or `comprehensive_safety`.
+    workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
+    input prompt with minor induced variance. FixIt attempts to directly address the
+    shortcomings of the output using the guardrail failure rationale. Do Nothing
+    does not attempt any improvement.
     """
 
     name: Required[str]
@@ -39,16 +30,25 @@ class DefendCreateWorkflowParams(TypedDict, total=False):
     1.0.
     """
 
-    automatic_tolerance: Literal["low", "medium", "high"]
+    automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]]
     """
-    Hallucination tolerance for automatic workflows; may be `low`, `medium`, or
-    `high`. Ignored if `type` is `custom`.
+    Mapping of guardrail metrics to hallucination tolerance levels (either `low`,
+    `medium`, or `high`). Possible metrics are `completeness`,
+    `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
+    `comprehensive_safety`.
+    """
+
+    custom_hallucination_threshold_values: Dict[str, float]
+    """Mapping of guardrail metrics to floating point threshold values.
+
+    Possible metrics are `correctness`, `completeness`, `instruction_adherence`,
+    `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
     """
 
     description: str
     """Description for the workflow."""
 
-    max_retries: int
+    max_improvement_attempt: int
     """Max.
 
     number of improvement action retries until a given event passes the guardrails.
