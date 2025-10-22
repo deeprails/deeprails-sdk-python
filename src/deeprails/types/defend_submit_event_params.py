@@ -12,7 +12,7 @@ class DefendSubmitEventParams(TypedDict, total=False):
     """A dictionary of inputs sent to the LLM to generate output.
 
     The dictionary must contain at least `user_prompt` or `system_prompt` field. For
-    ground_truth_aherence guadrail metric, `ground_truth` should be provided.
+    the ground_truth_adherence guardrail metric, `ground_truth` should be provided.
     """
 
     model_output: Required[str]

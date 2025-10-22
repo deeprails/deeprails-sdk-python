@@ -27,6 +27,7 @@ class TestDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
+            automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -37,10 +38,9 @@ class TestDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
-            automatic_hallucination_tolerance_levels={"foo": "low"},
-            custom_hallucination_threshold_values={"foo": 0},
+            automatic_hallucination_tolerance_levels={"correctness": "low"},
             description="description",
-            max_improvement_attempt=0,
+            max_improvement_attempt=2,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -51,6 +51,7 @@ class TestDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
+            automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
 
         assert response.is_closed is True
@@ -65,6 +66,7 @@ class TestDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
+            automatic_hallucination_tolerance_levels={"completeness": "medium"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -308,6 +310,7 @@ class TestAsyncDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
+            automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -318,10 +321,9 @@ class TestAsyncDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
-            automatic_hallucination_tolerance_levels={"foo": "low"},
-            custom_hallucination_threshold_values={"foo": 0},
+            automatic_hallucination_tolerance_levels={"correctness": "low"},
             description="description",
-            max_improvement_attempt=0,
+            max_improvement_attempt=2,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -332,6 +334,7 @@ class TestAsyncDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
+            automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
 
         assert response.is_closed is True
@@ -346,6 +349,7 @@ class TestAsyncDefend:
             improvement_action="regen",
             name="name",
             type="automatic",
+            automatic_hallucination_tolerance_levels={"completeness": "medium"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
