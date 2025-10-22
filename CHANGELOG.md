@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.0 (2025-10-22)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **api:** manual updates ([4b46121](https://github.com/deeprails/deeprails-sdk-python/commit/4b461213615578ca0382f044201c8343d4e9f167))
+
 ## 1.7.0 (2025-10-22)
 
 Full Changelog: [v1.6.1...v1.7.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.6.1...v1.7.0)
