@@ -24,8 +24,7 @@ class TestDefend:
     @parametrize
     def test_method_create_workflow(self, client: Deeprails) -> None:
         defend = client.defend.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
         )
@@ -35,13 +34,13 @@ class TestDefend:
     @parametrize
     def test_method_create_workflow_with_all_params(self, client: Deeprails) -> None:
         defend = client.defend.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
-            automatic_tolerance="low",
+            automatic_hallucination_tolerance_levels={"foo": "low"},
+            custom_hallucination_threshold_values={"foo": 0},
             description="description",
-            max_retries=0,
+            max_improvement_attempt=0,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -49,8 +48,7 @@ class TestDefend:
     @parametrize
     def test_raw_response_create_workflow(self, client: Deeprails) -> None:
         response = client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
         )
@@ -64,8 +62,7 @@ class TestDefend:
     @parametrize
     def test_streaming_response_create_workflow(self, client: Deeprails) -> None:
         with client.defend.with_streaming_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
         ) as response:
@@ -308,8 +305,7 @@ class TestAsyncDefend:
     @parametrize
     async def test_method_create_workflow(self, async_client: AsyncDeeprails) -> None:
         defend = await async_client.defend.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
         )
@@ -319,13 +315,13 @@ class TestAsyncDefend:
     @parametrize
     async def test_method_create_workflow_with_all_params(self, async_client: AsyncDeeprails) -> None:
         defend = await async_client.defend.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
-            automatic_tolerance="low",
+            automatic_hallucination_tolerance_levels={"foo": "low"},
+            custom_hallucination_threshold_values={"foo": 0},
             description="description",
-            max_retries=0,
+            max_improvement_attempt=0,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -333,8 +329,7 @@ class TestAsyncDefend:
     @parametrize
     async def test_raw_response_create_workflow(self, async_client: AsyncDeeprails) -> None:
         response = await async_client.defend.with_raw_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
         )
@@ -348,8 +343,7 @@ class TestAsyncDefend:
     @parametrize
     async def test_streaming_response_create_workflow(self, async_client: AsyncDeeprails) -> None:
         async with async_client.defend.with_streaming_response.create_workflow(
-            improvement_action="regenerate",
-            metrics={"foo": 0},
+            improvement_action="regen",
             name="name",
             type="automatic",
         ) as response:
