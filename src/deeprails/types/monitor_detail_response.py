@@ -7,10 +7,10 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .evaluation import Evaluation
 
-__all__ = ["MonitorRetrieveResponse", "Data", "DataStats"]
+__all__ = ["MonitorDetailResponse", "Stats"]
 
 
-class DataStats(BaseModel):
+class Stats(BaseModel):
     completed_evaluations: Optional[int] = None
     """Number of evaluations that completed successfully."""
 
@@ -27,7 +27,7 @@ class DataStats(BaseModel):
     """Total number of evaluations performed by this monitor."""
 
 
-class Data(BaseModel):
+class MonitorDetailResponse(BaseModel):
     monitor_id: str
     """A unique monitor ID."""
 
@@ -53,7 +53,7 @@ class Data(BaseModel):
     Each one corresponds to a separate monitor event.
     """
 
-    stats: Optional[DataStats] = None
+    stats: Optional[Stats] = None
     """
     Contains five fields used for stats of this monitor: total evaluations,
     completed evaluations, failed evaluations, queued evaluations, and in progress
@@ -65,16 +65,3 @@ class Data(BaseModel):
 
     user_id: Optional[str] = None
     """User ID of the user who created the monitor."""
-
-
-class MonitorRetrieveResponse(BaseModel):
-    success: bool
-    """Represents whether the request was completed successfully."""
-
-    data: Optional[Data] = None
-
-    message: Optional[str] = None
-    """The accompanying message for the request.
-
-    Includes error details when applicable.
-    """

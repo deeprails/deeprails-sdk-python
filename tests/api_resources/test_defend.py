@@ -40,7 +40,7 @@ class TestDefend:
             type="automatic",
             automatic_hallucination_tolerance_levels={"correctness": "low"},
             description="description",
-            max_improvement_attempt=2,
+            max_improvement_attempts=2,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -323,7 +323,7 @@ class TestAsyncDefend:
             type="automatic",
             automatic_hallucination_tolerance_levels={"correctness": "low"},
             description="description",
-            max_improvement_attempt=2,
+            max_improvement_attempts=2,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
