@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["APIResponse", "Data"]
+__all__ = ["MonitorResponse"]
 
 
-class Data(BaseModel):
+class MonitorResponse(BaseModel):
     monitor_id: str
     """A unique monitor ID."""
 
@@ -34,16 +34,3 @@ class Data(BaseModel):
 
     user_id: Optional[str] = None
     """User ID of the user who created the monitor."""
-
-
-class APIResponse(BaseModel):
-    success: bool
-    """Represents whether the request was completed successfully."""
-
-    data: Optional[Data] = None
-
-    message: Optional[str] = None
-    """The accompanying message for the request.
-
-    Includes error details when applicable.
-    """

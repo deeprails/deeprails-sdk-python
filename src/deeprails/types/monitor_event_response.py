@@ -5,10 +5,10 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["MonitorSubmitEventResponse", "Data"]
+__all__ = ["MonitorEventResponse"]
 
 
-class Data(BaseModel):
+class MonitorEventResponse(BaseModel):
     evaluation_id: str
     """A unique evaluation ID associated with this event."""
 
@@ -20,16 +20,3 @@ class Data(BaseModel):
 
     created_at: Optional[datetime] = None
     """The time the monitor event was created in UTC."""
-
-
-class MonitorSubmitEventResponse(BaseModel):
-    success: bool
-    """Represents whether the request was completed successfully."""
-
-    data: Optional[Data] = None
-
-    message: Optional[str] = None
-    """The accompanying message for the request.
-
-    Includes error details when applicable.
-    """

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.9.0 (2025-10-24)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** remove apiresponse from monitor ([4971a99](https://github.com/deeprails/deeprails-sdk-python/commit/4971a99c7357bebbc5e86a2d76d2be55bb34f5ae))
+
 ## 1.8.0 (2025-10-22)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.7.0...v1.8.0)
