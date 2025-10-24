@@ -31,7 +31,7 @@ class DefendResponse(BaseModel):
     Nothing does not attempt any improvement.
     """
 
-    max_improvement_attempt: Optional[int] = None
+    max_improvement_attempts: Optional[int] = None
     """Max.
 
     number of improvement action retries until a given event passes the guardrails.

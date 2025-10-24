@@ -48,7 +48,7 @@ class DefendCreateWorkflowParams(TypedDict, total=False):
     description: str
     """Description for the workflow."""
 
-    max_improvement_attempt: int
+    max_improvement_attempts: int
     """Max.
 
     number of improvement action retries until a given event passes the guardrails.
