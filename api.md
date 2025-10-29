@@ -36,8 +36,3 @@ Types:
 ```python
 from deeprails.types import Evaluation
 ```
-
-Methods:
-
-- <code title="post /evaluate">client.evaluate.<a href="./src/deeprails/resources/evaluate.py">create</a>(\*\*<a href="src/deeprails/types/evaluate_create_params.py">params</a>) -> <a href="./src/deeprails/types/evaluation.py">Evaluation</a></code>
-- <code title="get /evaluate/{eval_id}">client.evaluate.<a href="./src/deeprails/resources/evaluate.py">retrieve</a>(eval_id) -> <a href="./src/deeprails/types/evaluation.py">Evaluation</a></code>
