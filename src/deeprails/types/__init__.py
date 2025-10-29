@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .evaluation import Evaluation as Evaluation
 from .defend_response import DefendResponse as DefendResponse
 from .monitor_response import MonitorResponse as MonitorResponse
 from .monitor_create_params import MonitorCreateParams as MonitorCreateParams
