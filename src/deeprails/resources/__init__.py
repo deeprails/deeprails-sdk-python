@@ -16,14 +16,6 @@ from .monitor import (
     MonitorResourceWithStreamingResponse,
     AsyncMonitorResourceWithStreamingResponse,
 )
-from .evaluate import (
-    EvaluateResource,
-    AsyncEvaluateResource,
-    EvaluateResourceWithRawResponse,
-    AsyncEvaluateResourceWithRawResponse,
-    EvaluateResourceWithStreamingResponse,
-    AsyncEvaluateResourceWithStreamingResponse,
-)
 
 __all__ = [
     "DefendResource",
@@ -38,10 +30,4 @@ __all__ = [
     "AsyncMonitorResourceWithRawResponse",
     "MonitorResourceWithStreamingResponse",
     "AsyncMonitorResourceWithStreamingResponse",
-    "EvaluateResource",
-    "AsyncEvaluateResource",
-    "EvaluateResourceWithRawResponse",
-    "AsyncEvaluateResourceWithRawResponse",
-    "EvaluateResourceWithStreamingResponse",
-    "AsyncEvaluateResourceWithStreamingResponse",
 ]

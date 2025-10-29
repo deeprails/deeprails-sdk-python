@@ -7,7 +7,6 @@ from .defend_response import DefendResponse as DefendResponse
 from .monitor_response import MonitorResponse as MonitorResponse
 from .monitor_create_params import MonitorCreateParams as MonitorCreateParams
 from .monitor_update_params import MonitorUpdateParams as MonitorUpdateParams
-from .evaluate_create_params import EvaluateCreateParams as EvaluateCreateParams
 from .monitor_event_response import MonitorEventResponse as MonitorEventResponse
 from .monitor_detail_response import MonitorDetailResponse as MonitorDetailResponse
 from .monitor_retrieve_params import MonitorRetrieveParams as MonitorRetrieveParams

@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import defend, monitor, evaluate
+from .resources import defend, monitor
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, DeeprailsError
 from ._base_client import (
@@ -45,7 +45,6 @@ __all__ = [
 class Deeprails(SyncAPIClient):
     defend: defend.DefendResource
     monitor: monitor.MonitorResource
-    evaluate: evaluate.EvaluateResource
     with_raw_response: DeeprailsWithRawResponse
     with_streaming_response: DeeprailsWithStreamedResponse
 
@@ -105,7 +104,6 @@ class Deeprails(SyncAPIClient):
 
         self.defend = defend.DefendResource(self)
         self.monitor = monitor.MonitorResource(self)
-        self.evaluate = evaluate.EvaluateResource(self)
         self.with_raw_response = DeeprailsWithRawResponse(self)
         self.with_streaming_response = DeeprailsWithStreamedResponse(self)
 
@@ -217,7 +215,6 @@ class Deeprails(SyncAPIClient):
 class AsyncDeeprails(AsyncAPIClient):
     defend: defend.AsyncDefendResource
     monitor: monitor.AsyncMonitorResource
-    evaluate: evaluate.AsyncEvaluateResource
     with_raw_response: AsyncDeeprailsWithRawResponse
     with_streaming_response: AsyncDeeprailsWithStreamedResponse
 
@@ -277,7 +274,6 @@ class AsyncDeeprails(AsyncAPIClient):
 
         self.defend = defend.AsyncDefendResource(self)
         self.monitor = monitor.AsyncMonitorResource(self)
-        self.evaluate = evaluate.AsyncEvaluateResource(self)
         self.with_raw_response = AsyncDeeprailsWithRawResponse(self)
         self.with_streaming_response = AsyncDeeprailsWithStreamedResponse(self)
 
@@ -390,28 +386,24 @@ class DeeprailsWithRawResponse:
     def __init__(self, client: Deeprails) -> None:
         self.defend = defend.DefendResourceWithRawResponse(client.defend)
         self.monitor = monitor.MonitorResourceWithRawResponse(client.monitor)
-        self.evaluate = evaluate.EvaluateResourceWithRawResponse(client.evaluate)
 
 
 class AsyncDeeprailsWithRawResponse:
     def __init__(self, client: AsyncDeeprails) -> None:
         self.defend = defend.AsyncDefendResourceWithRawResponse(client.defend)
         self.monitor = monitor.AsyncMonitorResourceWithRawResponse(client.monitor)
-        self.evaluate = evaluate.AsyncEvaluateResourceWithRawResponse(client.evaluate)
 
 
 class DeeprailsWithStreamedResponse:
     def __init__(self, client: Deeprails) -> None:
         self.defend = defend.DefendResourceWithStreamingResponse(client.defend)
         self.monitor = monitor.MonitorResourceWithStreamingResponse(client.monitor)
-        self.evaluate = evaluate.EvaluateResourceWithStreamingResponse(client.evaluate)
 
 
 class AsyncDeeprailsWithStreamedResponse:
     def __init__(self, client: AsyncDeeprails) -> None:
         self.defend = defend.AsyncDefendResourceWithStreamingResponse(client.defend)
         self.monitor = monitor.AsyncMonitorResourceWithStreamingResponse(client.monitor)
-        self.evaluate = evaluate.AsyncEvaluateResourceWithStreamingResponse(client.evaluate)
 
 
 Client = Deeprails
