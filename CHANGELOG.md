@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.10.0 (2025-10-29)
+
+Full Changelog: [v1.9.0...v1.10.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.9.0...v1.10.0)
+
+### Features
+
+* **api:** remove evaluate api ([a3ddec1](https://github.com/deeprails/deeprails-sdk-python/commit/a3ddec1696eaa1247eea2a3bffd61e63d6537d30))
+* **api:** remove evaluate references ([23519a3](https://github.com/deeprails/deeprails-sdk-python/commit/23519a3349a254fe2fe24a51aeb59545d0820b70))
+
 ## 1.9.0 (2025-10-24)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.8.0...v1.9.0)
