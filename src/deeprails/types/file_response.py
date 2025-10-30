@@ -5,10 +5,10 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["FileUploadResponse"]
+__all__ = ["FileResponse"]
 
 
-class FileUploadResponse(BaseModel):
+class FileResponse(BaseModel):
     created_at: Optional[datetime] = None
     """The time the file was created in UTC."""
 

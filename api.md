@@ -34,9 +34,9 @@ Methods:
 Types:
 
 ```python
-from deeprails.types import FileUploadResponse
+from deeprails.types import FileResponse
 ```
 
 Methods:
 
-- <code title="post /files/upload">client.files.<a href="./src/deeprails/resources/files.py">upload</a>(\*\*<a href="src/deeprails/types/file_upload_params.py">params</a>) -> <a href="./src/deeprails/types/file_upload_response.py">FileUploadResponse</a></code>
+- <code title="post /files/upload">client.files.<a href="./src/deeprails/resources/files.py">upload</a>(\*\*<a href="src/deeprails/types/file_upload_params.py">params</a>) -> <a href="./src/deeprails/types/file_response.py">FileResponse</a></code>
