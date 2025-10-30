@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from .defend_response import DefendResponse as DefendResponse
 from .monitor_response import MonitorResponse as MonitorResponse
+from .file_upload_params import FileUploadParams as FileUploadParams
+from .file_upload_response import FileUploadResponse as FileUploadResponse
 from .monitor_create_params import MonitorCreateParams as MonitorCreateParams
 from .monitor_update_params import MonitorUpdateParams as MonitorUpdateParams
 from .monitor_event_response import MonitorEventResponse as MonitorEventResponse

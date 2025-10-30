@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import Literal, Required, TypedDict
 
+from .._types import SequenceNotStr
+
 __all__ = ["DefendCreateWorkflowParams"]
 
 
@@ -48,9 +50,21 @@ class DefendCreateWorkflowParams(TypedDict, total=False):
     description: str
     """Description for the workflow."""
 
+    file_search: SequenceNotStr[str]
+    """An array of file IDs to search in the workflow's evaluations.
+
+    Files must be uploaded via the DeepRails API first.
+    """
+
     max_improvement_attempts: int
     """Max.
 
     number of improvement action retries until a given event passes the guardrails.
     Defaults to 10.
+    """
+
+    web_search: bool
+    """Whether to enable web search for this workflow's evaluations.
+
+    Defaults to false.
     """

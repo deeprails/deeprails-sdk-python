@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import defend_submit_event_params, defend_create_workflow_params, defend_update_workflow_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -54,7 +54,9 @@ class DefendResource(SyncAPIResource):
         automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
         custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
         max_improvement_attempts: int | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -92,8 +94,13 @@ class DefendResource(SyncAPIResource):
 
           description: Description for the workflow.
 
+          file_search: An array of file IDs to search in the workflow's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
           max_improvement_attempts: Max. number of improvement action retries until a given event passes the
               guardrails. Defaults to 10.
+
+          web_search: Whether to enable web search for this workflow's evaluations. Defaults to false.
 
           extra_headers: Send extra headers
 
@@ -113,7 +120,9 @@ class DefendResource(SyncAPIResource):
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
                     "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
+                    "file_search": file_search,
                     "max_improvement_attempts": max_improvement_attempts,
+                    "web_search": web_search,
                 },
                 defend_create_workflow_params.DefendCreateWorkflowParams,
             ),
@@ -332,7 +341,9 @@ class AsyncDefendResource(AsyncAPIResource):
         automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
         custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
         max_improvement_attempts: int | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -370,8 +381,13 @@ class AsyncDefendResource(AsyncAPIResource):
 
           description: Description for the workflow.
 
+          file_search: An array of file IDs to search in the workflow's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
           max_improvement_attempts: Max. number of improvement action retries until a given event passes the
               guardrails. Defaults to 10.
+
+          web_search: Whether to enable web search for this workflow's evaluations. Defaults to false.
 
           extra_headers: Send extra headers
 
@@ -391,7 +407,9 @@ class AsyncDefendResource(AsyncAPIResource):
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
                     "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
+                    "file_search": file_search,
                     "max_improvement_attempts": max_improvement_attempts,
+                    "web_search": web_search,
                 },
                 defend_create_workflow_params.DefendCreateWorkflowParams,
             ),

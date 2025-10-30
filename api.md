@@ -28,3 +28,15 @@ Methods:
 - <code title="get /monitor/{monitor_id}">client.monitor.<a href="./src/deeprails/resources/monitor.py">retrieve</a>(monitor_id, \*\*<a href="src/deeprails/types/monitor_retrieve_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_detail_response.py">MonitorDetailResponse</a></code>
 - <code title="put /monitor/{monitor_id}">client.monitor.<a href="./src/deeprails/resources/monitor.py">update</a>(monitor_id, \*\*<a href="src/deeprails/types/monitor_update_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_response.py">MonitorResponse</a></code>
 - <code title="post /monitor/{monitor_id}/events">client.monitor.<a href="./src/deeprails/resources/monitor.py">submit_event</a>(monitor_id, \*\*<a href="src/deeprails/types/monitor_submit_event_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_event_response.py">MonitorEventResponse</a></code>
+
+# Files
+
+Types:
+
+```python
+from deeprails.types import FileUploadResponse
+```
+
+Methods:
+
+- <code title="post /files/upload">client.files.<a href="./src/deeprails/resources/files.py">upload</a>(\*\*<a href="src/deeprails/types/file_upload_params.py">params</a>) -> <a href="./src/deeprails/types/file_upload_response.py">FileUploadResponse</a></code>
