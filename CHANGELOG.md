@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.11.0 (2025-10-30)
+
+Full Changelog: [v1.10.0...v1.11.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.10.0...v1.11.0)
+
+### Features
+
+* **api:** Add file and web search as extended ai capabilities ([fc2bb8d](https://github.com/deeprails/deeprails-sdk-python/commit/fc2bb8d0ce8f111279583398469ae9bc0d11d474))
+* **api:** manual updates ([236c2a9](https://github.com/deeprails/deeprails-sdk-python/commit/236c2a923f7bcaa08f92a799be9ca725a0a3b53b))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([db832f6](https://github.com/deeprails/deeprails-sdk-python/commit/db832f6e4067940c762e5d0be9d57cbaf72c7309))
+
 ## 1.10.0 (2025-10-29)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.9.0...v1.10.0)
