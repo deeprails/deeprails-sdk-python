@@ -9,7 +9,7 @@ import pytest
 
 from deeprails import Deeprails, AsyncDeeprails
 from tests.utils import assert_matches_type
-from deeprails.types import FileUploadResponse
+from deeprails.types import FileResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +23,7 @@ class TestFiles:
         file = client.files.upload(
             file=b"raw file contents",
         )
-        assert_matches_type(FileUploadResponse, file, path=["response"])
+        assert_matches_type(FileResponse, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -35,7 +35,7 @@ class TestFiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         file = response.parse()
-        assert_matches_type(FileUploadResponse, file, path=["response"])
+        assert_matches_type(FileResponse, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -47,7 +47,7 @@ class TestFiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             file = response.parse()
-            assert_matches_type(FileUploadResponse, file, path=["response"])
+            assert_matches_type(FileResponse, file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -63,7 +63,7 @@ class TestAsyncFiles:
         file = await async_client.files.upload(
             file=b"raw file contents",
         )
-        assert_matches_type(FileUploadResponse, file, path=["response"])
+        assert_matches_type(FileResponse, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -75,7 +75,7 @@ class TestAsyncFiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         file = await response.parse()
-        assert_matches_type(FileUploadResponse, file, path=["response"])
+        assert_matches_type(FileResponse, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -87,6 +87,6 @@ class TestAsyncFiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             file = await response.parse()
-            assert_matches_type(FileUploadResponse, file, path=["response"])
+            assert_matches_type(FileResponse, file, path=["response"])
 
         assert cast(Any, response.is_closed) is True

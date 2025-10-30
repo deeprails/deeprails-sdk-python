@@ -18,7 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.file_upload_response import FileUploadResponse
+from ..types.file_response import FileResponse
 
 __all__ = ["FilesResource", "AsyncFilesResource"]
 
@@ -53,7 +53,7 @@ class FilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FileUploadResponse:
+    ) -> FileResponse:
         """
         Use this endpoint to upload a file to the DeepRails API
 
@@ -81,7 +81,7 @@ class FilesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FileUploadResponse,
+            cast_to=FileResponse,
         )
 
 
@@ -115,7 +115,7 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FileUploadResponse:
+    ) -> FileResponse:
         """
         Use this endpoint to upload a file to the DeepRails API
 
@@ -143,7 +143,7 @@ class AsyncFilesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=FileUploadResponse,
+            cast_to=FileResponse,
         )
 
 
