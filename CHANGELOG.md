@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.11.1 (2025-10-31)
+
+Full Changelog: [v1.11.0...v1.11.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.11.0...v1.11.1)
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([0413192](https://github.com/deeprails/deeprails-sdk-python/commit/0413192c31932a21cd34cc4fe63669914a1d1de3))
+
 ## 1.11.0 (2025-10-30)
 
 Full Changelog: [v1.10.0...v1.11.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.10.0...v1.11.0)
