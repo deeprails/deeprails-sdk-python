@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.12.0 (2025-11-02)
+
+Full Changelog: [v1.11.0...v1.12.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.11.0...v1.12.0)
+
+### Features
+
+* **api:** restructure monitor service ([47cac0a](https://github.com/deeprails/deeprails-sdk-python/commit/47cac0a5568f3f73619ccb34e701901468dffbd0))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([0413192](https://github.com/deeprails/deeprails-sdk-python/commit/0413192c31932a21cd34cc4fe63669914a1d1de3))
+
 ## 1.11.0 (2025-10-30)
 
 Full Changelog: [v1.10.0...v1.11.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.10.0...v1.11.0)

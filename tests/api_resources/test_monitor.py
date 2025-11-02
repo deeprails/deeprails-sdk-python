@@ -25,6 +25,7 @@ class TestMonitor:
     @parametrize
     def test_method_create(self, client: Deeprails) -> None:
         monitor = client.monitor.create(
+            guardrail_metrics=["correctness"],
             name="name",
         )
         assert_matches_type(MonitorResponse, monitor, path=["response"])
@@ -33,8 +34,11 @@ class TestMonitor:
     @parametrize
     def test_method_create_with_all_params(self, client: Deeprails) -> None:
         monitor = client.monitor.create(
+            guardrail_metrics=["correctness"],
             name="name",
             description="description",
+            file_search=["string"],
+            web_search=True,
         )
         assert_matches_type(MonitorResponse, monitor, path=["response"])
 
@@ -42,6 +46,7 @@ class TestMonitor:
     @parametrize
     def test_raw_response_create(self, client: Deeprails) -> None:
         response = client.monitor.with_raw_response.create(
+            guardrail_metrics=["correctness"],
             name="name",
         )
 
@@ -54,6 +59,7 @@ class TestMonitor:
     @parametrize
     def test_streaming_response_create(self, client: Deeprails) -> None:
         with client.monitor.with_streaming_response.create(
+            guardrail_metrics=["correctness"],
             name="name",
         ) as response:
             assert not response.is_closed
@@ -173,7 +179,6 @@ class TestMonitor:
     def test_method_submit_event(self, client: Deeprails) -> None:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={},
             model_output="model_output",
         )
@@ -184,14 +189,12 @@ class TestMonitor:
     def test_method_submit_event_with_all_params(self, client: Deeprails) -> None:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
             },
             model_output="model_output",
-            model_used="model_used",
             nametag="nametag",
             run_mode="precision_plus",
         )
@@ -202,7 +205,6 @@ class TestMonitor:
     def test_raw_response_submit_event(self, client: Deeprails) -> None:
         response = client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={},
             model_output="model_output",
         )
@@ -217,7 +219,6 @@ class TestMonitor:
     def test_streaming_response_submit_event(self, client: Deeprails) -> None:
         with client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={},
             model_output="model_output",
         ) as response:
@@ -235,7 +236,6 @@ class TestMonitor:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.submit_event(
                 monitor_id="",
-                guardrail_metrics=["correctness"],
                 model_input={},
                 model_output="model_output",
             )
@@ -250,6 +250,7 @@ class TestAsyncMonitor:
     @parametrize
     async def test_method_create(self, async_client: AsyncDeeprails) -> None:
         monitor = await async_client.monitor.create(
+            guardrail_metrics=["correctness"],
             name="name",
         )
         assert_matches_type(MonitorResponse, monitor, path=["response"])
@@ -258,8 +259,11 @@ class TestAsyncMonitor:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDeeprails) -> None:
         monitor = await async_client.monitor.create(
+            guardrail_metrics=["correctness"],
             name="name",
             description="description",
+            file_search=["string"],
+            web_search=True,
         )
         assert_matches_type(MonitorResponse, monitor, path=["response"])
 
@@ -267,6 +271,7 @@ class TestAsyncMonitor:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDeeprails) -> None:
         response = await async_client.monitor.with_raw_response.create(
+            guardrail_metrics=["correctness"],
             name="name",
         )
 
@@ -279,6 +284,7 @@ class TestAsyncMonitor:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDeeprails) -> None:
         async with async_client.monitor.with_streaming_response.create(
+            guardrail_metrics=["correctness"],
             name="name",
         ) as response:
             assert not response.is_closed
@@ -398,7 +404,6 @@ class TestAsyncMonitor:
     async def test_method_submit_event(self, async_client: AsyncDeeprails) -> None:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={},
             model_output="model_output",
         )
@@ -409,14 +414,12 @@ class TestAsyncMonitor:
     async def test_method_submit_event_with_all_params(self, async_client: AsyncDeeprails) -> None:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
             },
             model_output="model_output",
-            model_used="model_used",
             nametag="nametag",
             run_mode="precision_plus",
         )
@@ -427,7 +430,6 @@ class TestAsyncMonitor:
     async def test_raw_response_submit_event(self, async_client: AsyncDeeprails) -> None:
         response = await async_client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={},
             model_output="model_output",
         )
@@ -442,7 +444,6 @@ class TestAsyncMonitor:
     async def test_streaming_response_submit_event(self, async_client: AsyncDeeprails) -> None:
         async with async_client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
-            guardrail_metrics=["correctness"],
             model_input={},
             model_output="model_output",
         ) as response:
@@ -460,7 +461,6 @@ class TestAsyncMonitor:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.submit_event(
                 monitor_id="",
-                guardrail_metrics=["correctness"],
                 model_input={},
                 model_output="model_output",
             )
