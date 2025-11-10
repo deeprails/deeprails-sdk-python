@@ -9,9 +9,6 @@ __all__ = ["MonitorEventResponse"]
 
 
 class MonitorEventResponse(BaseModel):
-    evaluation_id: str
-    """A unique evaluation ID associated with this event."""
-
     event_id: str
     """A unique monitor event ID."""
 

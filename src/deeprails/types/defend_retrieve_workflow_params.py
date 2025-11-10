@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["MonitorRetrieveParams"]
+__all__ = ["DefendRetrieveWorkflowParams"]
 
 
-class MonitorRetrieveParams(TypedDict, total=False):
+class DefendRetrieveWorkflowParams(TypedDict, total=False):
     limit: int
-    """Limit the number of returned evaluations associated with this monitor.
+    """Limit the number of returned events associated with this workflow.
 
     Defaults to 10.
     """

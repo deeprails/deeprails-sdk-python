@@ -19,9 +19,10 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.monitor_response import MonitorResponse
 from ..types.monitor_event_response import MonitorEventResponse
+from ..types.monitor_create_response import MonitorCreateResponse
 from ..types.monitor_detail_response import MonitorDetailResponse
+from ..types.monitor_update_response import MonitorUpdateResponse
 
 __all__ = ["MonitorResource", "AsyncMonitorResource"]
 
@@ -69,7 +70,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorResponse:
+    ) -> MonitorCreateResponse:
         """
         Use this endpoint to create a new monitor to evaluate model inputs and outputs
         using guardrails
@@ -112,7 +113,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorResponse,
+            cast_to=MonitorCreateResponse,
         )
 
     def retrieve(
@@ -132,7 +133,8 @@ class MonitorResource(SyncAPIResource):
         specific monitor
 
         Args:
-          limit: Limit the returned events associated with this monitor. Defaults to 10.
+          limit: Limit the number of returned evaluations associated with this monitor. Defaults
+              to 10.
 
           extra_headers: Send extra headers
 
@@ -161,15 +163,15 @@ class MonitorResource(SyncAPIResource):
         monitor_id: str,
         *,
         description: str | Omit = omit,
-        monitor_status: Literal["active", "inactive"] | Omit = omit,
         name: str | Omit = omit,
+        status: Literal["active", "inactive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorResponse:
+    ) -> MonitorUpdateResponse:
         """
         Use this endpoint to update the name, description, or status of an existing
         monitor
@@ -177,10 +179,10 @@ class MonitorResource(SyncAPIResource):
         Args:
           description: Description of the monitor.
 
-          monitor_status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-              longer record and evaluate events.
-
           name: Name of the monitor.
+
+          status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+              longer record and evaluate events.
 
           extra_headers: Send extra headers
 
@@ -197,15 +199,15 @@ class MonitorResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "description": description,
-                    "monitor_status": monitor_status,
                     "name": name,
+                    "status": status,
                 },
                 monitor_update_params.MonitorUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorResponse,
+            cast_to=MonitorUpdateResponse,
         )
 
     def submit_event(
@@ -312,7 +314,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorResponse:
+    ) -> MonitorCreateResponse:
         """
         Use this endpoint to create a new monitor to evaluate model inputs and outputs
         using guardrails
@@ -355,7 +357,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorResponse,
+            cast_to=MonitorCreateResponse,
         )
 
     async def retrieve(
@@ -375,7 +377,8 @@ class AsyncMonitorResource(AsyncAPIResource):
         specific monitor
 
         Args:
-          limit: Limit the returned events associated with this monitor. Defaults to 10.
+          limit: Limit the number of returned evaluations associated with this monitor. Defaults
+              to 10.
 
           extra_headers: Send extra headers
 
@@ -404,15 +407,15 @@ class AsyncMonitorResource(AsyncAPIResource):
         monitor_id: str,
         *,
         description: str | Omit = omit,
-        monitor_status: Literal["active", "inactive"] | Omit = omit,
         name: str | Omit = omit,
+        status: Literal["active", "inactive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorResponse:
+    ) -> MonitorUpdateResponse:
         """
         Use this endpoint to update the name, description, or status of an existing
         monitor
@@ -420,10 +423,10 @@ class AsyncMonitorResource(AsyncAPIResource):
         Args:
           description: Description of the monitor.
 
-          monitor_status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-              longer record and evaluate events.
-
           name: Name of the monitor.
+
+          status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+              longer record and evaluate events.
 
           extra_headers: Send extra headers
 
@@ -440,15 +443,15 @@ class AsyncMonitorResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "description": description,
-                    "monitor_status": monitor_status,
                     "name": name,
+                    "status": status,
                 },
                 monitor_update_params.MonitorUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorResponse,
+            cast_to=MonitorUpdateResponse,
         )
 
     async def submit_event(

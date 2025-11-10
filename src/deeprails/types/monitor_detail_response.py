@@ -8,7 +8,12 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["MonitorDetailResponse", "Evaluation", "EvaluationModelInput", "Stats"]
+__all__ = ["MonitorDetailResponse", "Capability", "Evaluation", "EvaluationModelInput", "File", "Stats"]
+
+
+class Capability(BaseModel):
+    capability: Optional[str] = None
+    """The type of capability."""
 
 
 class EvaluationModelInput(BaseModel):
@@ -23,9 +28,6 @@ class EvaluationModelInput(BaseModel):
 
 
 class Evaluation(BaseModel):
-    eval_id: str
-    """A unique evaluation ID."""
-
     evaluation_status: Literal["in_progress", "completed", "canceled", "queued", "failed"]
     """Status of the evaluation."""
 
@@ -50,14 +52,8 @@ class Evaluation(BaseModel):
     created_at: Optional[datetime] = None
     """The time the evaluation was created in UTC."""
 
-    end_timestamp: Optional[datetime] = None
-    """The time the evaluation completed in UTC."""
-
     error_message: Optional[str] = None
-    """Description of the error causing the evaluation to fail, if any."""
-
-    error_timestamp: Optional[datetime] = None
-    """The time the error causing the evaluation to fail was recorded."""
+    """Error message if the evaluation failed."""
 
     evaluation_result: Optional[Dict[str, object]] = None
     """
@@ -85,12 +81,6 @@ class Evaluation(BaseModel):
     evaluated on.
     """
 
-    api_model_used: Optional[str] = FieldInfo(alias="model_used", default=None)
-    """Model ID used to generate the output, like `gpt-4o` or `o3`."""
-
-    modified_at: Optional[datetime] = None
-    """The most recent time the evaluation was modified in UTC."""
-
     nametag: Optional[str] = None
     """An optional, user-defined tag for the evaluation."""
 
@@ -101,8 +91,16 @@ class Evaluation(BaseModel):
     `evaluation_status`.
     """
 
-    start_timestamp: Optional[datetime] = None
-    """The time the evaluation started in UTC."""
+
+class File(BaseModel):
+    file_id: Optional[str] = None
+    """The ID of the file."""
+
+    file_name: Optional[str] = None
+    """The name of the file."""
+
+    file_size: Optional[int] = None
+    """The size of the file in bytes."""
 
 
 class Stats(BaseModel):
@@ -126,15 +124,18 @@ class MonitorDetailResponse(BaseModel):
     monitor_id: str
     """A unique monitor ID."""
 
-    monitor_status: Literal["active", "inactive"]
+    name: str
+    """Name of this monitor."""
+
+    status: Literal["active", "inactive"]
     """Status of the monitor.
 
     Can be `active` or `inactive`. Inactive monitors no longer record and evaluate
     events.
     """
 
-    name: str
-    """Name of this monitor."""
+    capabilities: Optional[List[Capability]] = None
+    """An array of capabilities associated with this monitor."""
 
     created_at: Optional[datetime] = None
     """The time the monitor was created in UTC."""
@@ -148,6 +149,9 @@ class MonitorDetailResponse(BaseModel):
     Each one corresponds to a separate monitor event.
     """
 
+    files: Optional[List[File]] = None
+    """An array of files associated with this monitor."""
+
     stats: Optional[Stats] = None
     """
     Contains five fields used for stats of this monitor: total evaluations,
@@ -157,6 +161,3 @@ class MonitorDetailResponse(BaseModel):
 
     updated_at: Optional[datetime] = None
     """The most recent time the monitor was modified in UTC."""
-
-    user_id: Optional[str] = None
-    """User ID of the user who created the monitor."""
