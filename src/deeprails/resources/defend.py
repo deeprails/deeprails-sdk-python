@@ -7,7 +7,12 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import defend_submit_event_params, defend_create_workflow_params, defend_update_workflow_params
+from ..types import (
+    defend_submit_event_params,
+    defend_create_workflow_params,
+    defend_update_workflow_params,
+    defend_retrieve_workflow_params,
+)
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -20,7 +25,10 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.defend_response import DefendResponse
+from ..types.defend_create_response import DefendCreateResponse
+from ..types.defend_update_response import DefendUpdateResponse
 from ..types.workflow_event_response import WorkflowEventResponse
+from ..types.workflow_event_detail_response import WorkflowEventDetailResponse
 
 __all__ = ["DefendResource", "AsyncDefendResource"]
 
@@ -50,7 +58,7 @@ class DefendResource(SyncAPIResource):
         *,
         improvement_action: Literal["regen", "fixit", "do_nothing"],
         name: str,
-        type: Literal["automatic", "custom"],
+        threshold_type: Literal["automatic", "custom"],
         automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
         custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
@@ -63,21 +71,21 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DefendResponse:
+    ) -> DefendCreateResponse:
         """
         Use this endpoint to create a new guardrail workflow with optional guardrail
         thresholds and improvement actions
 
         Args:
-          improvement_action: The action used to improve outputs that fail one or guardrail metrics for the
-              workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
-              input prompt with minor induced variance. FixIt attempts to directly address the
-              shortcomings of the output using the guardrail failure rationale. Do Nothing
-              does not attempt any improvement.
+          improvement_action: The action used to improve outputs that fail one or more guardrail metrics for
+              the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+              user's input prompt with minor induced variance. FixIt attempts to directly
+              address the shortcomings of the output using the guardrail failure rationale. Do
+              Nothing does not attempt any improvement.
 
           name: Name of the workflow.
 
-          type: Type of thresholds to use for the workflow, either `automatic` or `custom`.
+          threshold_type: Type of thresholds to use for the workflow, either `automatic` or `custom`.
               Automatic thresholds are assigned internally after the user specifies a
               qualitative tolerance for the metrics, whereas custom metrics allow the user to
               set the threshold for each metric as a floating point number between 0.0 and
@@ -97,7 +105,7 @@ class DefendResource(SyncAPIResource):
           file_search: An array of file IDs to search in the workflow's evaluations. Files must be
               uploaded via the DeepRails API first.
 
-          max_improvement_attempts: Max. number of improvement action retries until a given event passes the
+          max_improvement_attempts: Max. number of improvement action attempts until a given event passes the
               guardrails. Defaults to 10.
 
           web_search: Whether to enable web search for this workflow's evaluations. Defaults to false.
@@ -116,7 +124,7 @@ class DefendResource(SyncAPIResource):
                 {
                     "improvement_action": improvement_action,
                     "name": name,
-                    "type": type,
+                    "threshold_type": threshold_type,
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
                     "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
@@ -129,7 +137,7 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DefendResponse,
+            cast_to=DefendCreateResponse,
         )
 
     def retrieve_event(
@@ -143,7 +151,7 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WorkflowEventResponse:
+    ) -> WorkflowEventDetailResponse:
         """
         Use this endpoint to retrieve a specific event of a guardrail workflow
 
@@ -165,13 +173,14 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WorkflowEventResponse,
+            cast_to=WorkflowEventDetailResponse,
         )
 
     def retrieve_workflow(
         self,
         workflow_id: str,
         *,
+        limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -183,6 +192,9 @@ class DefendResource(SyncAPIResource):
         Use this endpoint to retrieve the details for a specific defend workflow
 
         Args:
+          limit: Limit the number of returned events associated with this workflow. Defaults
+              to 10.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -196,7 +208,11 @@ class DefendResource(SyncAPIResource):
         return self._get(
             f"/defend/{workflow_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"limit": limit}, defend_retrieve_workflow_params.DefendRetrieveWorkflowParams),
             ),
             cast_to=DefendResponse,
         )
@@ -277,9 +293,9 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DefendResponse:
+    ) -> DefendUpdateResponse:
         """
-        Use this endpoint to update an existing guardrail workflow
+        Use this endpoint to update an existing defend workflow
 
         Args:
           description: Description for the workflow.
@@ -308,7 +324,7 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DefendResponse,
+            cast_to=DefendUpdateResponse,
         )
 
 
@@ -337,7 +353,7 @@ class AsyncDefendResource(AsyncAPIResource):
         *,
         improvement_action: Literal["regen", "fixit", "do_nothing"],
         name: str,
-        type: Literal["automatic", "custom"],
+        threshold_type: Literal["automatic", "custom"],
         automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
         custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
@@ -350,21 +366,21 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DefendResponse:
+    ) -> DefendCreateResponse:
         """
         Use this endpoint to create a new guardrail workflow with optional guardrail
         thresholds and improvement actions
 
         Args:
-          improvement_action: The action used to improve outputs that fail one or guardrail metrics for the
-              workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
-              input prompt with minor induced variance. FixIt attempts to directly address the
-              shortcomings of the output using the guardrail failure rationale. Do Nothing
-              does not attempt any improvement.
+          improvement_action: The action used to improve outputs that fail one or more guardrail metrics for
+              the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+              user's input prompt with minor induced variance. FixIt attempts to directly
+              address the shortcomings of the output using the guardrail failure rationale. Do
+              Nothing does not attempt any improvement.
 
           name: Name of the workflow.
 
-          type: Type of thresholds to use for the workflow, either `automatic` or `custom`.
+          threshold_type: Type of thresholds to use for the workflow, either `automatic` or `custom`.
               Automatic thresholds are assigned internally after the user specifies a
               qualitative tolerance for the metrics, whereas custom metrics allow the user to
               set the threshold for each metric as a floating point number between 0.0 and
@@ -384,7 +400,7 @@ class AsyncDefendResource(AsyncAPIResource):
           file_search: An array of file IDs to search in the workflow's evaluations. Files must be
               uploaded via the DeepRails API first.
 
-          max_improvement_attempts: Max. number of improvement action retries until a given event passes the
+          max_improvement_attempts: Max. number of improvement action attempts until a given event passes the
               guardrails. Defaults to 10.
 
           web_search: Whether to enable web search for this workflow's evaluations. Defaults to false.
@@ -403,7 +419,7 @@ class AsyncDefendResource(AsyncAPIResource):
                 {
                     "improvement_action": improvement_action,
                     "name": name,
-                    "type": type,
+                    "threshold_type": threshold_type,
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
                     "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
@@ -416,7 +432,7 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DefendResponse,
+            cast_to=DefendCreateResponse,
         )
 
     async def retrieve_event(
@@ -430,7 +446,7 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WorkflowEventResponse:
+    ) -> WorkflowEventDetailResponse:
         """
         Use this endpoint to retrieve a specific event of a guardrail workflow
 
@@ -452,13 +468,14 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WorkflowEventResponse,
+            cast_to=WorkflowEventDetailResponse,
         )
 
     async def retrieve_workflow(
         self,
         workflow_id: str,
         *,
+        limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -470,6 +487,9 @@ class AsyncDefendResource(AsyncAPIResource):
         Use this endpoint to retrieve the details for a specific defend workflow
 
         Args:
+          limit: Limit the number of returned events associated with this workflow. Defaults
+              to 10.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -483,7 +503,13 @@ class AsyncDefendResource(AsyncAPIResource):
         return await self._get(
             f"/defend/{workflow_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"limit": limit}, defend_retrieve_workflow_params.DefendRetrieveWorkflowParams
+                ),
             ),
             cast_to=DefendResponse,
         )
@@ -564,9 +590,9 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DefendResponse:
+    ) -> DefendUpdateResponse:
         """
-        Use this endpoint to update an existing guardrail workflow
+        Use this endpoint to update an existing defend workflow
 
         Args:
           description: Description for the workflow.
@@ -595,7 +621,7 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DefendResponse,
+            cast_to=DefendUpdateResponse,
         )
 
 

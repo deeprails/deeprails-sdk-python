@@ -32,16 +32,17 @@ client = Deeprails(
     api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
 )
 
-defend_response = client.defend.create_workflow(
+defend_create_response = client.defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    type="custom",
+    threshold_type="automatic",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
+    web_search=True,
 )
-print(defend_response.workflow_id)
+print(defend_create_response.workflow_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -64,16 +65,17 @@ client = AsyncDeeprails(
 
 
 async def main() -> None:
-    defend_response = await client.defend.create_workflow(
+    defend_create_response = await client.defend.create_workflow(
         improvement_action="fixit",
         name="Push Alert Workflow",
-        type="custom",
+        threshold_type="automatic",
         custom_hallucination_threshold_values={
             "completeness": 0.7,
             "instruction_adherence": 0.75,
         },
+        web_search=True,
     )
-    print(defend_response.workflow_id)
+    print(defend_create_response.workflow_id)
 
 
 asyncio.run(main())
@@ -105,16 +107,17 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        defend_response = await client.defend.create_workflow(
+        defend_create_response = await client.defend.create_workflow(
             improvement_action="fixit",
             name="Push Alert Workflow",
-            type="custom",
+            threshold_type="automatic",
             custom_hallucination_threshold_values={
                 "completeness": 0.7,
                 "instruction_adherence": 0.75,
             },
+            web_search=True,
         )
-        print(defend_response.workflow_id)
+        print(defend_create_response.workflow_id)
 
 
 asyncio.run(main())
@@ -148,23 +151,6 @@ workflow_event_response = client.defend.submit_event(
 print(workflow_event_response.model_input)
 ```
 
-## File uploads
-
-Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
-
-```python
-from pathlib import Path
-from deeprails import Deeprails
-
-client = Deeprails()
-
-client.files.upload(
-    file=Path("/path/to/file"),
-)
-```
-
-The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
-
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `deeprails.APIConnectionError` is raised.
@@ -184,11 +170,12 @@ try:
     client.defend.create_workflow(
         improvement_action="fixit",
         name="Push Alert Workflow",
-        type="custom",
+        threshold_type="automatic",
         custom_hallucination_threshold_values={
             "completeness": 0.7,
             "instruction_adherence": 0.75,
         },
+        web_search=True,
     )
 except deeprails.APIConnectionError as e:
     print("The server could not be reached")
@@ -235,11 +222,12 @@ client = Deeprails(
 client.with_options(max_retries=5).defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    type="custom",
+    threshold_type="automatic",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
+    web_search=True,
 )
 ```
 
@@ -266,11 +254,12 @@ client = Deeprails(
 client.with_options(timeout=5.0).defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    type="custom",
+    threshold_type="automatic",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
+    web_search=True,
 )
 ```
 
@@ -315,11 +304,12 @@ client = Deeprails()
 response = client.defend.with_raw_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    type="custom",
+    threshold_type="automatic",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
+    web_search=True,
 )
 print(response.headers.get('X-My-Header'))
 
@@ -341,11 +331,12 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.defend.with_streaming_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    type="custom",
+    threshold_type="automatic",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
     },
+    web_search=True,
 ) as response:
     print(response.headers.get("X-My-Header"))
 

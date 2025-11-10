@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .._types import FileTypes
+from .._types import SequenceNotStr
 
 __all__ = ["FileUploadParams"]
 
 
 class FileUploadParams(TypedDict, total=False):
-    file: Required[FileTypes]
+    file: Required[SequenceNotStr[str]]
     """The contents of the file to upload."""
