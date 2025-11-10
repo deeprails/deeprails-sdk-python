@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.13.0 (2025-11-10)
+
+Full Changelog: [v1.12.0...v1.13.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.12.0...v1.13.0)
+
+### Features
+
+* **api:** Mass restructuring of API, including response bodies and naming schemes ([c72cf32](https://github.com/deeprails/deeprails-sdk-python/commit/c72cf32b37a41673c895a172dd09dcbe90b6ce40))
+
+
+### Chores
+
+* **internal:** grammar fix (it's -&gt; its) ([11449b2](https://github.com/deeprails/deeprails-sdk-python/commit/11449b27a513a1c5b5b35ba88778c636582feb0b))
+
 ## 1.12.0 (2025-11-02)
 
 Full Changelog: [v1.11.0...v1.12.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.11.0...v1.12.0)
