@@ -10,9 +10,10 @@ import pytest
 from deeprails import Deeprails, AsyncDeeprails
 from tests.utils import assert_matches_type
 from deeprails.types import (
-    MonitorResponse,
     MonitorEventResponse,
+    MonitorCreateResponse,
     MonitorDetailResponse,
+    MonitorUpdateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -28,7 +29,7 @@ class TestMonitor:
             guardrail_metrics=["correctness"],
             name="name",
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -40,7 +41,7 @@ class TestMonitor:
             file_search=["string"],
             web_search=True,
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -53,7 +54,7 @@ class TestMonitor:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         monitor = response.parse()
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -66,7 +67,7 @@ class TestMonitor:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             monitor = response.parse()
-            assert_matches_type(MonitorResponse, monitor, path=["response"])
+            assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -127,7 +128,7 @@ class TestMonitor:
         monitor = client.monitor.update(
             monitor_id="monitor_id",
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -135,10 +136,10 @@ class TestMonitor:
         monitor = client.monitor.update(
             monitor_id="monitor_id",
             description="description",
-            monitor_status="active",
             name="name",
+            status="active",
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -150,7 +151,7 @@ class TestMonitor:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         monitor = response.parse()
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -162,7 +163,7 @@ class TestMonitor:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             monitor = response.parse()
-            assert_matches_type(MonitorResponse, monitor, path=["response"])
+            assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -253,7 +254,7 @@ class TestAsyncMonitor:
             guardrail_metrics=["correctness"],
             name="name",
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -265,7 +266,7 @@ class TestAsyncMonitor:
             file_search=["string"],
             web_search=True,
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -278,7 +279,7 @@ class TestAsyncMonitor:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         monitor = await response.parse()
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -291,7 +292,7 @@ class TestAsyncMonitor:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             monitor = await response.parse()
-            assert_matches_type(MonitorResponse, monitor, path=["response"])
+            assert_matches_type(MonitorCreateResponse, monitor, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -352,7 +353,7 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.update(
             monitor_id="monitor_id",
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -360,10 +361,10 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.update(
             monitor_id="monitor_id",
             description="description",
-            monitor_status="active",
             name="name",
+            status="active",
         )
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -375,7 +376,7 @@ class TestAsyncMonitor:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         monitor = await response.parse()
-        assert_matches_type(MonitorResponse, monitor, path=["response"])
+        assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -387,7 +388,7 @@ class TestAsyncMonitor:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             monitor = await response.parse()
-            assert_matches_type(MonitorResponse, monitor, path=["response"])
+            assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

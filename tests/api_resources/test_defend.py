@@ -11,7 +11,10 @@ from deeprails import Deeprails, AsyncDeeprails
 from tests.utils import assert_matches_type
 from deeprails.types import (
     DefendResponse,
+    DefendCreateResponse,
+    DefendUpdateResponse,
     WorkflowEventResponse,
+    WorkflowEventDetailResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,10 +29,10 @@ class TestDefend:
         defend = client.defend.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -37,14 +40,14 @@ class TestDefend:
         defend = client.defend.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"correctness": "low"},
             description="description",
             file_search=["string"],
             max_improvement_attempts=2,
             web_search=True,
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -52,14 +55,14 @@ class TestDefend:
         response = client.defend.with_raw_response.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         defend = response.parse()
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -67,14 +70,14 @@ class TestDefend:
         with client.defend.with_streaming_response.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"completeness": "medium"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             defend = response.parse()
-            assert_matches_type(DefendResponse, defend, path=["response"])
+            assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -85,7 +88,7 @@ class TestDefend:
             event_id="event_id",
             workflow_id="workflow_id",
         )
-        assert_matches_type(WorkflowEventResponse, defend, path=["response"])
+        assert_matches_type(WorkflowEventDetailResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -98,7 +101,7 @@ class TestDefend:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         defend = response.parse()
-        assert_matches_type(WorkflowEventResponse, defend, path=["response"])
+        assert_matches_type(WorkflowEventDetailResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -111,7 +114,7 @@ class TestDefend:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             defend = response.parse()
-            assert_matches_type(WorkflowEventResponse, defend, path=["response"])
+            assert_matches_type(WorkflowEventDetailResponse, defend, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -134,7 +137,16 @@ class TestDefend:
     @parametrize
     def test_method_retrieve_workflow(self, client: Deeprails) -> None:
         defend = client.defend.retrieve_workflow(
-            "workflow_id",
+            workflow_id="workflow_id",
+        )
+        assert_matches_type(DefendResponse, defend, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_workflow_with_all_params(self, client: Deeprails) -> None:
+        defend = client.defend.retrieve_workflow(
+            workflow_id="workflow_id",
+            limit=0,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -142,7 +154,7 @@ class TestDefend:
     @parametrize
     def test_raw_response_retrieve_workflow(self, client: Deeprails) -> None:
         response = client.defend.with_raw_response.retrieve_workflow(
-            "workflow_id",
+            workflow_id="workflow_id",
         )
 
         assert response.is_closed is True
@@ -154,7 +166,7 @@ class TestDefend:
     @parametrize
     def test_streaming_response_retrieve_workflow(self, client: Deeprails) -> None:
         with client.defend.with_streaming_response.retrieve_workflow(
-            "workflow_id",
+            workflow_id="workflow_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -169,7 +181,7 @@ class TestDefend:
     def test_path_params_retrieve_workflow(self, client: Deeprails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             client.defend.with_raw_response.retrieve_workflow(
-                "",
+                workflow_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -253,7 +265,7 @@ class TestDefend:
         defend = client.defend.update_workflow(
             workflow_id="workflow_id",
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -263,7 +275,7 @@ class TestDefend:
             description="description",
             name="name",
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -275,7 +287,7 @@ class TestDefend:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         defend = response.parse()
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -287,7 +299,7 @@ class TestDefend:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             defend = response.parse()
-            assert_matches_type(DefendResponse, defend, path=["response"])
+            assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -311,10 +323,10 @@ class TestAsyncDefend:
         defend = await async_client.defend.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -322,14 +334,14 @@ class TestAsyncDefend:
         defend = await async_client.defend.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"correctness": "low"},
             description="description",
             file_search=["string"],
             max_improvement_attempts=2,
             web_search=True,
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -337,14 +349,14 @@ class TestAsyncDefend:
         response = await async_client.defend.with_raw_response.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"completeness": "medium"},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         defend = await response.parse()
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -352,14 +364,14 @@ class TestAsyncDefend:
         async with async_client.defend.with_streaming_response.create_workflow(
             improvement_action="regen",
             name="name",
-            type="automatic",
+            threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"completeness": "medium"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             defend = await response.parse()
-            assert_matches_type(DefendResponse, defend, path=["response"])
+            assert_matches_type(DefendCreateResponse, defend, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -370,7 +382,7 @@ class TestAsyncDefend:
             event_id="event_id",
             workflow_id="workflow_id",
         )
-        assert_matches_type(WorkflowEventResponse, defend, path=["response"])
+        assert_matches_type(WorkflowEventDetailResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -383,7 +395,7 @@ class TestAsyncDefend:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         defend = await response.parse()
-        assert_matches_type(WorkflowEventResponse, defend, path=["response"])
+        assert_matches_type(WorkflowEventDetailResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -396,7 +408,7 @@ class TestAsyncDefend:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             defend = await response.parse()
-            assert_matches_type(WorkflowEventResponse, defend, path=["response"])
+            assert_matches_type(WorkflowEventDetailResponse, defend, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -419,7 +431,16 @@ class TestAsyncDefend:
     @parametrize
     async def test_method_retrieve_workflow(self, async_client: AsyncDeeprails) -> None:
         defend = await async_client.defend.retrieve_workflow(
-            "workflow_id",
+            workflow_id="workflow_id",
+        )
+        assert_matches_type(DefendResponse, defend, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_workflow_with_all_params(self, async_client: AsyncDeeprails) -> None:
+        defend = await async_client.defend.retrieve_workflow(
+            workflow_id="workflow_id",
+            limit=0,
         )
         assert_matches_type(DefendResponse, defend, path=["response"])
 
@@ -427,7 +448,7 @@ class TestAsyncDefend:
     @parametrize
     async def test_raw_response_retrieve_workflow(self, async_client: AsyncDeeprails) -> None:
         response = await async_client.defend.with_raw_response.retrieve_workflow(
-            "workflow_id",
+            workflow_id="workflow_id",
         )
 
         assert response.is_closed is True
@@ -439,7 +460,7 @@ class TestAsyncDefend:
     @parametrize
     async def test_streaming_response_retrieve_workflow(self, async_client: AsyncDeeprails) -> None:
         async with async_client.defend.with_streaming_response.retrieve_workflow(
-            "workflow_id",
+            workflow_id="workflow_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -454,7 +475,7 @@ class TestAsyncDefend:
     async def test_path_params_retrieve_workflow(self, async_client: AsyncDeeprails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             await async_client.defend.with_raw_response.retrieve_workflow(
-                "",
+                workflow_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -538,7 +559,7 @@ class TestAsyncDefend:
         defend = await async_client.defend.update_workflow(
             workflow_id="workflow_id",
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -548,7 +569,7 @@ class TestAsyncDefend:
             description="description",
             name="name",
         )
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -560,7 +581,7 @@ class TestAsyncDefend:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         defend = await response.parse()
-        assert_matches_type(DefendResponse, defend, path=["response"])
+        assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -572,7 +593,7 @@ class TestAsyncDefend:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             defend = await response.parse()
-            assert_matches_type(DefendResponse, defend, path=["response"])
+            assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -2,13 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Mapping, cast
-
 import httpx
 
 from ..types import file_upload_params
-from .._types import Body, Query, Headers, NotGiven, FileTypes, not_given
-from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from .._types import Body, Query, Headers, NotGiven, SequenceNotStr, not_given
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -46,7 +44,7 @@ class FilesResource(SyncAPIResource):
     def upload(
         self,
         *,
-        file: FileTypes,
+        file: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,16 +66,13 @@ class FilesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal({"file": file})
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             "/files/upload",
-            body=maybe_transform(body, file_upload_params.FileUploadParams),
-            files=files,
+            body=maybe_transform({"file": file}, file_upload_params.FileUploadParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -108,7 +103,7 @@ class AsyncFilesResource(AsyncAPIResource):
     async def upload(
         self,
         *,
-        file: FileTypes,
+        file: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -130,16 +125,13 @@ class AsyncFilesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal({"file": file})
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/files/upload",
-            body=await async_maybe_transform(body, file_upload_params.FileUploadParams),
-            files=files,
+            body=await async_maybe_transform({"file": file}, file_upload_params.FileUploadParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
