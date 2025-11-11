@@ -23,6 +23,7 @@ from ..types.monitor_event_response import MonitorEventResponse
 from ..types.monitor_create_response import MonitorCreateResponse
 from ..types.monitor_detail_response import MonitorDetailResponse
 from ..types.monitor_update_response import MonitorUpdateResponse
+from ..types.monitor_event_detail_response import MonitorEventDetailResponse
 
 __all__ = ["MonitorResource", "AsyncMonitorResource"]
 
@@ -208,6 +209,42 @@ class MonitorResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MonitorUpdateResponse,
+        )
+
+    def retrieve_event(
+        self,
+        event_id: str,
+        *,
+        monitor_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MonitorEventDetailResponse:
+        """
+        Use this endpoint to retrieve the details of a specific monitor event
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not monitor_id:
+            raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
+        if not event_id:
+            raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
+        return self._get(
+            f"/monitor/{monitor_id}/events/{event_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MonitorEventDetailResponse,
         )
 
     def submit_event(
@@ -454,6 +491,42 @@ class AsyncMonitorResource(AsyncAPIResource):
             cast_to=MonitorUpdateResponse,
         )
 
+    async def retrieve_event(
+        self,
+        event_id: str,
+        *,
+        monitor_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MonitorEventDetailResponse:
+        """
+        Use this endpoint to retrieve the details of a specific monitor event
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not monitor_id:
+            raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
+        if not event_id:
+            raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
+        return await self._get(
+            f"/monitor/{monitor_id}/events/{event_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MonitorEventDetailResponse,
+        )
+
     async def submit_event(
         self,
         monitor_id: str,
@@ -528,6 +601,9 @@ class MonitorResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             monitor.update,
         )
+        self.retrieve_event = to_raw_response_wrapper(
+            monitor.retrieve_event,
+        )
         self.submit_event = to_raw_response_wrapper(
             monitor.submit_event,
         )
@@ -545,6 +621,9 @@ class AsyncMonitorResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             monitor.update,
+        )
+        self.retrieve_event = async_to_raw_response_wrapper(
+            monitor.retrieve_event,
         )
         self.submit_event = async_to_raw_response_wrapper(
             monitor.submit_event,
@@ -564,6 +643,9 @@ class MonitorResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             monitor.update,
         )
+        self.retrieve_event = to_streamed_response_wrapper(
+            monitor.retrieve_event,
+        )
         self.submit_event = to_streamed_response_wrapper(
             monitor.submit_event,
         )
@@ -581,6 +663,9 @@ class AsyncMonitorResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             monitor.update,
+        )
+        self.retrieve_event = async_to_streamed_response_wrapper(
+            monitor.retrieve_event,
         )
         self.submit_event = async_to_streamed_response_wrapper(
             monitor.submit_event,

@@ -39,6 +39,7 @@ Methods:
 - <code title="post /monitor">client.monitor.<a href="./src/deeprails/resources/monitor.py">create</a>(\*\*<a href="src/deeprails/types/monitor_create_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_create_response.py">MonitorCreateResponse</a></code>
 - <code title="get /monitor/{monitor_id}">client.monitor.<a href="./src/deeprails/resources/monitor.py">retrieve</a>(monitor_id, \*\*<a href="src/deeprails/types/monitor_retrieve_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_detail_response.py">MonitorDetailResponse</a></code>
 - <code title="put /monitor/{monitor_id}">client.monitor.<a href="./src/deeprails/resources/monitor.py">update</a>(monitor_id, \*\*<a href="src/deeprails/types/monitor_update_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_update_response.py">MonitorUpdateResponse</a></code>
+- <code title="get /monitor/{monitor_id}/events/{event_id}">client.monitor.<a href="./src/deeprails/resources/monitor.py">retrieve_event</a>(event_id, \*, monitor_id) -> <a href="./src/deeprails/types/monitor_event_detail_response.py">MonitorEventDetailResponse</a></code>
 - <code title="post /monitor/{monitor_id}/events">client.monitor.<a href="./src/deeprails/resources/monitor.py">submit_event</a>(monitor_id, \*\*<a href="src/deeprails/types/monitor_submit_event_params.py">params</a>) -> <a href="./src/deeprails/types/monitor_event_response.py">MonitorEventResponse</a></code>
 
 # Files

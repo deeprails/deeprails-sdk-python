@@ -33,7 +33,7 @@ client = Deeprails(
 defend_create_response = client.defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    threshold_type="automatic",
+    threshold_type="custom",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
@@ -66,7 +66,7 @@ async def main() -> None:
     defend_create_response = await client.defend.create_workflow(
         improvement_action="fixit",
         name="Push Alert Workflow",
-        threshold_type="automatic",
+        threshold_type="custom",
         custom_hallucination_threshold_values={
             "completeness": 0.7,
             "instruction_adherence": 0.75,
@@ -108,7 +108,7 @@ async def main() -> None:
         defend_create_response = await client.defend.create_workflow(
             improvement_action="fixit",
             name="Push Alert Workflow",
-            threshold_type="automatic",
+            threshold_type="custom",
             custom_hallucination_threshold_values={
                 "completeness": 0.7,
                 "instruction_adherence": 0.75,
@@ -168,7 +168,7 @@ try:
     client.defend.create_workflow(
         improvement_action="fixit",
         name="Push Alert Workflow",
-        threshold_type="automatic",
+        threshold_type="custom",
         custom_hallucination_threshold_values={
             "completeness": 0.7,
             "instruction_adherence": 0.75,
@@ -220,7 +220,7 @@ client = Deeprails(
 client.with_options(max_retries=5).defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    threshold_type="automatic",
+    threshold_type="custom",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
@@ -252,7 +252,7 @@ client = Deeprails(
 client.with_options(timeout=5.0).defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    threshold_type="automatic",
+    threshold_type="custom",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
@@ -302,7 +302,7 @@ client = Deeprails()
 response = client.defend.with_raw_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    threshold_type="automatic",
+    threshold_type="custom",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,
@@ -329,7 +329,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.defend.with_streaming_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
-    threshold_type="automatic",
+    threshold_type="custom",
     custom_hallucination_threshold_values={
         "completeness": 0.7,
         "instruction_adherence": 0.75,

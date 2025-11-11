@@ -14,6 +14,7 @@ from deeprails.types import (
     MonitorCreateResponse,
     MonitorDetailResponse,
     MonitorUpdateResponse,
+    MonitorEventDetailResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -173,6 +174,58 @@ class TestMonitor:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.update(
                 monitor_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_event(self, client: Deeprails) -> None:
+        monitor = client.monitor.retrieve_event(
+            event_id="event_id",
+            monitor_id="monitor_id",
+        )
+        assert_matches_type(MonitorEventDetailResponse, monitor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_event(self, client: Deeprails) -> None:
+        response = client.monitor.with_raw_response.retrieve_event(
+            event_id="event_id",
+            monitor_id="monitor_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        monitor = response.parse()
+        assert_matches_type(MonitorEventDetailResponse, monitor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_event(self, client: Deeprails) -> None:
+        with client.monitor.with_streaming_response.retrieve_event(
+            event_id="event_id",
+            monitor_id="monitor_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            monitor = response.parse()
+            assert_matches_type(MonitorEventDetailResponse, monitor, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_retrieve_event(self, client: Deeprails) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
+            client.monitor.with_raw_response.retrieve_event(
+                event_id="event_id",
+                monitor_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_id` but received ''"):
+            client.monitor.with_raw_response.retrieve_event(
+                event_id="",
+                monitor_id="monitor_id",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -398,6 +451,58 @@ class TestAsyncMonitor:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.update(
                 monitor_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+        monitor = await async_client.monitor.retrieve_event(
+            event_id="event_id",
+            monitor_id="monitor_id",
+        )
+        assert_matches_type(MonitorEventDetailResponse, monitor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+        response = await async_client.monitor.with_raw_response.retrieve_event(
+            event_id="event_id",
+            monitor_id="monitor_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        monitor = await response.parse()
+        assert_matches_type(MonitorEventDetailResponse, monitor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+        async with async_client.monitor.with_streaming_response.retrieve_event(
+            event_id="event_id",
+            monitor_id="monitor_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            monitor = await response.parse()
+            assert_matches_type(MonitorEventDetailResponse, monitor, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
+            await async_client.monitor.with_raw_response.retrieve_event(
+                event_id="event_id",
+                monitor_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_id` but received ''"):
+            await async_client.monitor.with_raw_response.retrieve_event(
+                event_id="",
+                monitor_id="monitor_id",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
