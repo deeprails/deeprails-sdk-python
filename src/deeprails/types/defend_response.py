@@ -90,56 +90,56 @@ class Stats(BaseModel):
 
 
 class DefendResponse(BaseModel):
-    name: str
-    """Name of the workflow."""
-
-    workflow_id: str
-    """A unique workflow ID."""
-
-    automatic_hallucination_tolerance_levels: Optional[Dict[str, Literal["low", "medium", "high"]]] = None
+    automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]]
     """Mapping of guardrail metric names to tolerance values.
 
     Values can be strings (`low`, `medium`, `high`) for automatic tolerance levels.
     """
 
-    capabilities: Optional[List[Capability]] = None
+    capabilities: List[Capability]
     """Extended AI capabilities available to the event, if any.
 
     Can be `web_search` and/or `file_search`.
     """
 
-    created_at: Optional[datetime] = None
+    created_at: datetime
     """The time the workflow was created in UTC."""
 
-    custom_hallucination_threshold_values: Optional[Dict[str, float]] = None
+    custom_hallucination_threshold_values: Dict[str, float]
     """Mapping of guardrail metric names to threshold values.
 
     Values can be floating point numbers (0.0-1.0) for custom thresholds.
     """
 
-    description: Optional[str] = None
+    description: str
     """Description for the workflow."""
 
-    events: Optional[List[Event]] = None
+    events: List[Event]
     """An array of events associated with this workflow."""
 
-    files: Optional[List[File]] = None
+    files: List[File]
     """List of files associated with the workflow.
 
     If this is not empty, models can search these files when performing evaluations
     or remediations
     """
 
-    stats: Optional[Stats] = None
+    name: str
+    """Name of the workflow."""
 
-    status: Optional[Literal["inactive", "active"]] = None
+    status: Literal["inactive", "active"]
     """Status of the selected workflow.
 
     May be `inactive` or `active`. Inactive workflows will not accept events.
     """
 
-    threshold_type: Optional[Literal["custom", "automatic"]] = None
+    threshold_type: Literal["custom", "automatic"]
     """Type of thresholds used to evaluate the event."""
 
-    updated_at: Optional[datetime] = None
+    updated_at: datetime
     """The most recent time the workflow was updated in UTC."""
+
+    workflow_id: str
+    """A unique workflow ID."""
+
+    stats: Optional[Stats] = None

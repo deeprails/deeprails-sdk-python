@@ -8,11 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["WorkflowEventDetailResponse", "Capability", "EvaluationHistory", "File"]
-
-
-class Capability(BaseModel):
-    capability: Optional[str] = None
+__all__ = ["WorkflowEventDetailResponse", "EvaluationHistory", "Capability", "File"]
 
 
 class EvaluationHistory(BaseModel):
@@ -43,6 +39,10 @@ class EvaluationHistory(BaseModel):
     run_mode: Optional[str] = None
 
 
+class Capability(BaseModel):
+    capability: Optional[str] = None
+
+
 class File(BaseModel):
     file_id: Optional[str] = None
 
@@ -52,6 +52,15 @@ class File(BaseModel):
 
 
 class WorkflowEventDetailResponse(BaseModel):
+    evaluation_history: List[EvaluationHistory]
+    """History of evaluations for the event."""
+
+    evaluation_result: Dict[str, object]
+    """
+    Evaluation result consisting of average scores and rationales for each of the
+    evaluated guardrail metrics.
+    """
+
     event_id: str
     """A unique workflow event ID."""
 
@@ -61,8 +70,20 @@ class WorkflowEventDetailResponse(BaseModel):
     filtered: bool
     """Whether the event was filtered and requires improvement."""
 
+    improved_model_output: str
+    """
+    Improved model output after improvement tool was applied and each metric passed
+    evaluation.
+    """
+
+    improvement_tool_status: Optional[Literal["improved", "failed on max retries", "improvement_required"]] = None
+    """Status of the improvement tool used to improve the event."""
+
     improvement_tool_type: Literal["regen", "fixit", "do_nothing"]
     """Type of improvement tool used to improve the event."""
+
+    threshold_type: Literal["custom", "automatic"]
+    """Type of thresholds used to evaluate the event."""
 
     workflow_id: str
     """Workflow ID associated with the event."""
@@ -86,29 +107,8 @@ class WorkflowEventDetailResponse(BaseModel):
     Values are floating point numbers (0.0-1.0) representing custom thresholds.
     """
 
-    evaluation_history: Optional[List[EvaluationHistory]] = None
-    """History of evaluations for the event."""
-
-    evaluation_result: Optional[Dict[str, object]] = None
-    """
-    Evaluation result consisting of average scores and rationales for each of the
-    evaluated guardrail metrics.
-    """
-
     files: Optional[List[File]] = None
     """List of files available to the event, if any.
 
     Will only be present if `file_search` is enabled.
     """
-
-    improved_model_output: Optional[str] = None
-    """
-    Improved model output after improvement tool was applied and each metric passed
-    evaluation.
-    """
-
-    improvement_tool_status: Optional[Literal["improved", "failed on max retries", "improvement_required"]] = None
-    """Status of the improvement tool used to improve the event."""
-
-    threshold_type: Optional[Literal["custom", "automatic"]] = None
-    """Type of thresholds used to evaluate the event."""

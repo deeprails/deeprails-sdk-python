@@ -121,11 +121,33 @@ class Stats(BaseModel):
 
 
 class MonitorDetailResponse(BaseModel):
+    capabilities: List[Capability]
+    """An array of capabilities associated with this monitor."""
+
+    created_at: datetime
+    """The time the monitor was created in UTC."""
+
+    evaluations: List[Evaluation]
+    """An array of all evaluations performed by this monitor.
+
+    Each one corresponds to a separate monitor event.
+    """
+
+    files: List[File]
+    """An array of files associated with this monitor."""
+
     monitor_id: str
     """A unique monitor ID."""
 
     name: str
     """Name of this monitor."""
+
+    stats: Stats
+    """
+    Contains five fields used for stats of this monitor: total evaluations,
+    completed evaluations, failed evaluations, queued evaluations, and in progress
+    evaluations.
+    """
 
     status: Literal["active", "inactive"]
     """Status of the monitor.
@@ -134,30 +156,8 @@ class MonitorDetailResponse(BaseModel):
     events.
     """
 
-    capabilities: Optional[List[Capability]] = None
-    """An array of capabilities associated with this monitor."""
-
-    created_at: Optional[datetime] = None
-    """The time the monitor was created in UTC."""
+    updated_at: datetime
+    """The most recent time the monitor was modified in UTC."""
 
     description: Optional[str] = None
     """Description of this monitor."""
-
-    evaluations: Optional[List[Evaluation]] = None
-    """An array of all evaluations performed by this monitor.
-
-    Each one corresponds to a separate monitor event.
-    """
-
-    files: Optional[List[File]] = None
-    """An array of files associated with this monitor."""
-
-    stats: Optional[Stats] = None
-    """
-    Contains five fields used for stats of this monitor: total evaluations,
-    completed evaluations, failed evaluations, queued evaluations, and in progress
-    evaluations.
-    """
-
-    updated_at: Optional[datetime] = None
-    """The most recent time the monitor was modified in UTC."""
