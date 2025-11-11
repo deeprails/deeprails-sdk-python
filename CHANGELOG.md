@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.0 (2025-11-11)
+
+Full Changelog: [v1.13.0...v1.14.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.13.0...v1.14.0)
+
+### Features
+
+* **api:** add retrieve monitor event and examples ([b295221](https://github.com/deeprails/deeprails-sdk-python/commit/b2952212f394e8947c900735a5841b78bf8ec729))
+
 ## 1.13.0 (2025-11-10)
 
 Full Changelog: [v1.12.0...v1.13.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.12.0...v1.13.0)
