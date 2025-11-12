@@ -76,11 +76,11 @@ class WorkflowEventDetailResponse(BaseModel):
     evaluation.
     """
 
+    improvement_action: Literal["regen", "fixit", "do_nothing"]
+    """Type of improvement action used to improve the event."""
+
     improvement_tool_status: Optional[Literal["improved", "failed on max retries", "improvement_required"]] = None
     """Status of the improvement tool used to improve the event."""
-
-    improvement_tool_type: Literal["regen", "fixit", "do_nothing"]
-    """Type of improvement tool used to improve the event."""
 
     threshold_type: Literal["custom", "automatic"]
     """Type of thresholds used to evaluate the event."""
