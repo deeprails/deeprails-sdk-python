@@ -112,7 +112,10 @@ class DefendResponse(BaseModel):
     """
 
     description: str
-    """Description for the workflow."""
+    """
+    A description for the workflow, to help you remember what that workflow means to
+    your organization.
+    """
 
     events: List[Event]
     """An array of events associated with this workflow."""
@@ -125,7 +128,9 @@ class DefendResponse(BaseModel):
     """
 
     name: str
-    """Name of the workflow."""
+    """
+    A human-readable name for the workflow that will correspond to it's workflow ID.
+    """
 
     status: Literal["inactive", "active"]
     """Status of the selected workflow.
@@ -141,5 +146,11 @@ class DefendResponse(BaseModel):
 
     workflow_id: str
     """A unique workflow ID."""
+
+    improvement_action: Optional[Literal["regen", "fixit", "do_nothing"]] = None
+    """
+    The action used to improve outputs that fail one or more guardrail metrics for
+    the workflow events.
+    """
 
     stats: Optional[Stats] = None

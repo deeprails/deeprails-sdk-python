@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.15.0 (2025-11-12)
+
+Full Changelog: [v1.14.0...v1.15.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.14.0...v1.15.0)
+
+### Features
+
+* **api:** remove dev server ([aee58f7](https://github.com/deeprails/deeprails-sdk-python/commit/aee58f7a369729f5b50030f722a02b6da9abd88c))
+
+
+### Bug Fixes
+
+* compat with Python 3.14 ([f319169](https://github.com/deeprails/deeprails-sdk-python/commit/f319169022a0fe5992e335dc63a00c9bc47d95d8))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([02e642b](https://github.com/deeprails/deeprails-sdk-python/commit/02e642b8fa4f10e49014187ae8887a4dcc1f8a66))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([25663d6](https://github.com/deeprails/deeprails-sdk-python/commit/25663d6698f6b61125f60d5fc0ba8a0ec26a800c))
+
 ## 1.14.0 (2025-11-11)
 
 Full Changelog: [v1.13.0...v1.14.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.13.0...v1.14.0)
