@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.16.0 (2025-11-18)
+
+Full Changelog: [v1.15.0...v1.16.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.15.0...v1.16.0)
+
+### Features
+
+* **api:** update docs URL ([587d5fb](https://github.com/deeprails/deeprails-sdk-python/commit/587d5fbc58e5bec2f89ee8c48f9815b4cb169caa))
+
 ## 1.15.0 (2025-11-12)
 
 Full Changelog: [v1.14.0...v1.15.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.14.0...v1.15.0)
