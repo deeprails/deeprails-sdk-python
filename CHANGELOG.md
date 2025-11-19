@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.19.0 (2025-11-19)
+
+Full Changelog: [v1.18.0...v1.19.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.18.0...v1.19.0)
+
+### Features
+
+* **api:** Minor changes and updates to examples ([804c8be](https://github.com/deeprails/deeprails-sdk-python/commit/804c8bea03fa1f8cbee47e0858a04ba88cce3d8f))
+* **api:** Update pyproject.toml ([4ed51b6](https://github.com/deeprails/deeprails-sdk-python/commit/4ed51b6c313d8a77ec1c9b685b90df8dc1840194))
+
 ## 1.18.0 (2025-11-19)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.17.0...v1.18.0)
