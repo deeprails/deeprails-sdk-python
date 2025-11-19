@@ -23,7 +23,7 @@ from ._utils import is_given, get_async_library
 from ._version import __version__
 from .resources import files, defend, monitor
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, DeeprailsError
+from ._exceptions import APIStatusError, DeepRailsError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -35,19 +35,19 @@ __all__ = [
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "Deeprails",
-    "AsyncDeeprails",
+    "DeepRails",
+    "AsyncDeepRails",
     "Client",
     "AsyncClient",
 ]
 
 
-class Deeprails(SyncAPIClient):
+class DeepRails(SyncAPIClient):
     defend: defend.DefendResource
     monitor: monitor.MonitorResource
     files: files.FilesResource
-    with_raw_response: DeeprailsWithRawResponse
-    with_streaming_response: DeeprailsWithStreamedResponse
+    with_raw_response: DeepRailsWithRawResponse
+    with_streaming_response: DeepRailsWithStreamedResponse
 
     # client options
     api_key: str
@@ -75,20 +75,20 @@ class Deeprails(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Deeprails client instance.
+        """Construct a new synchronous DeepRails client instance.
 
         This automatically infers the `api_key` argument from the `DEEPRAILS_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("DEEPRAILS_API_KEY")
         if api_key is None:
-            raise DeeprailsError(
+            raise DeepRailsError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the DEEPRAILS_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("DEEPRAILS_BASE_URL")
+            base_url = os.environ.get("DEEP_RAILS_BASE_URL")
         if base_url is None:
             base_url = f"https://api.deeprails.com"
 
@@ -106,8 +106,8 @@ class Deeprails(SyncAPIClient):
         self.defend = defend.DefendResource(self)
         self.monitor = monitor.MonitorResource(self)
         self.files = files.FilesResource(self)
-        self.with_raw_response = DeeprailsWithRawResponse(self)
-        self.with_streaming_response = DeeprailsWithStreamedResponse(self)
+        self.with_raw_response = DeepRailsWithRawResponse(self)
+        self.with_streaming_response = DeepRailsWithStreamedResponse(self)
 
     @property
     @override
@@ -214,12 +214,12 @@ class Deeprails(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncDeeprails(AsyncAPIClient):
+class AsyncDeepRails(AsyncAPIClient):
     defend: defend.AsyncDefendResource
     monitor: monitor.AsyncMonitorResource
     files: files.AsyncFilesResource
-    with_raw_response: AsyncDeeprailsWithRawResponse
-    with_streaming_response: AsyncDeeprailsWithStreamedResponse
+    with_raw_response: AsyncDeepRailsWithRawResponse
+    with_streaming_response: AsyncDeepRailsWithStreamedResponse
 
     # client options
     api_key: str
@@ -247,20 +247,20 @@ class AsyncDeeprails(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncDeeprails client instance.
+        """Construct a new async AsyncDeepRails client instance.
 
         This automatically infers the `api_key` argument from the `DEEPRAILS_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("DEEPRAILS_API_KEY")
         if api_key is None:
-            raise DeeprailsError(
+            raise DeepRailsError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the DEEPRAILS_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("DEEPRAILS_BASE_URL")
+            base_url = os.environ.get("DEEP_RAILS_BASE_URL")
         if base_url is None:
             base_url = f"https://api.deeprails.com"
 
@@ -278,8 +278,8 @@ class AsyncDeeprails(AsyncAPIClient):
         self.defend = defend.AsyncDefendResource(self)
         self.monitor = monitor.AsyncMonitorResource(self)
         self.files = files.AsyncFilesResource(self)
-        self.with_raw_response = AsyncDeeprailsWithRawResponse(self)
-        self.with_streaming_response = AsyncDeeprailsWithStreamedResponse(self)
+        self.with_raw_response = AsyncDeepRailsWithRawResponse(self)
+        self.with_streaming_response = AsyncDeepRailsWithStreamedResponse(self)
 
     @property
     @override
@@ -386,34 +386,34 @@ class AsyncDeeprails(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class DeeprailsWithRawResponse:
-    def __init__(self, client: Deeprails) -> None:
+class DeepRailsWithRawResponse:
+    def __init__(self, client: DeepRails) -> None:
         self.defend = defend.DefendResourceWithRawResponse(client.defend)
         self.monitor = monitor.MonitorResourceWithRawResponse(client.monitor)
         self.files = files.FilesResourceWithRawResponse(client.files)
 
 
-class AsyncDeeprailsWithRawResponse:
-    def __init__(self, client: AsyncDeeprails) -> None:
+class AsyncDeepRailsWithRawResponse:
+    def __init__(self, client: AsyncDeepRails) -> None:
         self.defend = defend.AsyncDefendResourceWithRawResponse(client.defend)
         self.monitor = monitor.AsyncMonitorResourceWithRawResponse(client.monitor)
         self.files = files.AsyncFilesResourceWithRawResponse(client.files)
 
 
-class DeeprailsWithStreamedResponse:
-    def __init__(self, client: Deeprails) -> None:
+class DeepRailsWithStreamedResponse:
+    def __init__(self, client: DeepRails) -> None:
         self.defend = defend.DefendResourceWithStreamingResponse(client.defend)
         self.monitor = monitor.MonitorResourceWithStreamingResponse(client.monitor)
         self.files = files.FilesResourceWithStreamingResponse(client.files)
 
 
-class AsyncDeeprailsWithStreamedResponse:
-    def __init__(self, client: AsyncDeeprails) -> None:
+class AsyncDeepRailsWithStreamedResponse:
+    def __init__(self, client: AsyncDeepRails) -> None:
         self.defend = defend.AsyncDefendResourceWithStreamingResponse(client.defend)
         self.monitor = monitor.AsyncMonitorResourceWithStreamingResponse(client.monitor)
         self.files = files.AsyncFilesResourceWithStreamingResponse(client.files)
 
 
-Client = Deeprails
+Client = DeepRails
 
-AsyncClient = AsyncDeeprails
+AsyncClient = AsyncDeepRails

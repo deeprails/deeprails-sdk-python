@@ -1,11 +1,11 @@
 [project]
 name = "deeprails"
 version = "1.17.0"
-description = "The official Python library for the deeprails API"
+description = "The official Python library for the deep rails API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Deeprails", email = "support@deeprails.ai" },
+{ name = "Deep Rails", email = "support@deeprails.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
