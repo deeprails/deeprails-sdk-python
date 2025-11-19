@@ -1,9 +1,9 @@
-# Deep Rails Python API library
+# DeepRails Python API library
 
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/deeprails.svg?label=pypi%20(stable))](https://pypi.org/project/deeprails/)
 
-The Deep Rails Python library provides convenient access to the Deep Rails REST API from any Python 3.9+
+The DeepRails Python library provides convenient access to the DeepRails REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
