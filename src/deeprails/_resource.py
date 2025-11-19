@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING
 import anyio
 
 if TYPE_CHECKING:
-    from ._client import Deeprails, AsyncDeeprails
+    from ._client import DeepRails, AsyncDeepRails
 
 
 class SyncAPIResource:
-    _client: Deeprails
+    _client: DeepRails
 
-    def __init__(self, client: Deeprails) -> None:
+    def __init__(self, client: DeepRails) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -28,9 +28,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncDeeprails
+    _client: AsyncDeepRails
 
-    def __init__(self, client: AsyncDeeprails) -> None:
+    def __init__(self, client: AsyncDeepRails) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

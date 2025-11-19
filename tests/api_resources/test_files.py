@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from deeprails import Deeprails, AsyncDeeprails
+from deeprails import DeepRails, AsyncDeepRails
 from tests.utils import assert_matches_type
 from deeprails.types import FileResponse
 
@@ -19,7 +19,7 @@ class TestFiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload(self, client: Deeprails) -> None:
+    def test_method_upload(self, client: DeepRails) -> None:
         file = client.files.upload(
             file=["string"],
         )
@@ -27,7 +27,7 @@ class TestFiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_upload(self, client: Deeprails) -> None:
+    def test_raw_response_upload(self, client: DeepRails) -> None:
         response = client.files.with_raw_response.upload(
             file=["string"],
         )
@@ -39,7 +39,7 @@ class TestFiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_upload(self, client: Deeprails) -> None:
+    def test_streaming_response_upload(self, client: DeepRails) -> None:
         with client.files.with_streaming_response.upload(
             file=["string"],
         ) as response:
@@ -59,7 +59,7 @@ class TestAsyncFiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_upload(self, async_client: AsyncDeepRails) -> None:
         file = await async_client.files.upload(
             file=["string"],
         )
@@ -67,7 +67,7 @@ class TestAsyncFiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_upload(self, async_client: AsyncDeeprails) -> None:
+    async def test_raw_response_upload(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.files.with_raw_response.upload(
             file=["string"],
         )
@@ -79,7 +79,7 @@ class TestAsyncFiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_upload(self, async_client: AsyncDeeprails) -> None:
+    async def test_streaming_response_upload(self, async_client: AsyncDeepRails) -> None:
         async with async_client.files.with_streaming_response.upload(
             file=["string"],
         ) as response:

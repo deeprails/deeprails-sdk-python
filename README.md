@@ -1,9 +1,9 @@
-# Deeprails Python API library
+# Deep Rails Python API library
 
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/deeprails.svg?label=pypi%20(stable))](https://pypi.org/project/deeprails/)
 
-The Deeprails Python library provides convenient access to the Deeprails REST API from any Python 3.9+
+The Deep Rails Python library provides convenient access to the Deep Rails REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -24,9 +24,9 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from deeprails import Deeprails
+from deeprails import DeepRails
 
-client = Deeprails(
+client = DeepRails(
     api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
 )
 
@@ -50,14 +50,14 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncDeeprails` instead of `Deeprails` and use `await` with each API call:
+Simply import `AsyncDeepRails` instead of `DeepRails` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from deeprails import AsyncDeeprails
+from deeprails import AsyncDeepRails
 
-client = AsyncDeeprails(
+client = AsyncDeepRails(
     api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
 )
 
@@ -97,11 +97,11 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 ```python
 import asyncio
 from deeprails import DefaultAioHttpClient
-from deeprails import AsyncDeeprails
+from deeprails import AsyncDeepRails
 
 
 async def main() -> None:
-    async with AsyncDeeprails(
+    async with AsyncDeepRails(
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
@@ -135,9 +135,9 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from deeprails import Deeprails
+from deeprails import DeepRails
 
-client = Deeprails()
+client = DeepRails()
 
 workflow_event_response = client.defend.submit_event(
     workflow_id="workflow_id",
@@ -160,9 +160,9 @@ All errors inherit from `deeprails.APIError`.
 
 ```python
 import deeprails
-from deeprails import Deeprails
+from deeprails import DeepRails
 
-client = Deeprails()
+client = DeepRails()
 
 try:
     client.defend.create_workflow(
@@ -208,10 +208,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from deeprails import Deeprails
+from deeprails import DeepRails
 
 # Configure the default for all requests:
-client = Deeprails(
+client = DeepRails(
     # default is 2
     max_retries=0,
 )
@@ -235,16 +235,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from deeprails import Deeprails
+from deeprails import DeepRails
 
 # Configure the default for all requests:
-client = Deeprails(
+client = DeepRails(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = Deeprails(
+client = DeepRails(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -271,10 +271,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `DEEPRAILS_LOG` to `info`.
+You can enable logging by setting the environment variable `DEEP_RAILS_LOG` to `info`.
 
 ```shell
-$ export DEEPRAILS_LOG=info
+$ export DEEP_RAILS_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -296,9 +296,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from deeprails import Deeprails
+from deeprails import DeepRails
 
-client = Deeprails()
+client = DeepRails()
 response = client.defend.with_raw_response.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
@@ -343,7 +343,6 @@ with client.defend.with_streaming_response.create_workflow(
 ```
 
 The context manager is required so that the response will reliably be closed.
-
 ## Requirements
 
 Python 3.9 or higher.
