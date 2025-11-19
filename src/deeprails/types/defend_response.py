@@ -145,7 +145,7 @@ class DefendResponse(BaseModel):
     """The most recent time the workflow was updated in UTC."""
 
     workflow_id: str
-    """A unique workflow ID."""
+    """A unique workflow ID used to identify the workflow in other endpoints."""
 
     improvement_action: Optional[Literal["regen", "fixit", "do_nothing"]] = None
     """
