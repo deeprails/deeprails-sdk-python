@@ -1,7 +1,7 @@
 [project]
 name = "deeprails"
 version = "1.18.0"
-description = "The official Python library for the deep rails API"
+description = "The official Python library for the DeepRails API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
