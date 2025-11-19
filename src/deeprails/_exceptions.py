@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class DeeprailsError(Exception):
+class DeepRailsError(Exception):
     pass
 
 
-class APIError(DeeprailsError):
+class APIError(DeepRailsError):
     message: str
     request: httpx.Request
 

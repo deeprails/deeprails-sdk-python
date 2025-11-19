@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from deeprails import Deeprails, AsyncDeeprails
+from deeprails import DeepRails, AsyncDeepRails
 from tests.utils import assert_matches_type
 from deeprails.types import (
     MonitorEventResponse,
@@ -25,7 +25,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create(self, client: Deeprails) -> None:
+    def test_method_create(self, client: DeepRails) -> None:
         monitor = client.monitor.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -34,7 +34,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params(self, client: Deeprails) -> None:
+    def test_method_create_with_all_params(self, client: DeepRails) -> None:
         monitor = client.monitor.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -46,7 +46,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Deeprails) -> None:
+    def test_raw_response_create(self, client: DeepRails) -> None:
         response = client.monitor.with_raw_response.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -59,7 +59,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Deeprails) -> None:
+    def test_streaming_response_create(self, client: DeepRails) -> None:
         with client.monitor.with_streaming_response.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -74,7 +74,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: Deeprails) -> None:
+    def test_method_retrieve(self, client: DeepRails) -> None:
         monitor = client.monitor.retrieve(
             monitor_id="monitor_id",
         )
@@ -82,7 +82,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: Deeprails) -> None:
+    def test_method_retrieve_with_all_params(self, client: DeepRails) -> None:
         monitor = client.monitor.retrieve(
             monitor_id="monitor_id",
             limit=0,
@@ -91,7 +91,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: Deeprails) -> None:
+    def test_raw_response_retrieve(self, client: DeepRails) -> None:
         response = client.monitor.with_raw_response.retrieve(
             monitor_id="monitor_id",
         )
@@ -103,7 +103,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: Deeprails) -> None:
+    def test_streaming_response_retrieve(self, client: DeepRails) -> None:
         with client.monitor.with_streaming_response.retrieve(
             monitor_id="monitor_id",
         ) as response:
@@ -117,7 +117,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: Deeprails) -> None:
+    def test_path_params_retrieve(self, client: DeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.retrieve(
                 monitor_id="",
@@ -125,7 +125,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: Deeprails) -> None:
+    def test_method_update(self, client: DeepRails) -> None:
         monitor = client.monitor.update(
             monitor_id="monitor_id",
         )
@@ -133,7 +133,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_with_all_params(self, client: Deeprails) -> None:
+    def test_method_update_with_all_params(self, client: DeepRails) -> None:
         monitor = client.monitor.update(
             monitor_id="monitor_id",
             description="description",
@@ -144,7 +144,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: Deeprails) -> None:
+    def test_raw_response_update(self, client: DeepRails) -> None:
         response = client.monitor.with_raw_response.update(
             monitor_id="monitor_id",
         )
@@ -156,7 +156,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: Deeprails) -> None:
+    def test_streaming_response_update(self, client: DeepRails) -> None:
         with client.monitor.with_streaming_response.update(
             monitor_id="monitor_id",
         ) as response:
@@ -170,7 +170,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: Deeprails) -> None:
+    def test_path_params_update(self, client: DeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.update(
                 monitor_id="",
@@ -178,7 +178,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_event(self, client: Deeprails) -> None:
+    def test_method_retrieve_event(self, client: DeepRails) -> None:
         monitor = client.monitor.retrieve_event(
             event_id="event_id",
             monitor_id="monitor_id",
@@ -187,7 +187,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_event(self, client: Deeprails) -> None:
+    def test_raw_response_retrieve_event(self, client: DeepRails) -> None:
         response = client.monitor.with_raw_response.retrieve_event(
             event_id="event_id",
             monitor_id="monitor_id",
@@ -200,7 +200,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_event(self, client: Deeprails) -> None:
+    def test_streaming_response_retrieve_event(self, client: DeepRails) -> None:
         with client.monitor.with_streaming_response.retrieve_event(
             event_id="event_id",
             monitor_id="monitor_id",
@@ -215,7 +215,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_event(self, client: Deeprails) -> None:
+    def test_path_params_retrieve_event(self, client: DeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.retrieve_event(
                 event_id="event_id",
@@ -230,7 +230,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_submit_event(self, client: Deeprails) -> None:
+    def test_method_submit_event(self, client: DeepRails) -> None:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={},
@@ -240,7 +240,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_submit_event_with_all_params(self, client: Deeprails) -> None:
+    def test_method_submit_event_with_all_params(self, client: DeepRails) -> None:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={
@@ -256,7 +256,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_submit_event(self, client: Deeprails) -> None:
+    def test_raw_response_submit_event(self, client: DeepRails) -> None:
         response = client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
             model_input={},
@@ -270,7 +270,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_submit_event(self, client: Deeprails) -> None:
+    def test_streaming_response_submit_event(self, client: DeepRails) -> None:
         with client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
             model_input={},
@@ -286,7 +286,7 @@ class TestMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_submit_event(self, client: Deeprails) -> None:
+    def test_path_params_submit_event(self, client: DeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.submit_event(
                 monitor_id="",
@@ -302,7 +302,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_create(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -311,7 +311,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -323,7 +323,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncDeeprails) -> None:
+    async def test_raw_response_create(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.monitor.with_raw_response.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -336,7 +336,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncDeeprails) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncDeepRails) -> None:
         async with async_client.monitor.with_streaming_response.create(
             guardrail_metrics=["correctness"],
             name="name",
@@ -351,7 +351,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_retrieve(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.retrieve(
             monitor_id="monitor_id",
         )
@@ -359,7 +359,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.retrieve(
             monitor_id="monitor_id",
             limit=0,
@@ -368,7 +368,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncDeeprails) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.monitor.with_raw_response.retrieve(
             monitor_id="monitor_id",
         )
@@ -380,7 +380,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncDeeprails) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncDeepRails) -> None:
         async with async_client.monitor.with_streaming_response.retrieve(
             monitor_id="monitor_id",
         ) as response:
@@ -394,7 +394,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncDeeprails) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncDeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.retrieve(
                 monitor_id="",
@@ -402,7 +402,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_update(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.update(
             monitor_id="monitor_id",
         )
@@ -410,7 +410,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.update(
             monitor_id="monitor_id",
             description="description",
@@ -421,7 +421,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncDeeprails) -> None:
+    async def test_raw_response_update(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.monitor.with_raw_response.update(
             monitor_id="monitor_id",
         )
@@ -433,7 +433,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncDeeprails) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncDeepRails) -> None:
         async with async_client.monitor.with_streaming_response.update(
             monitor_id="monitor_id",
         ) as response:
@@ -447,7 +447,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncDeeprails) -> None:
+    async def test_path_params_update(self, async_client: AsyncDeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.update(
                 monitor_id="",
@@ -455,7 +455,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_retrieve_event(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.retrieve_event(
             event_id="event_id",
             monitor_id="monitor_id",
@@ -464,7 +464,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_raw_response_retrieve_event(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.monitor.with_raw_response.retrieve_event(
             event_id="event_id",
             monitor_id="monitor_id",
@@ -477,7 +477,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_streaming_response_retrieve_event(self, async_client: AsyncDeepRails) -> None:
         async with async_client.monitor.with_streaming_response.retrieve_event(
             event_id="event_id",
             monitor_id="monitor_id",
@@ -492,7 +492,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_path_params_retrieve_event(self, async_client: AsyncDeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.retrieve_event(
                 event_id="event_id",
@@ -507,7 +507,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_submit_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_submit_event(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={},
@@ -517,7 +517,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_submit_event_with_all_params(self, async_client: AsyncDeeprails) -> None:
+    async def test_method_submit_event_with_all_params(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={
@@ -533,7 +533,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_submit_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_raw_response_submit_event(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
             model_input={},
@@ -547,7 +547,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_submit_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_streaming_response_submit_event(self, async_client: AsyncDeepRails) -> None:
         async with async_client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
             model_input={},
@@ -563,7 +563,7 @@ class TestAsyncMonitor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_submit_event(self, async_client: AsyncDeeprails) -> None:
+    async def test_path_params_submit_event(self, async_client: AsyncDeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.submit_event(
                 monitor_id="",
