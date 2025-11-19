@@ -64,9 +64,6 @@ class WorkflowEventDetailResponse(BaseModel):
     event_id: str
     """A unique workflow event ID."""
 
-    event_status: Literal["In Progress", "Completed"]
-    """Status of the event."""
-
     filtered: bool
     """Whether the event was filtered and requires improvement."""
 
@@ -81,6 +78,9 @@ class WorkflowEventDetailResponse(BaseModel):
 
     improvement_tool_status: Optional[Literal["improved", "failed on max retries", "improvement_required"]] = None
     """Status of the improvement tool used to improve the event."""
+
+    status: Literal["In Progress", "Completed"]
+    """Status of the event."""
 
     threshold_type: Literal["custom", "automatic"]
     """Type of thresholds used to evaluate the event."""
