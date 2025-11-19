@@ -77,8 +77,8 @@ class Evaluation(BaseModel):
         ]
     ] = None
     """
-    An array of guardrail metrics that the model input and output pair will be
-    evaluated on.
+    An array of guardrail metrics that the input and output pair will be evaluated
+    on.
     """
 
     nametag: Optional[str] = None

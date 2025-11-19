@@ -73,8 +73,8 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendCreateResponse:
         """
-        Use this endpoint to create a new guardrail workflow with optional guardrail
-        thresholds and improvement actions
+        Use this endpoint to create a new guardrail workflow by specifying guardrail
+        thresholds, an improvement action, and optional extended capabilities.
 
         Args:
           improvement_action: The action used to improve outputs that fail one or more guardrail metrics for
@@ -295,7 +295,7 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendUpdateResponse:
         """
-        Use this endpoint to update an existing defend workflow
+        Use this endpoint to update an existing defend workflow if its details change.
 
         Args:
           description: Description for the workflow.
@@ -368,8 +368,8 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendCreateResponse:
         """
-        Use this endpoint to create a new guardrail workflow with optional guardrail
-        thresholds and improvement actions
+        Use this endpoint to create a new guardrail workflow by specifying guardrail
+        thresholds, an improvement action, and optional extended capabilities.
 
         Args:
           improvement_action: The action used to improve outputs that fail one or more guardrail metrics for
@@ -592,7 +592,7 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DefendUpdateResponse:
         """
-        Use this endpoint to update an existing defend workflow
+        Use this endpoint to update an existing defend workflow if its details change.
 
         Args:
           description: Description for the workflow.
