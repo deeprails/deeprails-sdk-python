@@ -21,7 +21,7 @@ class TestFiles:
     @parametrize
     def test_method_upload(self, client: DeepRails) -> None:
         file = client.files.upload(
-            file=["string"],
+            files=["string"],
         )
         assert_matches_type(FileResponse, file, path=["response"])
 
@@ -29,7 +29,7 @@ class TestFiles:
     @parametrize
     def test_raw_response_upload(self, client: DeepRails) -> None:
         response = client.files.with_raw_response.upload(
-            file=["string"],
+            files=["string"],
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestFiles:
     @parametrize
     def test_streaming_response_upload(self, client: DeepRails) -> None:
         with client.files.with_streaming_response.upload(
-            file=["string"],
+            files=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -61,7 +61,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_method_upload(self, async_client: AsyncDeepRails) -> None:
         file = await async_client.files.upload(
-            file=["string"],
+            files=["string"],
         )
         assert_matches_type(FileResponse, file, path=["response"])
 
@@ -69,7 +69,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.files.with_raw_response.upload(
-            file=["string"],
+            files=["string"],
         )
 
         assert response.is_closed is True
@@ -81,7 +81,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncDeepRails) -> None:
         async with async_client.files.with_streaming_response.upload(
-            file=["string"],
+            files=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
