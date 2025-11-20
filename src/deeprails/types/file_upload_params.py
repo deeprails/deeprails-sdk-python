@@ -10,5 +10,5 @@ __all__ = ["FileUploadParams"]
 
 
 class FileUploadParams(TypedDict, total=False):
-    file: Required[SequenceNotStr[str]]
-    """The contents of the file to upload."""
+    files: Required[SequenceNotStr[str]]
+    """The contents of the files to upload."""
