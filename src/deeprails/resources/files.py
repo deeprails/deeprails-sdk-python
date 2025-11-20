@@ -44,7 +44,7 @@ class FilesResource(SyncAPIResource):
     def upload(
         self,
         *,
-        file: SequenceNotStr[str],
+        files: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,7 +56,7 @@ class FilesResource(SyncAPIResource):
         Use this endpoint to upload a file to the DeepRails API
 
         Args:
-          file: The contents of the file to upload.
+          files: The contents of the files to upload.
 
           extra_headers: Send extra headers
 
@@ -72,7 +72,7 @@ class FilesResource(SyncAPIResource):
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             "/files/upload",
-            body=maybe_transform({"file": file}, file_upload_params.FileUploadParams),
+            body=maybe_transform({"files": files}, file_upload_params.FileUploadParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -103,7 +103,7 @@ class AsyncFilesResource(AsyncAPIResource):
     async def upload(
         self,
         *,
-        file: SequenceNotStr[str],
+        files: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -115,7 +115,7 @@ class AsyncFilesResource(AsyncAPIResource):
         Use this endpoint to upload a file to the DeepRails API
 
         Args:
-          file: The contents of the file to upload.
+          files: The contents of the files to upload.
 
           extra_headers: Send extra headers
 
@@ -131,7 +131,7 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/files/upload",
-            body=await async_maybe_transform({"file": file}, file_upload_params.FileUploadParams),
+            body=await async_maybe_transform({"files": files}, file_upload_params.FileUploadParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

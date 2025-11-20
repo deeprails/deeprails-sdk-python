@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.20.0 (2025-11-20)
+
+Full Changelog: [v1.19.0...v1.20.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.19.0...v1.20.0)
+
+### Features
+
+* **api:** fix files upload parameter ([a3e0a11](https://github.com/deeprails/deeprails-sdk-python/commit/a3e0a118e36ae4e4133b42ed57e74692d8052d8f))
+
 ## 1.19.0 (2025-11-19)
 
 Full Changelog: [v1.18.0...v1.19.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.18.0...v1.19.0)
