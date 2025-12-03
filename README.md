@@ -95,6 +95,7 @@ pip install deeprails[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from deeprails import DefaultAioHttpClient
 from deeprails import AsyncDeepRails
@@ -102,7 +103,7 @@ from deeprails import AsyncDeepRails
 
 async def main() -> None:
     async with AsyncDeepRails(
-        api_key="My API Key",
+        api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         defend_create_response = await client.defend.create_workflow(

@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.20.1 (2025-12-03)
+
+Full Changelog: [v1.20.0...v1.20.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.20.0...v1.20.1)
+
+### Bug Fixes
+
+* ensure streams are always closed ([76fd1df](https://github.com/deeprails/deeprails-sdk-python/commit/76fd1dfa0d8ccfe9fbb2046882cf737b5ca6c865))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([87c660e](https://github.com/deeprails/deeprails-sdk-python/commit/87c660e69f8509666d20a67a8cbabcd63aa67325))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([5d9ceab](https://github.com/deeprails/deeprails-sdk-python/commit/5d9ceabb224e620221a162a0fc56812629f5b2d7))
+* **docs:** use environment variables for authentication in code snippets ([05bf7de](https://github.com/deeprails/deeprails-sdk-python/commit/05bf7de49c385433a792058e1d40474840ff3b87))
+* update lockfile ([38655f6](https://github.com/deeprails/deeprails-sdk-python/commit/38655f6e1b8f9984e9bc2256a80b7018fa28b295))
+
 ## 1.20.0 (2025-11-20)
 
 Full Changelog: [v1.19.0...v1.20.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.19.0...v1.20.0)
