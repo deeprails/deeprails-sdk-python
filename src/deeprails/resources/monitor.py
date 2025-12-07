@@ -19,11 +19,6 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.monitor_event_response import MonitorEventResponse
-from ..types.monitor_create_response import MonitorCreateResponse
-from ..types.monitor_detail_response import MonitorDetailResponse
-from ..types.monitor_update_response import MonitorUpdateResponse
-from ..types.monitor_event_detail_response import MonitorEventDetailResponse
 
 __all__ = ["MonitorResource", "AsyncMonitorResource"]
 
@@ -72,7 +67,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorCreateResponse:
+    ) -> object:
         """
         Use this endpoint to create a new monitor to evaluate model inputs and outputs
         using guardrails
@@ -85,7 +80,12 @@ class MonitorResource(SyncAPIResource):
 
           name: Name of the new monitor.
 
-          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+          context_awareness: Context includes any structured information that directly relates to the model’s
+              input and expected output—e.g., the recent turn-by-turn history between an AI
+              tutor and a student, facts or state passed through an agentic workflow, or other
+              domain-specific signals your system already knows and wants the model to
+              condition on. This field determines whether to enable context awareness for this
+              monitor's evaluations. Defaults to false.
 
           description: Description of the new monitor.
 
@@ -118,7 +118,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorCreateResponse,
+            cast_to=object,
         )
 
     def retrieve(
@@ -132,7 +132,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorDetailResponse:
+    ) -> object:
         """
         Use this endpoint to retrieve the details and evaluations associated with a
         specific monitor
@@ -160,7 +160,7 @@ class MonitorResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"limit": limit}, monitor_retrieve_params.MonitorRetrieveParams),
             ),
-            cast_to=MonitorDetailResponse,
+            cast_to=object,
         )
 
     def update(
@@ -168,26 +168,47 @@ class MonitorResource(SyncAPIResource):
         monitor_id: str,
         *,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
+        guardrail_metrics: List[
+            Literal[
+                "correctness",
+                "completeness",
+                "instruction_adherence",
+                "context_adherence",
+                "ground_truth_adherence",
+                "comprehensive_safety",
+            ]
+        ]
+        | Omit = omit,
         name: str | Omit = omit,
         status: Literal["active", "inactive"] | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorUpdateResponse:
+    ) -> object:
         """
-        Use this endpoint to update the name, description, or status of an existing
-        monitor
+        Use this endpoint to update the name, status, and/or other details of an
+        existing monitor.
 
         Args:
-          description: Description of the monitor.
+          description: New description of the monitor.
 
-          name: Name of the monitor.
+          file_search: An array of file IDs to search in the monitor's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
+          guardrail_metrics: An array of the new guardrail metrics that model input and output pairs will be
+              evaluated on.
+
+          name: New name of the monitor.
 
           status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
               longer record and evaluate events.
+
+          web_search: Whether to enable web search for this monitor's evaluations.
 
           extra_headers: Send extra headers
 
@@ -204,15 +225,18 @@ class MonitorResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "description": description,
+                    "file_search": file_search,
+                    "guardrail_metrics": guardrail_metrics,
                     "name": name,
                     "status": status,
+                    "web_search": web_search,
                 },
                 monitor_update_params.MonitorUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorUpdateResponse,
+            cast_to=object,
         )
 
     def retrieve_event(
@@ -226,7 +250,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorEventDetailResponse:
+    ) -> object:
         """
         Use this endpoint to retrieve the details of a specific monitor event
 
@@ -248,7 +272,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorEventDetailResponse,
+            cast_to=object,
         )
 
     def submit_event(
@@ -265,7 +289,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorEventResponse:
+    ) -> object:
         """
         Use this endpoint to submit a model input and output pair to a monitor for
         evaluation
@@ -308,7 +332,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorEventResponse,
+            cast_to=object,
         )
 
 
@@ -356,7 +380,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorCreateResponse:
+    ) -> object:
         """
         Use this endpoint to create a new monitor to evaluate model inputs and outputs
         using guardrails
@@ -369,7 +393,12 @@ class AsyncMonitorResource(AsyncAPIResource):
 
           name: Name of the new monitor.
 
-          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+          context_awareness: Context includes any structured information that directly relates to the model’s
+              input and expected output—e.g., the recent turn-by-turn history between an AI
+              tutor and a student, facts or state passed through an agentic workflow, or other
+              domain-specific signals your system already knows and wants the model to
+              condition on. This field determines whether to enable context awareness for this
+              monitor's evaluations. Defaults to false.
 
           description: Description of the new monitor.
 
@@ -402,7 +431,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorCreateResponse,
+            cast_to=object,
         )
 
     async def retrieve(
@@ -416,7 +445,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorDetailResponse:
+    ) -> object:
         """
         Use this endpoint to retrieve the details and evaluations associated with a
         specific monitor
@@ -444,7 +473,7 @@ class AsyncMonitorResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform({"limit": limit}, monitor_retrieve_params.MonitorRetrieveParams),
             ),
-            cast_to=MonitorDetailResponse,
+            cast_to=object,
         )
 
     async def update(
@@ -452,26 +481,47 @@ class AsyncMonitorResource(AsyncAPIResource):
         monitor_id: str,
         *,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
+        guardrail_metrics: List[
+            Literal[
+                "correctness",
+                "completeness",
+                "instruction_adherence",
+                "context_adherence",
+                "ground_truth_adherence",
+                "comprehensive_safety",
+            ]
+        ]
+        | Omit = omit,
         name: str | Omit = omit,
         status: Literal["active", "inactive"] | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorUpdateResponse:
+    ) -> object:
         """
-        Use this endpoint to update the name, description, or status of an existing
-        monitor
+        Use this endpoint to update the name, status, and/or other details of an
+        existing monitor.
 
         Args:
-          description: Description of the monitor.
+          description: New description of the monitor.
 
-          name: Name of the monitor.
+          file_search: An array of file IDs to search in the monitor's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
+          guardrail_metrics: An array of the new guardrail metrics that model input and output pairs will be
+              evaluated on.
+
+          name: New name of the monitor.
 
           status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
               longer record and evaluate events.
+
+          web_search: Whether to enable web search for this monitor's evaluations.
 
           extra_headers: Send extra headers
 
@@ -488,15 +538,18 @@ class AsyncMonitorResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "description": description,
+                    "file_search": file_search,
+                    "guardrail_metrics": guardrail_metrics,
                     "name": name,
                     "status": status,
+                    "web_search": web_search,
                 },
                 monitor_update_params.MonitorUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorUpdateResponse,
+            cast_to=object,
         )
 
     async def retrieve_event(
@@ -510,7 +563,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorEventDetailResponse:
+    ) -> object:
         """
         Use this endpoint to retrieve the details of a specific monitor event
 
@@ -532,7 +585,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorEventDetailResponse,
+            cast_to=object,
         )
 
     async def submit_event(
@@ -549,7 +602,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MonitorEventResponse:
+    ) -> object:
         """
         Use this endpoint to submit a model input and output pair to a monitor for
         evaluation
@@ -592,7 +645,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MonitorEventResponse,
+            cast_to=object,
         )
 
 
