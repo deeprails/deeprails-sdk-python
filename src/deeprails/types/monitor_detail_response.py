@@ -17,6 +17,15 @@ class Capability(BaseModel):
 
 
 class EvaluationModelInput(BaseModel):
+    context: Optional[List[str]] = None
+    """
+    Any structured information that directly relates to the model’s input and
+    expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+    student, facts or state passed through an agentic workflow, or other
+    domain-specific signals your system already knows and wants the model to
+    condition on.
+    """
+
     ground_truth: Optional[str] = None
     """The ground truth for evaluating Ground Truth Adherence guardrail."""
 

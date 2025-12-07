@@ -38,6 +38,7 @@ class TestMonitor:
         monitor = client.monitor.create(
             guardrail_metrics=["correctness"],
             name="name",
+            context_awareness=True,
             description="description",
             file_search=["string"],
             web_search=True,
@@ -244,6 +245,7 @@ class TestMonitor:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={
+                "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
@@ -315,6 +317,7 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.create(
             guardrail_metrics=["correctness"],
             name="name",
+            context_awareness=True,
             description="description",
             file_search=["string"],
             web_search=True,
@@ -521,6 +524,7 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={
+                "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",

@@ -40,6 +40,9 @@ class DefendCreateWorkflowParams(TypedDict, total=False):
     `comprehensive_safety`.
     """
 
+    context_awareness: bool
+    """Whether to enable context for this workflow's evaluations. Defaults to false."""
+
     custom_hallucination_threshold_values: Dict[str, float]
     """Mapping of guardrail metrics to floating point threshold values.
 
