@@ -99,7 +99,7 @@ class DefendResponse(BaseModel):
     capabilities: List[Capability]
     """Extended AI capabilities available to the event, if any.
 
-    Can be `web_search`, `context_awareness`, and/or `file_search`.
+    Can be `web_search`, `file_search`, and/or `context_awareness`.
     """
 
     created_at: datetime

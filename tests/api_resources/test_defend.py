@@ -274,8 +274,16 @@ class TestDefend:
     def test_method_update_workflow_with_all_params(self, client: DeepRails) -> None:
         defend = client.defend.update_workflow(
             workflow_id="workflow_id",
+            automatic_hallucination_tolerance_levels={"foo": "low"},
+            context_awareness=True,
+            custom_hallucination_threshold_values={"foo": 0},
             description="description",
+            file_search=["string"],
+            improvement_action="regen",
+            max_improvement_attempts=0,
             name="name",
+            threshold_type="automatic",
+            web_search=True,
         )
         assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 
@@ -570,8 +578,16 @@ class TestAsyncDefend:
     async def test_method_update_workflow_with_all_params(self, async_client: AsyncDeepRails) -> None:
         defend = await async_client.defend.update_workflow(
             workflow_id="workflow_id",
+            automatic_hallucination_tolerance_levels={"foo": "low"},
+            context_awareness=True,
+            custom_hallucination_threshold_values={"foo": 0},
             description="description",
+            file_search=["string"],
+            improvement_action="regen",
+            max_improvement_attempts=0,
             name="name",
+            threshold_type="automatic",
+            web_search=True,
         )
         assert_matches_type(DefendUpdateResponse, defend, path=["response"])
 

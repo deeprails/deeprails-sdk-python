@@ -138,8 +138,11 @@ class TestMonitor:
         monitor = client.monitor.update(
             monitor_id="monitor_id",
             description="description",
+            file_search=["string"],
+            guardrail_metrics=["correctness"],
             name="name",
-            status="active",
+            status="inactive",
+            web_search=True,
         )
         assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 
@@ -417,8 +420,11 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.update(
             monitor_id="monitor_id",
             description="description",
+            file_search=["string"],
+            guardrail_metrics=["correctness"],
             name="name",
-            status="active",
+            status="inactive",
+            web_search=True,
         )
         assert_matches_type(MonitorUpdateResponse, monitor, path=["response"])
 

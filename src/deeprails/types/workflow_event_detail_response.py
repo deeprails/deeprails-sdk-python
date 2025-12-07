@@ -98,7 +98,7 @@ class WorkflowEventDetailResponse(BaseModel):
     capabilities: Optional[List[Capability]] = None
     """Extended AI capabilities available to the event, if any.
 
-    Can be `web_search`, `context_awareness`, and/or `file_search`.
+    Can be `web_search`, `file_search`, and/or `context_awareness`.
     """
 
     custom_hallucination_threshold_values: Optional[Dict[str, float]] = None

@@ -97,7 +97,12 @@ class DefendResource(SyncAPIResource):
               `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
               `comprehensive_safety`.
 
-          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+          context_awareness: Context includes any structured information that directly relates to the model’s
+              input and expected output—e.g., the recent turn-by-turn history between an AI
+              tutor and a student, facts or state passed through an agentic workflow, or other
+              domain-specific signals your system already knows and wants the model to
+              condition on. This field determines whether to enable context awareness for this
+              workflow's evaluations. Defaults to false.
 
           custom_hallucination_threshold_values: Mapping of guardrail metrics to floating point threshold values. Possible
               metrics are `correctness`, `completeness`, `instruction_adherence`,
@@ -289,8 +294,16 @@ class DefendResource(SyncAPIResource):
         self,
         workflow_id: str,
         *,
+        automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
+        context_awareness: bool | Omit = omit,
+        custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
+        improvement_action: Literal["regen", "fixit", "do_nothing"] | Omit = omit,
+        max_improvement_attempts: int | Omit = omit,
         name: str | Omit = omit,
+        threshold_type: Literal["automatic", "custom"] | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -302,9 +315,41 @@ class DefendResource(SyncAPIResource):
         Use this endpoint to update an existing defend workflow if its details change.
 
         Args:
-          description: Description for the workflow.
+          automatic_hallucination_tolerance_levels: New mapping of guardrail metrics to hallucination tolerance levels (either
+              `low`, `medium`, or `high`) to be used when `threshold_type` is set to
+              `automatic`. Possible metrics are `completeness`, `instruction_adherence`,
+              `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
 
-          name: Name of the workflow.
+          context_awareness: Whether to enable context awareness for this workflow's evaluations.
+
+          custom_hallucination_threshold_values: New mapping of guardrail metrics to floating point threshold values to be used
+              when `threshold_type` is set to `custom`. Possible metrics are `correctness`,
+              `completeness`, `instruction_adherence`, `context_adherence`,
+              `ground_truth_adherence`, or `comprehensive_safety`.
+
+          description: New description for the workflow.
+
+          file_search: An array of file IDs to search in the workflow's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
+          improvement_action: The new action used to improve outputs that fail one or more guardrail metrics
+              for the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs
+              the user's input prompt with minor induced variance. FixIt attempts to directly
+              address the shortcomings of the output using the guardrail failure rationale. Do
+              Nothing does not attempt any improvement.
+
+          max_improvement_attempts: Max. number of improvement action attempts until a given event passes the
+              guardrails. Defaults to 10.
+
+          name: New name for the workflow.
+
+          threshold_type: New type of thresholds to use for the workflow, either `automatic` or `custom`.
+              Automatic thresholds are assigned internally after the user specifies a
+              qualitative tolerance for the metrics, whereas custom metrics allow the user to
+              set the threshold for each metric as a floating point number between 0.0 and
+              1.0.
+
+          web_search: Whether to enable web search for this workflow's evaluations.
 
           extra_headers: Send extra headers
 
@@ -320,8 +365,16 @@ class DefendResource(SyncAPIResource):
             f"/defend/{workflow_id}",
             body=maybe_transform(
                 {
+                    "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
+                    "context_awareness": context_awareness,
+                    "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
+                    "file_search": file_search,
+                    "improvement_action": improvement_action,
+                    "max_improvement_attempts": max_improvement_attempts,
                     "name": name,
+                    "threshold_type": threshold_type,
+                    "web_search": web_search,
                 },
                 defend_update_workflow_params.DefendUpdateWorkflowParams,
             ),
@@ -396,7 +449,12 @@ class AsyncDefendResource(AsyncAPIResource):
               `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
               `comprehensive_safety`.
 
-          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+          context_awareness: Context includes any structured information that directly relates to the model’s
+              input and expected output—e.g., the recent turn-by-turn history between an AI
+              tutor and a student, facts or state passed through an agentic workflow, or other
+              domain-specific signals your system already knows and wants the model to
+              condition on. This field determines whether to enable context awareness for this
+              workflow's evaluations. Defaults to false.
 
           custom_hallucination_threshold_values: Mapping of guardrail metrics to floating point threshold values. Possible
               metrics are `correctness`, `completeness`, `instruction_adherence`,
@@ -590,8 +648,16 @@ class AsyncDefendResource(AsyncAPIResource):
         self,
         workflow_id: str,
         *,
+        automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
+        context_awareness: bool | Omit = omit,
+        custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
+        improvement_action: Literal["regen", "fixit", "do_nothing"] | Omit = omit,
+        max_improvement_attempts: int | Omit = omit,
         name: str | Omit = omit,
+        threshold_type: Literal["automatic", "custom"] | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -603,9 +669,41 @@ class AsyncDefendResource(AsyncAPIResource):
         Use this endpoint to update an existing defend workflow if its details change.
 
         Args:
-          description: Description for the workflow.
+          automatic_hallucination_tolerance_levels: New mapping of guardrail metrics to hallucination tolerance levels (either
+              `low`, `medium`, or `high`) to be used when `threshold_type` is set to
+              `automatic`. Possible metrics are `completeness`, `instruction_adherence`,
+              `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
 
-          name: Name of the workflow.
+          context_awareness: Whether to enable context awareness for this workflow's evaluations.
+
+          custom_hallucination_threshold_values: New mapping of guardrail metrics to floating point threshold values to be used
+              when `threshold_type` is set to `custom`. Possible metrics are `correctness`,
+              `completeness`, `instruction_adherence`, `context_adherence`,
+              `ground_truth_adherence`, or `comprehensive_safety`.
+
+          description: New description for the workflow.
+
+          file_search: An array of file IDs to search in the workflow's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
+          improvement_action: The new action used to improve outputs that fail one or more guardrail metrics
+              for the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs
+              the user's input prompt with minor induced variance. FixIt attempts to directly
+              address the shortcomings of the output using the guardrail failure rationale. Do
+              Nothing does not attempt any improvement.
+
+          max_improvement_attempts: Max. number of improvement action attempts until a given event passes the
+              guardrails. Defaults to 10.
+
+          name: New name for the workflow.
+
+          threshold_type: New type of thresholds to use for the workflow, either `automatic` or `custom`.
+              Automatic thresholds are assigned internally after the user specifies a
+              qualitative tolerance for the metrics, whereas custom metrics allow the user to
+              set the threshold for each metric as a floating point number between 0.0 and
+              1.0.
+
+          web_search: Whether to enable web search for this workflow's evaluations.
 
           extra_headers: Send extra headers
 
@@ -621,8 +719,16 @@ class AsyncDefendResource(AsyncAPIResource):
             f"/defend/{workflow_id}",
             body=await async_maybe_transform(
                 {
+                    "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
+                    "context_awareness": context_awareness,
+                    "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
+                    "file_search": file_search,
+                    "improvement_action": improvement_action,
+                    "max_improvement_attempts": max_improvement_attempts,
                     "name": name,
+                    "threshold_type": threshold_type,
+                    "web_search": web_search,
                 },
                 defend_update_workflow_params.DefendUpdateWorkflowParams,
             ),

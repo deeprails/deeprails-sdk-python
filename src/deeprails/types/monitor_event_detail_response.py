@@ -29,7 +29,10 @@ class File(BaseModel):
 
 class MonitorEventDetailResponse(BaseModel):
     capabilities: Optional[List[Capability]] = None
-    """The capabilities associated with the monitor event."""
+    """The extended AI capabilities associated with the monitor event.
+
+    Can be `web_search`, `file_search`, and/or `context_awareness`.
+    """
 
     eval_time: Optional[str] = None
     """The time spent on the evaluation in seconds."""

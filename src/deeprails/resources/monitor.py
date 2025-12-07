@@ -85,7 +85,12 @@ class MonitorResource(SyncAPIResource):
 
           name: Name of the new monitor.
 
-          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+          context_awareness: Context includes any structured information that directly relates to the model’s
+              input and expected output—e.g., the recent turn-by-turn history between an AI
+              tutor and a student, facts or state passed through an agentic workflow, or other
+              domain-specific signals your system already knows and wants the model to
+              condition on. This field determines whether to enable context awareness for this
+              monitor's evaluations. Defaults to false.
 
           description: Description of the new monitor.
 
@@ -168,8 +173,21 @@ class MonitorResource(SyncAPIResource):
         monitor_id: str,
         *,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
+        guardrail_metrics: List[
+            Literal[
+                "correctness",
+                "completeness",
+                "instruction_adherence",
+                "context_adherence",
+                "ground_truth_adherence",
+                "comprehensive_safety",
+            ]
+        ]
+        | Omit = omit,
         name: str | Omit = omit,
         status: Literal["active", "inactive"] | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,16 +196,24 @@ class MonitorResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MonitorUpdateResponse:
         """
-        Use this endpoint to update the name, description, or status of an existing
-        monitor
+        Use this endpoint to update the name, status, and/or other details of an
+        existing monitor.
 
         Args:
-          description: Description of the monitor.
+          description: New description of the monitor.
 
-          name: Name of the monitor.
+          file_search: An array of file IDs to search in the monitor's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
+          guardrail_metrics: An array of the new guardrail metrics that model input and output pairs will be
+              evaluated on.
+
+          name: New name of the monitor.
 
           status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
               longer record and evaluate events.
+
+          web_search: Whether to enable web search for this monitor's evaluations.
 
           extra_headers: Send extra headers
 
@@ -204,8 +230,11 @@ class MonitorResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "description": description,
+                    "file_search": file_search,
+                    "guardrail_metrics": guardrail_metrics,
                     "name": name,
                     "status": status,
+                    "web_search": web_search,
                 },
                 monitor_update_params.MonitorUpdateParams,
             ),
@@ -369,7 +398,12 @@ class AsyncMonitorResource(AsyncAPIResource):
 
           name: Name of the new monitor.
 
-          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+          context_awareness: Context includes any structured information that directly relates to the model’s
+              input and expected output—e.g., the recent turn-by-turn history between an AI
+              tutor and a student, facts or state passed through an agentic workflow, or other
+              domain-specific signals your system already knows and wants the model to
+              condition on. This field determines whether to enable context awareness for this
+              monitor's evaluations. Defaults to false.
 
           description: Description of the new monitor.
 
@@ -452,8 +486,21 @@ class AsyncMonitorResource(AsyncAPIResource):
         monitor_id: str,
         *,
         description: str | Omit = omit,
+        file_search: SequenceNotStr[str] | Omit = omit,
+        guardrail_metrics: List[
+            Literal[
+                "correctness",
+                "completeness",
+                "instruction_adherence",
+                "context_adherence",
+                "ground_truth_adherence",
+                "comprehensive_safety",
+            ]
+        ]
+        | Omit = omit,
         name: str | Omit = omit,
         status: Literal["active", "inactive"] | Omit = omit,
+        web_search: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -462,16 +509,24 @@ class AsyncMonitorResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MonitorUpdateResponse:
         """
-        Use this endpoint to update the name, description, or status of an existing
-        monitor
+        Use this endpoint to update the name, status, and/or other details of an
+        existing monitor.
 
         Args:
-          description: Description of the monitor.
+          description: New description of the monitor.
 
-          name: Name of the monitor.
+          file_search: An array of file IDs to search in the monitor's evaluations. Files must be
+              uploaded via the DeepRails API first.
+
+          guardrail_metrics: An array of the new guardrail metrics that model input and output pairs will be
+              evaluated on.
+
+          name: New name of the monitor.
 
           status: Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
               longer record and evaluate events.
+
+          web_search: Whether to enable web search for this monitor's evaluations.
 
           extra_headers: Send extra headers
 
@@ -488,8 +543,11 @@ class AsyncMonitorResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "description": description,
+                    "file_search": file_search,
+                    "guardrail_metrics": guardrail_metrics,
                     "name": name,
                     "status": status,
+                    "web_search": web_search,
                 },
                 monitor_update_params.MonitorUpdateParams,
             ),
