@@ -25,6 +25,10 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.defend_response import DefendResponse
+from ..types.defend_create_response import DefendCreateResponse
+from ..types.defend_update_response import DefendUpdateResponse
+from ..types.workflow_event_response import WorkflowEventResponse
+from ..types.workflow_event_detail_response import WorkflowEventDetailResponse
 
 __all__ = ["DefendResource", "AsyncDefendResource"]
 
@@ -68,7 +72,7 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> DefendCreateResponse:
         """
         Use this endpoint to create a new guardrail workflow by specifying guardrail
         thresholds, an improvement action, and optional extended capabilities.
@@ -142,7 +146,7 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=DefendCreateResponse,
         )
 
     def retrieve_event(
@@ -156,7 +160,7 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowEventDetailResponse:
         """
         Use this endpoint to retrieve a specific event of a guardrail workflow
 
@@ -178,7 +182,7 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WorkflowEventDetailResponse,
         )
 
     def retrieve_workflow(
@@ -237,7 +241,7 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowEventResponse:
         """
         Use this endpoint to submit a model input and output pair to a workflow for
         evaluation
@@ -283,7 +287,7 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WorkflowEventResponse,
         )
 
     def update_workflow(
@@ -306,7 +310,7 @@ class DefendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> DefendUpdateResponse:
         """
         Use this endpoint to update an existing defend workflow if its details change.
 
@@ -377,7 +381,7 @@ class DefendResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=DefendUpdateResponse,
         )
 
 
@@ -420,7 +424,7 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> DefendCreateResponse:
         """
         Use this endpoint to create a new guardrail workflow by specifying guardrail
         thresholds, an improvement action, and optional extended capabilities.
@@ -494,7 +498,7 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=DefendCreateResponse,
         )
 
     async def retrieve_event(
@@ -508,7 +512,7 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowEventDetailResponse:
         """
         Use this endpoint to retrieve a specific event of a guardrail workflow
 
@@ -530,7 +534,7 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WorkflowEventDetailResponse,
         )
 
     async def retrieve_workflow(
@@ -591,7 +595,7 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowEventResponse:
         """
         Use this endpoint to submit a model input and output pair to a workflow for
         evaluation
@@ -637,7 +641,7 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WorkflowEventResponse,
         )
 
     async def update_workflow(
@@ -660,7 +664,7 @@ class AsyncDefendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> DefendUpdateResponse:
         """
         Use this endpoint to update an existing defend workflow if its details change.
 
@@ -731,7 +735,7 @@ class AsyncDefendResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=DefendUpdateResponse,
         )
 
 
