@@ -60,6 +60,7 @@ class DefendResource(SyncAPIResource):
         name: str,
         threshold_type: Literal["automatic", "custom"],
         automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
+        context_awareness: bool | Omit = omit,
         custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
         file_search: SequenceNotStr[str] | Omit = omit,
@@ -96,6 +97,8 @@ class DefendResource(SyncAPIResource):
               `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
               `comprehensive_safety`.
 
+          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+
           custom_hallucination_threshold_values: Mapping of guardrail metrics to floating point threshold values. Possible
               metrics are `correctness`, `completeness`, `instruction_adherence`,
               `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
@@ -126,6 +129,7 @@ class DefendResource(SyncAPIResource):
                     "name": name,
                     "threshold_type": threshold_type,
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
+                    "context_awareness": context_awareness,
                     "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
                     "file_search": file_search,
@@ -355,6 +359,7 @@ class AsyncDefendResource(AsyncAPIResource):
         name: str,
         threshold_type: Literal["automatic", "custom"],
         automatic_hallucination_tolerance_levels: Dict[str, Literal["low", "medium", "high"]] | Omit = omit,
+        context_awareness: bool | Omit = omit,
         custom_hallucination_threshold_values: Dict[str, float] | Omit = omit,
         description: str | Omit = omit,
         file_search: SequenceNotStr[str] | Omit = omit,
@@ -391,6 +396,8 @@ class AsyncDefendResource(AsyncAPIResource):
               `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
               `comprehensive_safety`.
 
+          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+
           custom_hallucination_threshold_values: Mapping of guardrail metrics to floating point threshold values. Possible
               metrics are `correctness`, `completeness`, `instruction_adherence`,
               `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
@@ -421,6 +428,7 @@ class AsyncDefendResource(AsyncAPIResource):
                     "name": name,
                     "threshold_type": threshold_type,
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
+                    "context_awareness": context_awareness,
                     "custom_hallucination_threshold_values": custom_hallucination_threshold_values,
                     "description": description,
                     "file_search": file_search,
