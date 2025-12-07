@@ -33,6 +33,9 @@ class MonitorCreateParams(TypedDict, total=False):
     name: Required[str]
     """Name of the new monitor."""
 
+    context_awareness: bool
+    """Whether to enable context for this workflow's evaluations. Defaults to false."""
+
     description: str
     """Description of the new monitor."""
 

@@ -41,6 +41,7 @@ class TestDefend:
             name="name",
             threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"foo": "low"},
+            context_awareness=True,
             custom_hallucination_threshold_values={"foo": 0},
             description="description",
             file_search=["string"],
@@ -200,6 +201,7 @@ class TestDefend:
         defend = client.defend.submit_event(
             workflow_id="workflow_id",
             model_input={
+                "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",
@@ -333,6 +335,7 @@ class TestAsyncDefend:
             name="name",
             threshold_type="automatic",
             automatic_hallucination_tolerance_levels={"foo": "low"},
+            context_awareness=True,
             custom_hallucination_threshold_values={"foo": 0},
             description="description",
             file_search=["string"],
@@ -492,6 +495,7 @@ class TestAsyncDefend:
         defend = await async_client.defend.submit_event(
             workflow_id="workflow_id",
             model_input={
+                "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
                 "user_prompt": "user_prompt",

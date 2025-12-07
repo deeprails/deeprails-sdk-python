@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
+from .._types import SequenceNotStr
+
 __all__ = ["MonitorSubmitEventParams", "ModelInput"]
 
 
@@ -33,6 +35,15 @@ class MonitorSubmitEventParams(TypedDict, total=False):
 
 
 class ModelInput(TypedDict, total=False):
+    context: SequenceNotStr[str]
+    """
+    Any structured information that directly relates to the model’s input and
+    expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+    student, facts or state passed through an agentic workflow, or other
+    domain-specific signals your system already knows and wants the model to
+    condition on.
+    """
+
     ground_truth: str
     """The ground truth for evaluating Ground Truth Adherence guardrail."""
 

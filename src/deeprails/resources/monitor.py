@@ -62,6 +62,7 @@ class MonitorResource(SyncAPIResource):
             ]
         ],
         name: str,
+        context_awareness: bool | Omit = omit,
         description: str | Omit = omit,
         file_search: SequenceNotStr[str] | Omit = omit,
         web_search: bool | Omit = omit,
@@ -84,6 +85,8 @@ class MonitorResource(SyncAPIResource):
 
           name: Name of the new monitor.
 
+          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+
           description: Description of the new monitor.
 
           file_search: An array of file IDs to search in the monitor's evaluations. Files must be
@@ -105,6 +108,7 @@ class MonitorResource(SyncAPIResource):
                 {
                     "guardrail_metrics": guardrail_metrics,
                     "name": name,
+                    "context_awareness": context_awareness,
                     "description": description,
                     "file_search": file_search,
                     "web_search": web_search,
@@ -342,6 +346,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             ]
         ],
         name: str,
+        context_awareness: bool | Omit = omit,
         description: str | Omit = omit,
         file_search: SequenceNotStr[str] | Omit = omit,
         web_search: bool | Omit = omit,
@@ -364,6 +369,8 @@ class AsyncMonitorResource(AsyncAPIResource):
 
           name: Name of the new monitor.
 
+          context_awareness: Whether to enable context for this workflow's evaluations. Defaults to false.
+
           description: Description of the new monitor.
 
           file_search: An array of file IDs to search in the monitor's evaluations. Files must be
@@ -385,6 +392,7 @@ class AsyncMonitorResource(AsyncAPIResource):
                 {
                     "guardrail_metrics": guardrail_metrics,
                     "name": name,
+                    "context_awareness": context_awareness,
                     "description": description,
                     "file_search": file_search,
                     "web_search": web_search,
