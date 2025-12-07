@@ -19,6 +19,11 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.monitor_event_response import MonitorEventResponse
+from ..types.monitor_create_response import MonitorCreateResponse
+from ..types.monitor_detail_response import MonitorDetailResponse
+from ..types.monitor_update_response import MonitorUpdateResponse
+from ..types.monitor_event_detail_response import MonitorEventDetailResponse
 
 __all__ = ["MonitorResource", "AsyncMonitorResource"]
 
@@ -67,7 +72,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorCreateResponse:
         """
         Use this endpoint to create a new monitor to evaluate model inputs and outputs
         using guardrails
@@ -118,7 +123,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorCreateResponse,
         )
 
     def retrieve(
@@ -132,7 +137,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorDetailResponse:
         """
         Use this endpoint to retrieve the details and evaluations associated with a
         specific monitor
@@ -160,7 +165,7 @@ class MonitorResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"limit": limit}, monitor_retrieve_params.MonitorRetrieveParams),
             ),
-            cast_to=object,
+            cast_to=MonitorDetailResponse,
         )
 
     def update(
@@ -189,7 +194,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorUpdateResponse:
         """
         Use this endpoint to update the name, status, and/or other details of an
         existing monitor.
@@ -236,7 +241,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorUpdateResponse,
         )
 
     def retrieve_event(
@@ -250,7 +255,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorEventDetailResponse:
         """
         Use this endpoint to retrieve the details of a specific monitor event
 
@@ -272,7 +277,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorEventDetailResponse,
         )
 
     def submit_event(
@@ -289,7 +294,7 @@ class MonitorResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorEventResponse:
         """
         Use this endpoint to submit a model input and output pair to a monitor for
         evaluation
@@ -332,7 +337,7 @@ class MonitorResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorEventResponse,
         )
 
 
@@ -380,7 +385,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorCreateResponse:
         """
         Use this endpoint to create a new monitor to evaluate model inputs and outputs
         using guardrails
@@ -431,7 +436,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorCreateResponse,
         )
 
     async def retrieve(
@@ -445,7 +450,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorDetailResponse:
         """
         Use this endpoint to retrieve the details and evaluations associated with a
         specific monitor
@@ -473,7 +478,7 @@ class AsyncMonitorResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform({"limit": limit}, monitor_retrieve_params.MonitorRetrieveParams),
             ),
-            cast_to=object,
+            cast_to=MonitorDetailResponse,
         )
 
     async def update(
@@ -502,7 +507,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorUpdateResponse:
         """
         Use this endpoint to update the name, status, and/or other details of an
         existing monitor.
@@ -549,7 +554,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorUpdateResponse,
         )
 
     async def retrieve_event(
@@ -563,7 +568,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorEventDetailResponse:
         """
         Use this endpoint to retrieve the details of a specific monitor event
 
@@ -585,7 +590,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorEventDetailResponse,
         )
 
     async def submit_event(
@@ -602,7 +607,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> MonitorEventResponse:
         """
         Use this endpoint to submit a model input and output pair to a monitor for
         evaluation
@@ -645,7 +650,7 @@ class AsyncMonitorResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MonitorEventResponse,
         )
 
 
