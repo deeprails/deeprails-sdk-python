@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.22.0 (2025-12-07)
+
+Full Changelog: [v1.21.0...v1.22.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.21.0...v1.22.0)
+
+### Features
+
+* **api:** Expand update endpoints ([9fd3448](https://github.com/deeprails/deeprails-sdk-python/commit/9fd3448b79013177b38d443ba67c553a44c779ae))
+* **api:** manual updates ([a98dc53](https://github.com/deeprails/deeprails-sdk-python/commit/a98dc538b121e2a74631e7eaba78c89e9d206a2f))
+
 ## 1.21.0 (2025-12-07)
 
 Full Changelog: [v1.20.0...v1.21.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.20.0...v1.21.0)
