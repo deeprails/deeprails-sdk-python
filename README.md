@@ -30,7 +30,7 @@ client = DeepRails(
     api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
 )
 
-defend_create_response = client.defend.create_workflow(
+response = client.defend.create_workflow(
     improvement_action="fixit",
     name="Push Alert Workflow",
     threshold_type="custom",
@@ -40,7 +40,6 @@ defend_create_response = client.defend.create_workflow(
     },
     web_search=True,
 )
-print(defend_create_response.workflow_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -63,7 +62,7 @@ client = AsyncDeepRails(
 
 
 async def main() -> None:
-    defend_create_response = await client.defend.create_workflow(
+    response = await client.defend.create_workflow(
         improvement_action="fixit",
         name="Push Alert Workflow",
         threshold_type="custom",
@@ -73,7 +72,6 @@ async def main() -> None:
         },
         web_search=True,
     )
-    print(defend_create_response.workflow_id)
 
 
 asyncio.run(main())
@@ -106,7 +104,7 @@ async def main() -> None:
         api_key=os.environ.get("DEEPRAILS_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        defend_create_response = await client.defend.create_workflow(
+        response = await client.defend.create_workflow(
             improvement_action="fixit",
             name="Push Alert Workflow",
             threshold_type="custom",
@@ -116,7 +114,6 @@ async def main() -> None:
             },
             web_search=True,
         )
-        print(defend_create_response.workflow_id)
 
 
 asyncio.run(main())
@@ -140,14 +137,14 @@ from deeprails import DeepRails
 
 client = DeepRails()
 
-workflow_event_response = client.defend.submit_event(
+response = client.defend.submit_event(
     workflow_id="workflow_id",
     model_input={"user_prompt": "user_prompt"},
     model_output="model_output",
     model_used="model_used",
     run_mode="precision_plus",
 )
-print(workflow_event_response.model_input)
+print(response.model_input)
 ```
 
 ## Handling errors
@@ -313,7 +310,7 @@ response = client.defend.with_raw_response.create_workflow(
 print(response.headers.get('X-My-Header'))
 
 defend = response.parse()  # get the object that `defend.create_workflow()` would have returned
-print(defend.workflow_id)
+print(defend)
 ```
 
 These methods return an [`APIResponse`](https://github.com/deeprails/deeprails-sdk-python/tree/main/src/deeprails/_response.py) object.
