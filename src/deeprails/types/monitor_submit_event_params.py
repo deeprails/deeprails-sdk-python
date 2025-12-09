@@ -35,6 +35,11 @@ class MonitorSubmitEventParams(TypedDict, total=False):
 
 
 class ModelInput(TypedDict, total=False):
+    """A dictionary of inputs sent to the LLM to generate output.
+
+    The dictionary must contain at least a `user_prompt` field or a `system_prompt` field. For ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
+    """
+
     context: SequenceNotStr[str]
     """
     Any structured information that directly relates to the model’s input and
