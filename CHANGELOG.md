@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.22.1 (2025-12-09)
+
+Full Changelog: [v1.22.0...v1.22.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.22.0...v1.22.1)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([6bafa1d](https://github.com/deeprails/deeprails-sdk-python/commit/6bafa1d574bcd57a7c7690eba5ca458dc1d258e7))
+
+
+### Chores
+
+* add missing docstrings ([3d9f4f7](https://github.com/deeprails/deeprails-sdk-python/commit/3d9f4f7a0b482b3435c6c101b0595c40517e393a))
+
 ## 1.22.0 (2025-12-07)
 
 Full Changelog: [v1.21.0...v1.22.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.21.0...v1.22.0)
