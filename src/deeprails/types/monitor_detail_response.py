@@ -22,6 +22,9 @@ class EvaluationModelInput(BaseModel):
     The dictionary must contain at least a `user_prompt` field or a `system_prompt` field. For ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
     """
 
+    user_prompt: str
+    """The user prompt used to generate the output."""
+
     context: Optional[List[str]] = None
     """
     Any structured information that directly relates to the model’s input and
@@ -36,9 +39,6 @@ class EvaluationModelInput(BaseModel):
 
     system_prompt: Optional[str] = None
     """The system prompt used to generate the output."""
-
-    user_prompt: Optional[str] = None
-    """The user prompt used to generate the output."""
 
 
 class Evaluation(BaseModel):

@@ -76,8 +76,17 @@ class WorkflowEventDetailResponse(BaseModel):
     improvement_action: Literal["regen", "fixit", "do_nothing"]
     """Type of improvement action used to improve the event."""
 
-    improvement_tool_status: Optional[Literal["improved", "failed on max retries", "improvement_required"]] = None
-    """Status of the improvement tool used to improve the event."""
+    improvement_tool_status: Optional[
+        Literal["improved", "improvement_failed", "no_improvement_required", "improvement_required"]
+    ] = None
+    """Status of the improvement tool used to improve the event.
+
+    `improvement_required` indicates that the evaluation is complete and the
+    improvement action is needed but is not taking place. `improved` and
+    `improvement_failed` indicate when the improvement action concludes,
+    successfully and unsuccessfully, respectively. `no_improvement_required` means
+    that the first evaluation passed all its metrics!
+    """
 
     status: Literal["In Progress", "Completed"]
     """Status of the event."""
