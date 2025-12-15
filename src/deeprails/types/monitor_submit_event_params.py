@@ -24,17 +24,25 @@ class MonitorSubmitEventParams(TypedDict, total=False):
     nametag: str
     """An optional, user-defined tag for the event."""
 
-    run_mode: Literal["precision_plus", "precision", "smart", "economy"]
+    run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"]
     """Run mode for the monitor event.
 
     The run mode allows the user to optimize for speed, accuracy, and cost by
     determining which models are used to evaluate the event. Available run modes
-    include `precision_plus`, `precision`, `smart`, and `economy`. Defaults to
-    `smart`.
+    include `precision_plus_codex`, `precision_plus`, `precision`, `smart`, and
+    `economy`. Defaults to `smart`.
     """
 
 
 class ModelInput(TypedDict, total=False):
+    """A dictionary of inputs sent to the LLM to generate output.
+
+    The dictionary must contain at least a `user_prompt` field or a `system_prompt` field. For ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
+    """
+
+    user_prompt: Required[str]
+    """The user prompt used to generate the output."""
+
     context: SequenceNotStr[str]
     """
     Any structured information that directly relates to the model’s input and
@@ -49,6 +57,3 @@ class ModelInput(TypedDict, total=False):
 
     system_prompt: str
     """The system prompt used to generate the output."""
-
-    user_prompt: str
-    """The user prompt used to generate the output."""

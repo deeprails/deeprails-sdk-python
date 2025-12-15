@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.23.0 (2025-12-15)
+
+Full Changelog: [v1.22.0...v1.23.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.22.0...v1.23.0)
+
+### Features
+
+* **api:** add precision plus codex ([204731c](https://github.com/deeprails/deeprails-sdk-python/commit/204731c7e9e28d68ff45788fb4e266e2d3616d1a))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([6bafa1d](https://github.com/deeprails/deeprails-sdk-python/commit/6bafa1d574bcd57a7c7690eba5ca458dc1d258e7))
+
+
+### Chores
+
+* add missing docstrings ([3d9f4f7](https://github.com/deeprails/deeprails-sdk-python/commit/3d9f4f7a0b482b3435c6c101b0595c40517e393a))
+
 ## 1.22.0 (2025-12-07)
 
 Full Changelog: [v1.21.0...v1.22.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.21.0...v1.22.0)

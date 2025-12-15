@@ -17,6 +17,14 @@ class Capability(BaseModel):
 
 
 class EvaluationModelInput(BaseModel):
+    """A dictionary of inputs sent to the LLM to generate output.
+
+    The dictionary must contain at least a `user_prompt` field or a `system_prompt` field. For ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
+    """
+
+    user_prompt: str
+    """The user prompt used to generate the output."""
+
     context: Optional[List[str]] = None
     """
     Any structured information that directly relates to the model’s input and
@@ -31,9 +39,6 @@ class EvaluationModelInput(BaseModel):
 
     system_prompt: Optional[str] = None
     """The system prompt used to generate the output."""
-
-    user_prompt: Optional[str] = None
-    """The user prompt used to generate the output."""
 
 
 class Evaluation(BaseModel):
@@ -113,6 +118,10 @@ class File(BaseModel):
 
 
 class Stats(BaseModel):
+    """
+    Contains five fields used for stats of this monitor: total evaluations, completed evaluations, failed evaluations, queued evaluations, and in progress evaluations.
+    """
+
     completed_evaluations: Optional[int] = None
     """Number of evaluations that completed successfully."""
 
