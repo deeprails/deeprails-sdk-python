@@ -287,7 +287,7 @@ class MonitorResource(SyncAPIResource):
         model_input: monitor_submit_event_params.ModelInput,
         model_output: str,
         nametag: str | Omit = omit,
-        run_mode: Literal["precision_plus", "precision", "smart", "economy"] | Omit = omit,
+        run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -310,8 +310,8 @@ class MonitorResource(SyncAPIResource):
 
           run_mode: Run mode for the monitor event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
-              event. Available run modes include `precision_plus`, `precision`, `smart`, and
-              `economy`. Defaults to `smart`.
+              event. Available run modes include `precision_plus_codex`, `precision_plus`,
+              `precision`, `smart`, and `economy`. Defaults to `smart`.
 
           extra_headers: Send extra headers
 
@@ -600,7 +600,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         model_input: monitor_submit_event_params.ModelInput,
         model_output: str,
         nametag: str | Omit = omit,
-        run_mode: Literal["precision_plus", "precision", "smart", "economy"] | Omit = omit,
+        run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -623,8 +623,8 @@ class AsyncMonitorResource(AsyncAPIResource):
 
           run_mode: Run mode for the monitor event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
-              event. Available run modes include `precision_plus`, `precision`, `smart`, and
-              `economy`. Defaults to `smart`.
+              event. Available run modes include `precision_plus_codex`, `precision_plus`,
+              `precision`, `smart`, and `economy`. Defaults to `smart`.
 
           extra_headers: Send extra headers
 

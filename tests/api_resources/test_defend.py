@@ -190,10 +190,10 @@ class TestDefend:
     def test_method_submit_event(self, client: DeepRails) -> None:
         defend = client.defend.submit_event(
             workflow_id="workflow_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
 
@@ -203,14 +203,14 @@ class TestDefend:
         defend = client.defend.submit_event(
             workflow_id="workflow_id",
             model_input={
+                "user_prompt": "user_prompt",
                 "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
-                "user_prompt": "user_prompt",
             },
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
             nametag="nametag",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
@@ -220,10 +220,10 @@ class TestDefend:
     def test_raw_response_submit_event(self, client: DeepRails) -> None:
         response = client.defend.with_raw_response.submit_event(
             workflow_id="workflow_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         )
 
         assert response.is_closed is True
@@ -236,10 +236,10 @@ class TestDefend:
     def test_streaming_response_submit_event(self, client: DeepRails) -> None:
         with client.defend.with_streaming_response.submit_event(
             workflow_id="workflow_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -255,10 +255,10 @@ class TestDefend:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             client.defend.with_raw_response.submit_event(
                 workflow_id="",
-                model_input={},
+                model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
                 model_used="model_used",
-                run_mode="precision_plus",
+                run_mode="precision_plus_codex",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -494,10 +494,10 @@ class TestAsyncDefend:
     async def test_method_submit_event(self, async_client: AsyncDeepRails) -> None:
         defend = await async_client.defend.submit_event(
             workflow_id="workflow_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
 
@@ -507,14 +507,14 @@ class TestAsyncDefend:
         defend = await async_client.defend.submit_event(
             workflow_id="workflow_id",
             model_input={
+                "user_prompt": "user_prompt",
                 "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
-                "user_prompt": "user_prompt",
             },
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
             nametag="nametag",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
@@ -524,10 +524,10 @@ class TestAsyncDefend:
     async def test_raw_response_submit_event(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.defend.with_raw_response.submit_event(
             workflow_id="workflow_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         )
 
         assert response.is_closed is True
@@ -540,10 +540,10 @@ class TestAsyncDefend:
     async def test_streaming_response_submit_event(self, async_client: AsyncDeepRails) -> None:
         async with async_client.defend.with_streaming_response.submit_event(
             workflow_id="workflow_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -559,10 +559,10 @@ class TestAsyncDefend:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             await async_client.defend.with_raw_response.submit_event(
                 workflow_id="",
-                model_input={},
+                model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
                 model_used="model_used",
-                run_mode="precision_plus",
+                run_mode="precision_plus_codex",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

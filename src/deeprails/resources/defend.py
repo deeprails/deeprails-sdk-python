@@ -233,7 +233,7 @@ class DefendResource(SyncAPIResource):
         model_input: defend_submit_event_params.ModelInput,
         model_output: str,
         model_used: str,
-        run_mode: Literal["precision_plus", "precision", "smart", "economy"],
+        run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"],
         nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -257,8 +257,8 @@ class DefendResource(SyncAPIResource):
 
           run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
-              event. Available run modes include `precision_plus`, `precision`, `smart`, and
-              `economy`. Defaults to `smart`.
+              event. Available run modes include `precision_plus_codex`, `precision_plus`,
+              `precision`, `smart`, and `economy`. Defaults to `smart`.
 
           nametag: An optional, user-defined tag for the event.
 
@@ -587,7 +587,7 @@ class AsyncDefendResource(AsyncAPIResource):
         model_input: defend_submit_event_params.ModelInput,
         model_output: str,
         model_used: str,
-        run_mode: Literal["precision_plus", "precision", "smart", "economy"],
+        run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"],
         nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -611,8 +611,8 @@ class AsyncDefendResource(AsyncAPIResource):
 
           run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
-              event. Available run modes include `precision_plus`, `precision`, `smart`, and
-              `economy`. Defaults to `smart`.
+              event. Available run modes include `precision_plus_codex`, `precision_plus`,
+              `precision`, `smart`, and `economy`. Defaults to `smart`.
 
           nametag: An optional, user-defined tag for the event.
 

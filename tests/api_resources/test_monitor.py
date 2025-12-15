@@ -237,7 +237,7 @@ class TestMonitor:
     def test_method_submit_event(self, client: DeepRails) -> None:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
         )
         assert_matches_type(MonitorEventResponse, monitor, path=["response"])
@@ -248,14 +248,14 @@ class TestMonitor:
         monitor = client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={
+                "user_prompt": "user_prompt",
                 "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
-                "user_prompt": "user_prompt",
             },
             model_output="model_output",
             nametag="nametag",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         )
         assert_matches_type(MonitorEventResponse, monitor, path=["response"])
 
@@ -264,7 +264,7 @@ class TestMonitor:
     def test_raw_response_submit_event(self, client: DeepRails) -> None:
         response = client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
         )
 
@@ -278,7 +278,7 @@ class TestMonitor:
     def test_streaming_response_submit_event(self, client: DeepRails) -> None:
         with client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
         ) as response:
             assert not response.is_closed
@@ -295,7 +295,7 @@ class TestMonitor:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             client.monitor.with_raw_response.submit_event(
                 monitor_id="",
-                model_input={},
+                model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
             )
 
@@ -519,7 +519,7 @@ class TestAsyncMonitor:
     async def test_method_submit_event(self, async_client: AsyncDeepRails) -> None:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
         )
         assert_matches_type(MonitorEventResponse, monitor, path=["response"])
@@ -530,14 +530,14 @@ class TestAsyncMonitor:
         monitor = await async_client.monitor.submit_event(
             monitor_id="monitor_id",
             model_input={
+                "user_prompt": "user_prompt",
                 "context": ["string"],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
-                "user_prompt": "user_prompt",
             },
             model_output="model_output",
             nametag="nametag",
-            run_mode="precision_plus",
+            run_mode="precision_plus_codex",
         )
         assert_matches_type(MonitorEventResponse, monitor, path=["response"])
 
@@ -546,7 +546,7 @@ class TestAsyncMonitor:
     async def test_raw_response_submit_event(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.monitor.with_raw_response.submit_event(
             monitor_id="monitor_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
         )
 
@@ -560,7 +560,7 @@ class TestAsyncMonitor:
     async def test_streaming_response_submit_event(self, async_client: AsyncDeepRails) -> None:
         async with async_client.monitor.with_streaming_response.submit_event(
             monitor_id="monitor_id",
-            model_input={},
+            model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
         ) as response:
             assert not response.is_closed
@@ -577,6 +577,6 @@ class TestAsyncMonitor:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `monitor_id` but received ''"):
             await async_client.monitor.with_raw_response.submit_event(
                 monitor_id="",
-                model_input={},
+                model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
             )
