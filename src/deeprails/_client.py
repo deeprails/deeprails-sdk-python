@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import files, defend, monitor
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, DeepRailsError
 from ._base_client import (
@@ -29,6 +29,12 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+
+if TYPE_CHECKING:
+    from .resources import files, defend, monitor
+    from .resources.files import FilesResource, AsyncFilesResource
+    from .resources.defend import DefendResource, AsyncDefendResource
+    from .resources.monitor import MonitorResource, AsyncMonitorResource
 
 __all__ = [
     "Timeout",
@@ -43,12 +49,6 @@ __all__ = [
 
 
 class DeepRails(SyncAPIClient):
-    defend: defend.DefendResource
-    monitor: monitor.MonitorResource
-    files: files.FilesResource
-    with_raw_response: DeepRailsWithRawResponse
-    with_streaming_response: DeepRailsWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -103,11 +103,31 @@ class DeepRails(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.defend = defend.DefendResource(self)
-        self.monitor = monitor.MonitorResource(self)
-        self.files = files.FilesResource(self)
-        self.with_raw_response = DeepRailsWithRawResponse(self)
-        self.with_streaming_response = DeepRailsWithStreamedResponse(self)
+    @cached_property
+    def defend(self) -> DefendResource:
+        from .resources.defend import DefendResource
+
+        return DefendResource(self)
+
+    @cached_property
+    def monitor(self) -> MonitorResource:
+        from .resources.monitor import MonitorResource
+
+        return MonitorResource(self)
+
+    @cached_property
+    def files(self) -> FilesResource:
+        from .resources.files import FilesResource
+
+        return FilesResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> DeepRailsWithRawResponse:
+        return DeepRailsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DeepRailsWithStreamedResponse:
+        return DeepRailsWithStreamedResponse(self)
 
     @property
     @override
@@ -215,12 +235,6 @@ class DeepRails(SyncAPIClient):
 
 
 class AsyncDeepRails(AsyncAPIClient):
-    defend: defend.AsyncDefendResource
-    monitor: monitor.AsyncMonitorResource
-    files: files.AsyncFilesResource
-    with_raw_response: AsyncDeepRailsWithRawResponse
-    with_streaming_response: AsyncDeepRailsWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -275,11 +289,31 @@ class AsyncDeepRails(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.defend = defend.AsyncDefendResource(self)
-        self.monitor = monitor.AsyncMonitorResource(self)
-        self.files = files.AsyncFilesResource(self)
-        self.with_raw_response = AsyncDeepRailsWithRawResponse(self)
-        self.with_streaming_response = AsyncDeepRailsWithStreamedResponse(self)
+    @cached_property
+    def defend(self) -> AsyncDefendResource:
+        from .resources.defend import AsyncDefendResource
+
+        return AsyncDefendResource(self)
+
+    @cached_property
+    def monitor(self) -> AsyncMonitorResource:
+        from .resources.monitor import AsyncMonitorResource
+
+        return AsyncMonitorResource(self)
+
+    @cached_property
+    def files(self) -> AsyncFilesResource:
+        from .resources.files import AsyncFilesResource
+
+        return AsyncFilesResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncDeepRailsWithRawResponse:
+        return AsyncDeepRailsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncDeepRailsWithStreamedResponse:
+        return AsyncDeepRailsWithStreamedResponse(self)
 
     @property
     @override
@@ -387,31 +421,103 @@ class AsyncDeepRails(AsyncAPIClient):
 
 
 class DeepRailsWithRawResponse:
+    _client: DeepRails
+
     def __init__(self, client: DeepRails) -> None:
-        self.defend = defend.DefendResourceWithRawResponse(client.defend)
-        self.monitor = monitor.MonitorResourceWithRawResponse(client.monitor)
-        self.files = files.FilesResourceWithRawResponse(client.files)
+        self._client = client
+
+    @cached_property
+    def defend(self) -> defend.DefendResourceWithRawResponse:
+        from .resources.defend import DefendResourceWithRawResponse
+
+        return DefendResourceWithRawResponse(self._client.defend)
+
+    @cached_property
+    def monitor(self) -> monitor.MonitorResourceWithRawResponse:
+        from .resources.monitor import MonitorResourceWithRawResponse
+
+        return MonitorResourceWithRawResponse(self._client.monitor)
+
+    @cached_property
+    def files(self) -> files.FilesResourceWithRawResponse:
+        from .resources.files import FilesResourceWithRawResponse
+
+        return FilesResourceWithRawResponse(self._client.files)
 
 
 class AsyncDeepRailsWithRawResponse:
+    _client: AsyncDeepRails
+
     def __init__(self, client: AsyncDeepRails) -> None:
-        self.defend = defend.AsyncDefendResourceWithRawResponse(client.defend)
-        self.monitor = monitor.AsyncMonitorResourceWithRawResponse(client.monitor)
-        self.files = files.AsyncFilesResourceWithRawResponse(client.files)
+        self._client = client
+
+    @cached_property
+    def defend(self) -> defend.AsyncDefendResourceWithRawResponse:
+        from .resources.defend import AsyncDefendResourceWithRawResponse
+
+        return AsyncDefendResourceWithRawResponse(self._client.defend)
+
+    @cached_property
+    def monitor(self) -> monitor.AsyncMonitorResourceWithRawResponse:
+        from .resources.monitor import AsyncMonitorResourceWithRawResponse
+
+        return AsyncMonitorResourceWithRawResponse(self._client.monitor)
+
+    @cached_property
+    def files(self) -> files.AsyncFilesResourceWithRawResponse:
+        from .resources.files import AsyncFilesResourceWithRawResponse
+
+        return AsyncFilesResourceWithRawResponse(self._client.files)
 
 
 class DeepRailsWithStreamedResponse:
+    _client: DeepRails
+
     def __init__(self, client: DeepRails) -> None:
-        self.defend = defend.DefendResourceWithStreamingResponse(client.defend)
-        self.monitor = monitor.MonitorResourceWithStreamingResponse(client.monitor)
-        self.files = files.FilesResourceWithStreamingResponse(client.files)
+        self._client = client
+
+    @cached_property
+    def defend(self) -> defend.DefendResourceWithStreamingResponse:
+        from .resources.defend import DefendResourceWithStreamingResponse
+
+        return DefendResourceWithStreamingResponse(self._client.defend)
+
+    @cached_property
+    def monitor(self) -> monitor.MonitorResourceWithStreamingResponse:
+        from .resources.monitor import MonitorResourceWithStreamingResponse
+
+        return MonitorResourceWithStreamingResponse(self._client.monitor)
+
+    @cached_property
+    def files(self) -> files.FilesResourceWithStreamingResponse:
+        from .resources.files import FilesResourceWithStreamingResponse
+
+        return FilesResourceWithStreamingResponse(self._client.files)
 
 
 class AsyncDeepRailsWithStreamedResponse:
+    _client: AsyncDeepRails
+
     def __init__(self, client: AsyncDeepRails) -> None:
-        self.defend = defend.AsyncDefendResourceWithStreamingResponse(client.defend)
-        self.monitor = monitor.AsyncMonitorResourceWithStreamingResponse(client.monitor)
-        self.files = files.AsyncFilesResourceWithStreamingResponse(client.files)
+        self._client = client
+
+    @cached_property
+    def defend(self) -> defend.AsyncDefendResourceWithStreamingResponse:
+        from .resources.defend import AsyncDefendResourceWithStreamingResponse
+
+        return AsyncDefendResourceWithStreamingResponse(self._client.defend)
+
+    @cached_property
+    def monitor(self) -> monitor.AsyncMonitorResourceWithStreamingResponse:
+        from .resources.monitor import AsyncMonitorResourceWithStreamingResponse
+
+        return AsyncMonitorResourceWithStreamingResponse(self._client.monitor)
+
+    @cached_property
+    def files(self) -> files.AsyncFilesResourceWithStreamingResponse:
+        from .resources.files import AsyncFilesResourceWithStreamingResponse
+
+        return AsyncFilesResourceWithStreamingResponse(self._client.files)
 
 
 Client = DeepRails
