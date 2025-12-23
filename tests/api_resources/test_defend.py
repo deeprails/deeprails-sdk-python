@@ -202,7 +202,12 @@ class TestDefend:
             workflow_id="workflow_id",
             model_input={
                 "user_prompt": "user_prompt",
-                "context": ["string"],
+                "context": [
+                    {
+                        "content": "content",
+                        "role": "user",
+                    }
+                ],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
             },
@@ -504,7 +509,12 @@ class TestAsyncDefend:
             workflow_id="workflow_id",
             model_input={
                 "user_prompt": "user_prompt",
-                "context": ["string"],
+                "context": [
+                    {
+                        "content": "content",
+                        "role": "user",
+                    }
+                ],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
             },

@@ -2,20 +2,18 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-from .._types import SequenceNotStr
-
-__all__ = ["DefendSubmitEventParams", "ModelInput"]
+__all__ = ["DefendSubmitEventParams", "ModelInput", "ModelInputContext"]
 
 
 class DefendSubmitEventParams(TypedDict, total=False):
     model_input: Required[ModelInput]
     """A dictionary of inputs sent to the LLM to generate output.
 
-    The dictionary must contain at least a `user_prompt` field or a `system_prompt`
-    field. For the ground_truth_adherence guardrail metric, `ground_truth` should be
-    provided.
+    The dictionary must contain a `user_prompt` field. For the
+    ground_truth_adherence guardrail metric, `ground_truth` should be provided.
     """
 
     model_output: Required[str]
@@ -37,16 +35,24 @@ class DefendSubmitEventParams(TypedDict, total=False):
     """An optional, user-defined tag for the event."""
 
 
+class ModelInputContext(TypedDict, total=False):
+    content: str
+    """The content of the message."""
+
+    role: str
+    """The role of the speaker."""
+
+
 class ModelInput(TypedDict, total=False):
     """A dictionary of inputs sent to the LLM to generate output.
 
-    The dictionary must contain at least a `user_prompt` field or a `system_prompt` field. For the ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
+    The dictionary must contain a `user_prompt` field. For the ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
     """
 
     user_prompt: Required[str]
     """The user prompt used to generate the output."""
 
-    context: SequenceNotStr[str]
+    context: Iterable[ModelInputContext]
     """
     Any structured information that directly relates to the model’s input and
     expected output—e.g., the recent turn-by-turn history between an AI tutor and a

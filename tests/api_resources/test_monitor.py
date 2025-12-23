@@ -249,7 +249,12 @@ class TestMonitor:
             monitor_id="monitor_id",
             model_input={
                 "user_prompt": "user_prompt",
-                "context": ["string"],
+                "context": [
+                    {
+                        "content": "content",
+                        "role": "user",
+                    }
+                ],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
             },
@@ -531,7 +536,12 @@ class TestAsyncMonitor:
             monitor_id="monitor_id",
             model_input={
                 "user_prompt": "user_prompt",
-                "context": ["string"],
+                "context": [
+                    {
+                        "content": "content",
+                        "role": "user",
+                    }
+                ],
                 "ground_truth": "ground_truth",
                 "system_prompt": "system_prompt",
             },
