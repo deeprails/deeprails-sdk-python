@@ -16,6 +16,12 @@ class Capability(BaseModel):
 
 
 class EventEvaluation(BaseModel):
+    analysis_of_failures: Optional[str] = None
+    """
+    Analysis of the failures of the model_output according to the guardrail metrics
+    evaluated.
+    """
+
     attempt: Optional[str] = None
     """The attempt number or identifier for this evaluation."""
 
@@ -37,6 +43,21 @@ class EventEvaluation(BaseModel):
     guardrail_metrics: Optional[List[str]] = None
     """An array of guardrail metrics evaluated."""
 
+    improvement_tool_status: Optional[
+        Literal["improved", "improvement_failed", "no_improvement_required", "improvement_required"]
+    ] = None
+    """Status of the improvement tool used to improve the event.
+
+    `improvement_required` indicates that the evaluation is complete and the
+    improvement action is needed but is not taking place. `improved` and
+    `improvement_failed` indicate when the improvement action concludes,
+    successfully and unsuccessfully, respectively. `no_improvement_required` means
+    that the first evaluation passed all its metrics!
+    """
+
+    key_improvements: Optional[List[str]] = None
+    """A list of key improvements made to the model_output to address the failures."""
+
     api_model_input: Optional[Dict[str, object]] = FieldInfo(alias="model_input", default=None)
     """The model input used for the evaluation."""
 
@@ -57,6 +78,9 @@ class EventEvaluation(BaseModel):
 
 
 class Event(BaseModel):
+    billing_request_id: Optional[str] = None
+    """The ID of the billing request for the event."""
+
     evaluations: Optional[List[EventEvaluation]] = None
     """An array of evaluations for this event."""
 
@@ -78,6 +102,9 @@ class Event(BaseModel):
     that the first evaluation passed all its metrics!
     """
 
+    status: Optional[Literal["completed", "failed", "in_progress"]] = None
+    """Status of the event."""
+
 
 class File(BaseModel):
     file_id: Optional[str] = None
@@ -85,6 +112,10 @@ class File(BaseModel):
     file_name: Optional[str] = None
 
     file_size: Optional[int] = None
+
+    presigned_url: Optional[str] = None
+
+    presigned_url_expires_at: Optional[datetime] = None
 
 
 class Stats(BaseModel):

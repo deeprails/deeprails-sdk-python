@@ -9,6 +9,9 @@ __all__ = ["WorkflowEventResponse"]
 
 
 class WorkflowEventResponse(BaseModel):
+    billing_request_id: str
+    """The ID of the billing request for the event."""
+
     created_at: datetime
     """The time the event was created in UTC."""
 
