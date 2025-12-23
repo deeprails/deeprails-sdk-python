@@ -12,6 +12,8 @@ __all__ = ["WorkflowEventDetailResponse", "EvaluationHistory", "Capability", "Fi
 
 
 class EvaluationHistory(BaseModel):
+    analysis_of_failures: Optional[str] = None
+
     attempt: Optional[str] = None
 
     created_at: Optional[datetime] = None
@@ -26,11 +28,15 @@ class EvaluationHistory(BaseModel):
 
     guardrail_metrics: Optional[List[str]] = None
 
+    improvement_tool_status: Optional[
+        Literal["improved", "improvement_failed", "no_improvement_required", "improvement_required"]
+    ] = None
+
+    key_improvements: Optional[List[str]] = None
+
     api_model_input: Optional[Dict[str, object]] = FieldInfo(alias="model_input", default=None)
 
     api_model_output: Optional[str] = FieldInfo(alias="model_output", default=None)
-
-    modified_at: Optional[datetime] = None
 
     nametag: Optional[str] = None
 
@@ -50,8 +56,14 @@ class File(BaseModel):
 
     file_size: Optional[int] = None
 
+    presigned_url: Optional[str] = None
+
+    presigned_url_expires_at: Optional[datetime] = None
+
 
 class WorkflowEventDetailResponse(BaseModel):
+    analysis_of_failures: List[str]
+
     evaluation_history: List[EvaluationHistory]
     """History of evaluations for the event."""
 
@@ -88,6 +100,8 @@ class WorkflowEventDetailResponse(BaseModel):
     that the first evaluation passed all its metrics!
     """
 
+    key_improvements: List[object]
+
     status: Literal["In Progress", "Completed"]
     """Status of the event."""
 
@@ -120,4 +134,10 @@ class WorkflowEventDetailResponse(BaseModel):
     """List of files available to the event, if any.
 
     Will only be present if `file_search` is enabled.
+    """
+
+    max_improvement_attempts: Optional[int] = None
+    """
+    The maximum number of improvement attempts to be applied to one event before it
+    is considered failed.
     """

@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.24.0 (2025-12-23)
+
+Full Changelog: [v1.23.0...v1.24.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.23.0...v1.24.0)
+
+### Features
+
+* **api:** add key improvements and analysis of failures ([1205e40](https://github.com/deeprails/deeprails-sdk-python/commit/1205e406077d94a1608e1274879fb9ebd8f80729))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([1d3be39](https://github.com/deeprails/deeprails-sdk-python/commit/1d3be39067d612a9ad19c3f0252fcfad200232a5))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([288d8cb](https://github.com/deeprails/deeprails-sdk-python/commit/288d8cb1eea6162ca1ed8bd7a1d9d5d26a35defc))
+* **internal:** add missing files argument to base client ([c54fdad](https://github.com/deeprails/deeprails-sdk-python/commit/c54fdadbcbe79e17853ee1c14b1825765bb84a6b))
+* speedup initial import ([ca49036](https://github.com/deeprails/deeprails-sdk-python/commit/ca49036945d7e7fa6b8114adfa7bbf9d55df53ba))
+
 ## 1.23.0 (2025-12-15)
 
 Full Changelog: [v1.22.0...v1.23.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.22.0...v1.23.0)

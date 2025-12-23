@@ -8,7 +8,15 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["MonitorDetailResponse", "Capability", "Evaluation", "EvaluationModelInput", "File", "Stats"]
+__all__ = [
+    "MonitorDetailResponse",
+    "Capability",
+    "Evaluation",
+    "EvaluationModelInput",
+    "EvaluationModelInputContext",
+    "File",
+    "Stats",
+]
 
 
 class Capability(BaseModel):
@@ -16,16 +24,24 @@ class Capability(BaseModel):
     """The type of capability."""
 
 
+class EvaluationModelInputContext(BaseModel):
+    content: Optional[str] = None
+    """The content of the message."""
+
+    role: Optional[str] = None
+    """The role of the speaker."""
+
+
 class EvaluationModelInput(BaseModel):
     """A dictionary of inputs sent to the LLM to generate output.
 
-    The dictionary must contain at least a `user_prompt` field or a `system_prompt` field. For ground_truth_adherence  guardrail metric, `ground_truth` should be provided.
+    The dictionary must contain a `user_prompt` field. For ground_truth_adherence  guardrail metric, `ground_truth` should be provided. When `context_awareness` is enabled, `context` should be provided.
     """
 
     user_prompt: str
     """The user prompt used to generate the output."""
 
-    context: Optional[List[str]] = None
+    context: Optional[List[EvaluationModelInputContext]] = None
     """
     Any structured information that directly relates to the model’s input and
     expected output—e.g., the recent turn-by-turn history between an AI tutor and a
@@ -48,9 +64,9 @@ class Evaluation(BaseModel):
     api_model_input: EvaluationModelInput = FieldInfo(alias="model_input")
     """A dictionary of inputs sent to the LLM to generate output.
 
-    The dictionary must contain at least a `user_prompt` field or a `system_prompt`
-    field. For ground_truth_adherence guardrail metric, `ground_truth` should be
-    provided.
+    The dictionary must contain a `user_prompt` field. For ground_truth_adherence
+    guardrail metric, `ground_truth` should be provided. When `context_awareness` is
+    enabled, `context` should be provided.
     """
 
     api_model_output: str = FieldInfo(alias="model_output")
