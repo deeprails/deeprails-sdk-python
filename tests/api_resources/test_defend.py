@@ -183,6 +183,77 @@ class TestDefend:
                 workflow_id="",
             )
 
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_method_submit_and_stream_event(self, client: DeepRails) -> None:
+        defend_stream = client.defend.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+        )
+        defend_stream.response.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_method_submit_and_stream_event_with_all_params(self, client: DeepRails) -> None:
+        defend_stream = client.defend.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+            stream=True,
+            nametag="nametag",
+        )
+        defend_stream.response.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_raw_response_submit_and_stream_event(self, client: DeepRails) -> None:
+        response = client.defend.with_raw_response.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+        )
+
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        stream = response.parse()
+        stream.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_streaming_response_submit_and_stream_event(self, client: DeepRails) -> None:
+        with client.defend.with_streaming_response.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            stream = response.parse()
+            stream.close()
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    def test_path_params_submit_and_stream_event(self, client: DeepRails) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            client.defend.with_raw_response.submit_and_stream_event(
+                workflow_id="",
+                model_input={"foo": "bar"},
+                model_output="model_output",
+                model_used="model_used",
+                run_mode="fast",
+            )
+
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_submit_event(self, client: DeepRails) -> None:
@@ -488,6 +559,77 @@ class TestAsyncDefend:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             await async_client.defend.with_raw_response.retrieve_workflow(
                 workflow_id="",
+            )
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_method_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
+        defend_stream = await async_client.defend.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+        )
+        await defend_stream.response.aclose()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_method_submit_and_stream_event_with_all_params(self, async_client: AsyncDeepRails) -> None:
+        defend_stream = await async_client.defend.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+            stream=True,
+            nametag="nametag",
+        )
+        await defend_stream.response.aclose()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_raw_response_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
+        response = await async_client.defend.with_raw_response.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+        )
+
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        stream = await response.parse()
+        await stream.close()
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_streaming_response_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
+        async with async_client.defend.with_streaming_response.submit_and_stream_event(
+            workflow_id="workflow_id",
+            model_input={"foo": "bar"},
+            model_output="model_output",
+            model_used="model_used",
+            run_mode="fast",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            stream = await response.parse()
+            await stream.close()
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism doesn't support text/event-stream responses")
+    @parametrize
+    async def test_path_params_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            await async_client.defend.with_raw_response.submit_and_stream_event(
+                workflow_id="",
+                model_input={"foo": "bar"},
+                model_output="model_output",
+                model_used="model_used",
+                run_mode="fast",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
