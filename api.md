@@ -9,6 +9,7 @@ from deeprails.types import (
     DefendUpdateResponse,
     WorkflowEventDetailResponse,
     WorkflowEventResponse,
+    DefendSubmitAndStreamEventResponse,
 )
 ```
 
@@ -17,6 +18,7 @@ Methods:
 - <code title="post /defend">client.defend.<a href="./src/deeprails/resources/defend.py">create_workflow</a>(\*\*<a href="src/deeprails/types/defend_create_workflow_params.py">params</a>) -> <a href="./src/deeprails/types/defend_create_response.py">DefendCreateResponse</a></code>
 - <code title="get /defend/{workflow_id}/events/{event_id}">client.defend.<a href="./src/deeprails/resources/defend.py">retrieve_event</a>(event_id, \*, workflow_id) -> <a href="./src/deeprails/types/workflow_event_detail_response.py">WorkflowEventDetailResponse</a></code>
 - <code title="get /defend/{workflow_id}">client.defend.<a href="./src/deeprails/resources/defend.py">retrieve_workflow</a>(workflow_id, \*\*<a href="src/deeprails/types/defend_retrieve_workflow_params.py">params</a>) -> <a href="./src/deeprails/types/defend_response.py">DefendResponse</a></code>
+- <code title="post /defend/{workflow_id}/events?stream=true">client.defend.<a href="./src/deeprails/resources/defend.py">submit_and_stream_event</a>(workflow_id, \*\*<a href="src/deeprails/types/defend_submit_and_stream_event_params.py">params</a>) -> str</code>
 - <code title="post /defend/{workflow_id}/events">client.defend.<a href="./src/deeprails/resources/defend.py">submit_event</a>(workflow_id, \*\*<a href="src/deeprails/types/defend_submit_event_params.py">params</a>) -> <a href="./src/deeprails/types/workflow_event_response.py">WorkflowEventResponse</a></code>
 - <code title="put /defend/{workflow_id}">client.defend.<a href="./src/deeprails/resources/defend.py">update_workflow</a>(workflow_id, \*\*<a href="src/deeprails/types/defend_update_workflow_params.py">params</a>) -> <a href="./src/deeprails/types/defend_update_response.py">DefendUpdateResponse</a></code>
 
