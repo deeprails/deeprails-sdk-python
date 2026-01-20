@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.25.0 (2026-01-20)
+
+Full Changelog: [v1.24.0...v1.25.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.24.0...v1.25.0)
+
+### Features
+
+* **api:** manual updates ([8a77ac8](https://github.com/deeprails/deeprails-sdk-python/commit/8a77ac8272bfabc3b35122e3ff904440806398ed))
+* **client:** add support for binary request streaming ([97e312c](https://github.com/deeprails/deeprails-sdk-python/commit/97e312c6c4ef77c2964558df9b748d435b084db8))
+
+
+### Chores
+
+* **internal:** codegen related update ([5f9d210](https://github.com/deeprails/deeprails-sdk-python/commit/5f9d2106b98ed3d6d0c403c30852cb96eab48d8b))
+* **internal:** update `actions/checkout` version ([547dac2](https://github.com/deeprails/deeprails-sdk-python/commit/547dac2ac82bfabad9e70efa5af2ef3c6e0260a8))
+
 ## 1.24.0 (2025-12-23)
 
 Full Changelog: [v1.23.0...v1.24.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.23.0...v1.24.0)

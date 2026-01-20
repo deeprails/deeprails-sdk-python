@@ -22,3 +22,7 @@ from .defend_update_workflow_params import DefendUpdateWorkflowParams as DefendU
 from .monitor_event_detail_response import MonitorEventDetailResponse as MonitorEventDetailResponse
 from .workflow_event_detail_response import WorkflowEventDetailResponse as WorkflowEventDetailResponse
 from .defend_retrieve_workflow_params import DefendRetrieveWorkflowParams as DefendRetrieveWorkflowParams
+from .defend_submit_and_stream_event_params import DefendSubmitAndStreamEventParams as DefendSubmitAndStreamEventParams
+from .defend_submit_and_stream_event_response import (
+    DefendSubmitAndStreamEventResponse as DefendSubmitAndStreamEventResponse,
+)
