@@ -183,7 +183,7 @@ class TestDefend:
                 workflow_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_and_stream_event(self, client: DeepRails) -> None:
         defend_stream = client.defend.submit_and_stream_event(
@@ -195,7 +195,7 @@ class TestDefend:
         )
         defend_stream.response.close()
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_and_stream_event_with_all_params(self, client: DeepRails) -> None:
         defend_stream = client.defend.submit_and_stream_event(
@@ -209,7 +209,7 @@ class TestDefend:
         )
         defend_stream.response.close()
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_submit_and_stream_event(self, client: DeepRails) -> None:
         response = client.defend.with_raw_response.submit_and_stream_event(
@@ -224,7 +224,7 @@ class TestDefend:
         stream = response.parse()
         stream.close()
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_submit_and_stream_event(self, client: DeepRails) -> None:
         with client.defend.with_streaming_response.submit_and_stream_event(
@@ -242,7 +242,7 @@ class TestDefend:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_submit_and_stream_event(self, client: DeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
@@ -561,7 +561,7 @@ class TestAsyncDefend:
                 workflow_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
         defend_stream = await async_client.defend.submit_and_stream_event(
@@ -573,7 +573,7 @@ class TestAsyncDefend:
         )
         await defend_stream.response.aclose()
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_and_stream_event_with_all_params(self, async_client: AsyncDeepRails) -> None:
         defend_stream = await async_client.defend.submit_and_stream_event(
@@ -587,7 +587,7 @@ class TestAsyncDefend:
         )
         await defend_stream.response.aclose()
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
         response = await async_client.defend.with_raw_response.submit_and_stream_event(
@@ -602,7 +602,7 @@ class TestAsyncDefend:
         stream = await response.parse()
         await stream.close()
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
         async with async_client.defend.with_streaming_response.submit_and_stream_event(
@@ -620,7 +620,7 @@ class TestAsyncDefend:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server doesn't support text/event-stream responses")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_submit_and_stream_event(self, async_client: AsyncDeepRails) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
