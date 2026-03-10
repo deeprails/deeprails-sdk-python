@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.26.0 (2026-03-10)
+
+Full Changelog: [v1.25.0...v1.26.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.25.0...v1.26.0)
+
+### Features
+
+* **api:** manual updates ([3a9248b](https://github.com/deeprails/deeprails-sdk-python/commit/3a9248b62b512ea6b5d3da1e7899d220045d2882))
+* **api:** update run mode lists ([9edf003](https://github.com/deeprails/deeprails-sdk-python/commit/9edf00309e164155bd3cc849afb015ee61554f18))
+* **client:** add custom JSON encoder for extended type support ([df85b76](https://github.com/deeprails/deeprails-sdk-python/commit/df85b76b2d636f312b1deb962bd13133fb58e1e6))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([3b4703a](https://github.com/deeprails/deeprails-sdk-python/commit/3b4703a253039eca1a4fab4a955726fc7aed0999))
+* **ci:** upgrade `actions/github-script` ([79e5242](https://github.com/deeprails/deeprails-sdk-python/commit/79e524262dd19264b73732e6b8f4e3d3c0f6aa6c))
+* format all `api.md` files ([b4fe705](https://github.com/deeprails/deeprails-sdk-python/commit/b4fe705ba309a1cac4e9d3abccda70b2eef850b5))
+* **internal:** add request options to SSE classes ([bc54f7c](https://github.com/deeprails/deeprails-sdk-python/commit/bc54f7c4ddbfe0edee8b0d314cc9a04b8f130e38))
+* **internal:** bump dependencies ([18b899d](https://github.com/deeprails/deeprails-sdk-python/commit/18b899d6e40a67b6af04ccc012fa240693ed775f))
+* **internal:** fix lint error on Python 3.14 ([6335881](https://github.com/deeprails/deeprails-sdk-python/commit/63358810ebc67a7ecba269df661b9e2099dbb9b5))
+* **internal:** make `test_proxy_environment_variables` more resilient ([f03efb2](https://github.com/deeprails/deeprails-sdk-python/commit/f03efb2cede995a4d6cef068d31ad4db9ef3c8e2))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([923d571](https://github.com/deeprails/deeprails-sdk-python/commit/923d571ef2d8f973e69e2909927b8fdec7de38ab))
+* **internal:** remove mock server code ([4c64963](https://github.com/deeprails/deeprails-sdk-python/commit/4c6496303388d8996af9dfc2c9cab2d6539e3f1a))
+* **test:** update skip reason message ([d095518](https://github.com/deeprails/deeprails-sdk-python/commit/d0955180f3936f0935bf6b868dac4a529ce4f833))
+* update mock server docs ([7b7c379](https://github.com/deeprails/deeprails-sdk-python/commit/7b7c37926ebd2e1d7cdbf115965d76afe6d8a279))
+
 ## 1.25.0 (2026-01-20)
 
 Full Changelog: [v1.24.0...v1.25.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.24.0...v1.25.0)
