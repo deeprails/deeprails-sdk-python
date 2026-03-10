@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["WorkflowEventDetailResponse", "EvaluationHistory", "Capability", "File"]
+__all__ = ["WorkflowEventDetailResponse", "EvaluationHistory", "KeyImprovement", "Capability", "File"]
 
 
 class EvaluationHistory(BaseModel):
@@ -43,6 +43,10 @@ class EvaluationHistory(BaseModel):
     progress: Optional[int] = None
 
     run_mode: Optional[str] = None
+
+
+class KeyImprovement(BaseModel):
+    key_improvement: Optional[List[str]] = None
 
 
 class Capability(BaseModel):
@@ -100,7 +104,7 @@ class WorkflowEventDetailResponse(BaseModel):
     that the first evaluation passed all its metrics!
     """
 
-    key_improvements: List[object]
+    key_improvements: List[KeyImprovement]
 
     status: Literal["In Progress", "Completed"]
     """Status of the event."""
