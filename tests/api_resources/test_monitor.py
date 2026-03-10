@@ -260,7 +260,7 @@ class TestMonitor:
             },
             model_output="model_output",
             nametag="nametag",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         )
         assert_matches_type(MonitorEventResponse, monitor, path=["response"])
 
@@ -547,7 +547,7 @@ class TestAsyncMonitor:
             },
             model_output="model_output",
             nametag="nametag",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         )
         assert_matches_type(MonitorEventResponse, monitor, path=["response"])
 

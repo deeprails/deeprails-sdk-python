@@ -61,7 +61,9 @@ class MonitorEventDetailResponse(BaseModel):
     nametag: Optional[str] = None
     """A human-readable tag for the monitor event."""
 
-    run_mode: Optional[Literal["precision_plus", "precision", "smart", "economy"]] = None
+    run_mode: Optional[
+        Literal["super_fast", "fast", "precision", "precision_codex", "precision_max", "precision_max_codex"]
+    ] = None
     """The run mode used to evaluate the monitor event."""
 
     status: Optional[Literal["in_progress", "completed", "canceled", "queued", "failed"]] = None
