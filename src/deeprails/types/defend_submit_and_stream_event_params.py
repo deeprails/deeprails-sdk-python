@@ -18,16 +18,19 @@ class DefendSubmitAndStreamEventParams(TypedDict, total=False):
     model_used: Required[str]
     """The model that generated the output (e.g., "gpt-4", "claude-3")."""
 
-    run_mode: Required[Literal["fast", "precision", "precision_codex", "precision_max", "precision_max_codex"]]
+    run_mode: Required[Literal["super_fast", "fast", "precision", "precision_codex"]]
     """The evaluation run mode.
 
-    Streaming only supports fast, precision, and precision_codex.
+    Streaming is supported on all run modes except precision_max and
+    precision_max_codex. Note: super_fast does not support Web Search or File Search
+    — if your workflow has these enabled, use a different run mode or disable the
+    capability on the workflow.
     """
 
     stream: bool
     """Enable SSE streaming for real-time token feedback.
 
-    Only supported for single-model run modes (fast, precision, precision_codex).
+    Supported on all run modes except precision_max and precision_max_codex.
     """
 
     nametag: str
