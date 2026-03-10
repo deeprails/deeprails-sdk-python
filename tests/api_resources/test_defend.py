@@ -191,7 +191,7 @@ class TestDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
         )
         defend_stream.response.close()
 
@@ -203,7 +203,7 @@ class TestDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
             stream=True,
             nametag="nametag",
         )
@@ -217,7 +217,7 @@ class TestDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
         )
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -232,7 +232,7 @@ class TestDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -251,7 +251,7 @@ class TestDefend:
                 model_input={"foo": "bar"},
                 model_output="model_output",
                 model_used="model_used",
-                run_mode="fast",
+                run_mode="super_fast",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -262,7 +262,7 @@ class TestDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
 
@@ -284,7 +284,7 @@ class TestDefend:
             },
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
             nametag="nametag",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
@@ -297,7 +297,7 @@ class TestDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         )
 
         assert response.is_closed is True
@@ -313,7 +313,7 @@ class TestDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -332,7 +332,7 @@ class TestDefend:
                 model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
                 model_used="model_used",
-                run_mode="precision_plus_codex",
+                run_mode="super_fast",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -569,7 +569,7 @@ class TestAsyncDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
         )
         await defend_stream.response.aclose()
 
@@ -581,7 +581,7 @@ class TestAsyncDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
             stream=True,
             nametag="nametag",
         )
@@ -595,7 +595,7 @@ class TestAsyncDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
         )
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -610,7 +610,7 @@ class TestAsyncDefend:
             model_input={"foo": "bar"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="fast",
+            run_mode="super_fast",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -629,7 +629,7 @@ class TestAsyncDefend:
                 model_input={"foo": "bar"},
                 model_output="model_output",
                 model_used="model_used",
-                run_mode="fast",
+                run_mode="super_fast",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -640,7 +640,7 @@ class TestAsyncDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
 
@@ -662,7 +662,7 @@ class TestAsyncDefend:
             },
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
             nametag="nametag",
         )
         assert_matches_type(WorkflowEventResponse, defend, path=["response"])
@@ -675,7 +675,7 @@ class TestAsyncDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         )
 
         assert response.is_closed is True
@@ -691,7 +691,7 @@ class TestAsyncDefend:
             model_input={"user_prompt": "user_prompt"},
             model_output="model_output",
             model_used="model_used",
-            run_mode="precision_plus_codex",
+            run_mode="super_fast",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -710,7 +710,7 @@ class TestAsyncDefend:
                 model_input={"user_prompt": "user_prompt"},
                 model_output="model_output",
                 model_used="model_used",
-                run_mode="precision_plus_codex",
+                run_mode="super_fast",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

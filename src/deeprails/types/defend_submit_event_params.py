@@ -22,13 +22,18 @@ class DefendSubmitEventParams(TypedDict, total=False):
     model_used: Required[str]
     """Model ID used to generate the output, like `gpt-4o` or `o3`."""
 
-    run_mode: Required[Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"]]
+    run_mode: Required[
+        Literal["super_fast", "fast", "precision", "precision_codex", "precision_max", "precision_max_codex"]
+    ]
     """Run mode for the workflow event.
 
     The run mode allows the user to optimize for speed, accuracy, and cost by
     determining which models are used to evaluate the event. Available run modes
-    include `precision_plus_codex`, `precision_plus`, `precision`, `smart`, and
-    `economy`. Defaults to `smart`.
+    (fastest to most thorough): `super_fast`, `fast`, `precision`,
+    `precision_codex`, `precision_max`, and `precision_max_codex`. Defaults to
+    `fast`. Note: `super_fast` does not support Web Search or File Search — if your
+    workflow has these capabilities enabled, use a different run mode or edit the
+    workflow to disable them.
     """
 
     nametag: str

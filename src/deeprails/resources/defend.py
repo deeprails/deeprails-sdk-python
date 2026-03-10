@@ -236,7 +236,7 @@ class DefendResource(SyncAPIResource):
         model_input: Dict[str, object],
         model_output: str,
         model_used: str,
-        run_mode: Literal["fast", "precision", "precision_codex", "precision_max", "precision_max_codex"],
+        run_mode: Literal["super_fast", "fast", "precision", "precision_codex"],
         stream: bool | Omit = omit,
         nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -247,8 +247,8 @@ class DefendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Stream[DefendSubmitAndStreamEventResponse]:
         """
-        Use this endpoint to create a new event for a guardrail workflow with real-time
-        streaming feedback via Server-Sent Events (SSE).
+        Use this endpoint to submit a model input and output pair to a workflow for
+        evaluation with streaming responses.
 
         Args:
           model_input: The input provided to the model (e.g., prompt, messages).
@@ -257,11 +257,13 @@ class DefendResource(SyncAPIResource):
 
           model_used: The model that generated the output (e.g., "gpt-4", "claude-3").
 
-          run_mode: The evaluation run mode. Streaming only supports fast, precision, and
-              precision_codex.
+          run_mode: The evaluation run mode. Streaming is supported on all run modes except
+              precision_max and precision_max_codex. Note: super_fast does not support Web
+              Search or File Search — if your workflow has these enabled, use a different run
+              mode or disable the capability on the workflow.
 
-          stream: Enable SSE streaming for real-time token feedback. Only supported for
-              single-model run modes (fast, precision, precision_codex).
+          stream: Enable SSE streaming for real-time token feedback. Supported on all run modes
+              except precision_max and precision_max_codex.
 
           nametag: Optional tag to identify this event.
 
@@ -309,7 +311,7 @@ class DefendResource(SyncAPIResource):
         model_input: defend_submit_event_params.ModelInput,
         model_output: str,
         model_used: str,
-        run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"],
+        run_mode: Literal["super_fast", "fast", "precision", "precision_codex", "precision_max", "precision_max_codex"],
         nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -333,8 +335,11 @@ class DefendResource(SyncAPIResource):
 
           run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
-              event. Available run modes include `precision_plus_codex`, `precision_plus`,
-              `precision`, `smart`, and `economy`. Defaults to `smart`.
+              event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+              `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+              Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+              Search — if your workflow has these capabilities enabled, use a different run
+              mode or edit the workflow to disable them.
 
           nametag: An optional, user-defined tag for the event.
 
@@ -663,7 +668,7 @@ class AsyncDefendResource(AsyncAPIResource):
         model_input: Dict[str, object],
         model_output: str,
         model_used: str,
-        run_mode: Literal["fast", "precision", "precision_codex", "precision_max", "precision_max_codex"],
+        run_mode: Literal["super_fast", "fast", "precision", "precision_codex"],
         stream: bool | Omit = omit,
         nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -674,8 +679,8 @@ class AsyncDefendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[DefendSubmitAndStreamEventResponse]:
         """
-        Use this endpoint to create a new event for a guardrail workflow with real-time
-        streaming feedback via Server-Sent Events (SSE).
+        Use this endpoint to submit a model input and output pair to a workflow for
+        evaluation with streaming responses.
 
         Args:
           model_input: The input provided to the model (e.g., prompt, messages).
@@ -684,11 +689,13 @@ class AsyncDefendResource(AsyncAPIResource):
 
           model_used: The model that generated the output (e.g., "gpt-4", "claude-3").
 
-          run_mode: The evaluation run mode. Streaming only supports fast, precision, and
-              precision_codex.
+          run_mode: The evaluation run mode. Streaming is supported on all run modes except
+              precision_max and precision_max_codex. Note: super_fast does not support Web
+              Search or File Search — if your workflow has these enabled, use a different run
+              mode or disable the capability on the workflow.
 
-          stream: Enable SSE streaming for real-time token feedback. Only supported for
-              single-model run modes (fast, precision, precision_codex).
+          stream: Enable SSE streaming for real-time token feedback. Supported on all run modes
+              except precision_max and precision_max_codex.
 
           nametag: Optional tag to identify this event.
 
@@ -736,7 +743,7 @@ class AsyncDefendResource(AsyncAPIResource):
         model_input: defend_submit_event_params.ModelInput,
         model_output: str,
         model_used: str,
-        run_mode: Literal["precision_plus_codex", "precision_plus", "precision", "smart", "economy"],
+        run_mode: Literal["super_fast", "fast", "precision", "precision_codex", "precision_max", "precision_max_codex"],
         nametag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -760,8 +767,11 @@ class AsyncDefendResource(AsyncAPIResource):
 
           run_mode: Run mode for the workflow event. The run mode allows the user to optimize for
               speed, accuracy, and cost by determining which models are used to evaluate the
-              event. Available run modes include `precision_plus_codex`, `precision_plus`,
-              `precision`, `smart`, and `economy`. Defaults to `smart`.
+              event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+              `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+              Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+              Search — if your workflow has these capabilities enabled, use a different run
+              mode or edit the workflow to disable them.
 
           nametag: An optional, user-defined tag for the event.
 
