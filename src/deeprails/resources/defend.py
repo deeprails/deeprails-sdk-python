@@ -15,7 +15,7 @@ from ..types import (
     defend_submit_and_stream_event_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -181,7 +181,7 @@ class DefendResource(SyncAPIResource):
         if not event_id:
             raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
         return self._get(
-            f"/defend/{workflow_id}/events/{event_id}",
+            path_template("/defend/{workflow_id}/events/{event_id}", workflow_id=workflow_id, event_id=event_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -218,7 +218,7 @@ class DefendResource(SyncAPIResource):
         if not workflow_id:
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         return self._get(
-            f"/defend/{workflow_id}",
+            path_template("/defend/{workflow_id}", workflow_id=workflow_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -279,7 +279,7 @@ class DefendResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
-            f"/defend/{workflow_id}/events?stream=true",
+            path_template("/defend/{workflow_id}/events?stream=true", workflow_id=workflow_id),
             body=maybe_transform(
                 {
                     "model_input": model_input,
@@ -354,7 +354,7 @@ class DefendResource(SyncAPIResource):
         if not workflow_id:
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         return self._post(
-            f"/defend/{workflow_id}/events",
+            path_template("/defend/{workflow_id}/events", workflow_id=workflow_id),
             body=maybe_transform(
                 {
                     "model_input": model_input,
@@ -443,7 +443,7 @@ class DefendResource(SyncAPIResource):
         if not workflow_id:
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         return self._put(
-            f"/defend/{workflow_id}",
+            path_template("/defend/{workflow_id}", workflow_id=workflow_id),
             body=maybe_transform(
                 {
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,
@@ -611,7 +611,7 @@ class AsyncDefendResource(AsyncAPIResource):
         if not event_id:
             raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
         return await self._get(
-            f"/defend/{workflow_id}/events/{event_id}",
+            path_template("/defend/{workflow_id}/events/{event_id}", workflow_id=workflow_id, event_id=event_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -648,7 +648,7 @@ class AsyncDefendResource(AsyncAPIResource):
         if not workflow_id:
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         return await self._get(
-            f"/defend/{workflow_id}",
+            path_template("/defend/{workflow_id}", workflow_id=workflow_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -711,7 +711,7 @@ class AsyncDefendResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
-            f"/defend/{workflow_id}/events?stream=true",
+            path_template("/defend/{workflow_id}/events?stream=true", workflow_id=workflow_id),
             body=await async_maybe_transform(
                 {
                     "model_input": model_input,
@@ -786,7 +786,7 @@ class AsyncDefendResource(AsyncAPIResource):
         if not workflow_id:
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         return await self._post(
-            f"/defend/{workflow_id}/events",
+            path_template("/defend/{workflow_id}/events", workflow_id=workflow_id),
             body=await async_maybe_transform(
                 {
                     "model_input": model_input,
@@ -875,7 +875,7 @@ class AsyncDefendResource(AsyncAPIResource):
         if not workflow_id:
             raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
         return await self._put(
-            f"/defend/{workflow_id}",
+            path_template("/defend/{workflow_id}", workflow_id=workflow_id),
             body=await async_maybe_transform(
                 {
                     "automatic_hallucination_tolerance_levels": automatic_hallucination_tolerance_levels,

@@ -9,7 +9,7 @@ import httpx
 
 from ..types import monitor_create_params, monitor_update_params, monitor_retrieve_params, monitor_submit_event_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -157,7 +157,7 @@ class MonitorResource(SyncAPIResource):
         if not monitor_id:
             raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
         return self._get(
-            f"/monitor/{monitor_id}",
+            path_template("/monitor/{monitor_id}", monitor_id=monitor_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -226,7 +226,7 @@ class MonitorResource(SyncAPIResource):
         if not monitor_id:
             raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
         return self._put(
-            f"/monitor/{monitor_id}",
+            path_template("/monitor/{monitor_id}", monitor_id=monitor_id),
             body=maybe_transform(
                 {
                     "description": description,
@@ -273,7 +273,7 @@ class MonitorResource(SyncAPIResource):
         if not event_id:
             raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
         return self._get(
-            f"/monitor/{monitor_id}/events/{event_id}",
+            path_template("/monitor/{monitor_id}/events/{event_id}", monitor_id=monitor_id, event_id=event_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -328,7 +328,7 @@ class MonitorResource(SyncAPIResource):
         if not monitor_id:
             raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
         return self._post(
-            f"/monitor/{monitor_id}/events",
+            path_template("/monitor/{monitor_id}/events", monitor_id=monitor_id),
             body=maybe_transform(
                 {
                     "model_input": model_input,
@@ -474,7 +474,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         if not monitor_id:
             raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
         return await self._get(
-            f"/monitor/{monitor_id}",
+            path_template("/monitor/{monitor_id}", monitor_id=monitor_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -543,7 +543,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         if not monitor_id:
             raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
         return await self._put(
-            f"/monitor/{monitor_id}",
+            path_template("/monitor/{monitor_id}", monitor_id=monitor_id),
             body=await async_maybe_transform(
                 {
                     "description": description,
@@ -590,7 +590,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         if not event_id:
             raise ValueError(f"Expected a non-empty value for `event_id` but received {event_id!r}")
         return await self._get(
-            f"/monitor/{monitor_id}/events/{event_id}",
+            path_template("/monitor/{monitor_id}/events/{event_id}", monitor_id=monitor_id, event_id=event_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -645,7 +645,7 @@ class AsyncMonitorResource(AsyncAPIResource):
         if not monitor_id:
             raise ValueError(f"Expected a non-empty value for `monitor_id` but received {monitor_id!r}")
         return await self._post(
-            f"/monitor/{monitor_id}/events",
+            path_template("/monitor/{monitor_id}/events", monitor_id=monitor_id),
             body=await async_maybe_transform(
                 {
                     "model_input": model_input,
