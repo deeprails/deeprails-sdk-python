@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.26.1 (2026-03-25)
+
+Full Changelog: [v1.26.0...v1.26.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.26.0...v1.26.1)
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([7b8f509](https://github.com/deeprails/deeprails-sdk-python/commit/7b8f509615bfca90d9fda54835a6e9fc6fafe3c3))
+* **pydantic:** do not pass `by_alias` unless set ([15e3524](https://github.com/deeprails/deeprails-sdk-python/commit/15e3524e2f5905bd4b964d9be1d618027625ca8c))
+* sanitize endpoint path params ([ec1e174](https://github.com/deeprails/deeprails-sdk-python/commit/ec1e174233b69cc75afb3b35c577f1803e3e4702))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([b2cc3b8](https://github.com/deeprails/deeprails-sdk-python/commit/b2cc3b82df63fcd3767f941a2b09a7992486001d))
+* **internal:** tweak CI branches ([94869f0](https://github.com/deeprails/deeprails-sdk-python/commit/94869f0284fed13bd041f489cb8bcce45b1483e3))
+* **internal:** update gitignore ([80bcbd8](https://github.com/deeprails/deeprails-sdk-python/commit/80bcbd87d9f6496b765711939d1b1f72f4b43e7d))
+
 ## 1.26.0 (2026-03-10)
 
 Full Changelog: [v1.25.0...v1.26.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.25.0...v1.26.0)
