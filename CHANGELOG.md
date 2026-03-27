@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.27.0 (2026-03-27)
+
+Full Changelog: [v1.26.1...v1.27.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.26.1...v1.27.0)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([3d0abbf](https://github.com/deeprails/deeprails-sdk-python/commit/3d0abbf21b6ea55b63d855a202c7830f3276bc9c))
+
 ## 1.26.1 (2026-03-25)
 
 Full Changelog: [v1.26.0...v1.26.1](https://github.com/deeprails/deeprails-sdk-python/compare/v1.26.0...v1.26.1)
