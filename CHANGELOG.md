@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.28.0 (2026-05-13)
+
+Full Changelog: [v1.27.0...v1.28.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.27.0...v1.28.0)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([88cb173](https://github.com/deeprails/deeprails-sdk-python/commit/88cb1732d4db762c46d07528f9fc9d2877ae3fb9))
+* support setting headers via env ([409bc0c](https://github.com/deeprails/deeprails-sdk-python/commit/409bc0c8a6fa32d262a08e85f2c6a235d65d3362))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([f8550d9](https://github.com/deeprails/deeprails-sdk-python/commit/f8550d97885bfd8ce6619db64e13ca3a10316081))
+* **client:** preserve hardcoded query params when merging with user params ([48406d1](https://github.com/deeprails/deeprails-sdk-python/commit/48406d180cbf8c38a044df8bd49037492f8ad8f4))
+* ensure file data are only sent as 1 parameter ([4f9c8e2](https://github.com/deeprails/deeprails-sdk-python/commit/4f9c8e298bd3a73666abf8a8795d8bc7f2e9d187))
+* use correct field name format for multipart file arrays ([96ce457](https://github.com/deeprails/deeprails-sdk-python/commit/96ce457f62c9175493ef45275372c5baf28edb22))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([9711cbf](https://github.com/deeprails/deeprails-sdk-python/commit/9711cbfee3a9de0a6bc3af3e0b14656a045caa81))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([2d0cead](https://github.com/deeprails/deeprails-sdk-python/commit/2d0ceade1884c999002d0bf5c6c6670b296d2b31))
+* **internal:** reformat pyproject.toml ([3c1d54c](https://github.com/deeprails/deeprails-sdk-python/commit/3c1d54c522985119a1cfddfad79a48590e3d3df3))
+
 ## 1.27.0 (2026-03-27)
 
 Full Changelog: [v1.26.1...v1.27.0](https://github.com/deeprails/deeprails-sdk-python/compare/v1.26.1...v1.27.0)
